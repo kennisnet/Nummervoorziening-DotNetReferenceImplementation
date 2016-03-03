@@ -1168,13 +1168,13 @@ namespace NVA.DotNetReferenceImplementation
     }
 
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface NummervoorzieningChannel : Nummervoorziening, System.ServiceModel.IClientChannel
+    public interface NummervoorzieningChannel : INummervoorziening, System.ServiceModel.IClientChannel
     {
     }
 
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class NummervoorzieningClient : System.ServiceModel.ClientBase<Nummervoorziening>, Nummervoorziening
+    public partial class NummervoorzieningClient : System.ServiceModel.ClientBase<INummervoorziening>, INummervoorziening
     {
 
         public NummervoorzieningClient()
