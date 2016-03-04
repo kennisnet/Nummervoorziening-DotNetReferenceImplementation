@@ -2,6 +2,7 @@
 using CryptSharp.Utility;
 using System.Text;
 using System;
+using NVA_DotNetReferenceImplementation.SCrypter;
 
 namespace NVA_DotNetReferenceImplementation.Controllers
 {
@@ -9,39 +10,28 @@ namespace NVA_DotNetReferenceImplementation.Controllers
     {
         public ActionResult Index()
         {
-            byte[] hash = Hash("secret", "rktYml0MIp9TC9u6Ny6uqw==");
-            
+            Util scryptUtil = new Util();
+
+            byte[] hash = scryptUtil.GenerateHash("secret");
+
+            System.Net.ServicePointManager.ServerCertificateValidationCallback =
+                ((sender, certificate, chain, sslPolicyErrors) => true);
+
             ViewBag.Base64Hash = Convert.ToBase64String(hash);
             ViewBag.HexHash = BitConverter.ToString(hash).Replace("-", "").ToLower();
 
-            return View();
-        }
+            SchoolIDClient schoolID = new SchoolIDClient();
 
-        private byte[] Hash(string password, string salt)
-        {
-            byte[] keyBytes = Encoding.UTF8.GetBytes(password);
-            byte[] saltBytes = Convert.FromBase64String(salt);
-            int N = 16384;
-            int r = 8;
-            int p = 1;
-            int? maxThreads = (int?)null;
-            int derivedKeyLength = 32;
-            
-            return SCrypt.ComputeDerivedKey(keyBytes, saltBytes, N, r, p, maxThreads, derivedKeyLength);
-        }
+            PingRequest pingRequest = new PingRequest();
+            pingRequest1 requestWrapper = new pingRequest1();
 
-        public ActionResult About()
-        {
-            ViewBag.Message = "Your application description page.";
+            requestWrapper.pingRequest = pingRequest;
+
+            pingResponse1 response = schoolID.ping(requestWrapper);
+
+            PingResponse pingResponse = response.pingResponse;
 
             return View();
-        }
-
-        public ActionResult Contact()
-        {
-            ViewBag.Message = "Your contact page.";
-
-            return View();
-        }
+        }        
     }
 }

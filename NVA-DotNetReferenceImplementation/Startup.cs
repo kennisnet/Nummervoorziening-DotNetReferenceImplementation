@@ -8,7 +8,7 @@ namespace NVA_DotNetReferenceImplementation
     {
         public void Configuration(IAppBuilder app)
         {
-            ConfigureAuth(app);
+            
         }
     }
 }
