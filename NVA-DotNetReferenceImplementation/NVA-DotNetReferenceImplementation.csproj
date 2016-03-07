@@ -170,10 +170,14 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="SCrypter\Constants.cs" />
-    <Compile Include="SCrypter\Util.cs" />
+    <Compile Include="SchoolID\Operations\PingOperation.cs" />
+    <Compile Include="SchoolID\Operations\RetrieveSectorsOperation.cs" />
+    <Compile Include="SchoolID\Operations\RetrieveChainsOperation.cs" />
+    <Compile Include="SchoolID\SchoolIDServiceUtil.cs" />
+    <Compile Include="SchoolID\SCrypter\Constants.cs" />
+    <Compile Include="SchoolID\SCrypter\Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Shared\SchoolID.cs" />
+    <Compile Include="SchoolID\SchoolID.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
