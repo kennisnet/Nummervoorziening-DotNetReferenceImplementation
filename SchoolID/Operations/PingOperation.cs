@@ -17,7 +17,7 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
         /// Checks through a PingRequest whether the SchoolID servivce is available
         /// </summary>
         /// <returns>TRUE if the service is up and running</returns>
-        public bool isAvailable()
+        public bool IsAvailable()
         {
             try {
                 pingRequestWrapper.pingRequest = pingRequest;
@@ -37,7 +37,7 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
         /// Retrieves the current DateTime of the School ID server
         /// </summary>
         /// <returns>Null upon errors, else the DateTime retrieved from the server</returns>
-        public DateTime? getSchoolIDDateTime()
+        public DateTime? GetSchoolIDDateTime()
         {           
             try
             {
@@ -59,7 +59,7 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
         /// Retrieves the current application version of the School ID service.
         /// </summary>
         /// <returns>A string containing the version of the School ID service</returns>
-        public string getSchoolIDVersion()
+        public string GetSchoolIDVersion()
         {
             try
             {

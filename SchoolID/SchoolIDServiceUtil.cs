@@ -15,7 +15,7 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
         /// The SOAP proxy class which can directly be used to communicate with the School ID SOAP service
         /// </summary>
         private SchoolIDClient schoolIDClient;
-       
+
         private static SchoolIDServiceUtil instance;
 
         private SchoolIDServiceUtil() {
@@ -38,50 +38,56 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
         /// Checks whether the School ID service is up and running
         /// </summary>
         /// <returns>TRUE if all systems are up</returns>
-        public bool isSchoolIDAvailable()
+        public bool IsSchoolIDAvailable()
         {
             PingOperation pingOperation = new PingOperation(schoolIDClient);
-            return pingOperation.isAvailable();
+            return pingOperation.IsAvailable();
         }
 
         /// <summary>
         /// Retrieves the current DateTime on the School ID server.
         /// </summary>
         /// <returns>DataTime.Now of the School ID server</returns>
-        public DateTime? getSchoolIDDateTime()
+        public DateTime? GetSchoolIDDateTime()
         {
             PingOperation pingOperation = new PingOperation(schoolIDClient);
-            return pingOperation.getSchoolIDDateTime();
+            return pingOperation.GetSchoolIDDateTime();
         }
 
         /// <summary>
         /// Retrieves the current version number of the School ID service.
         /// </summary>
         /// <returns>A string containing the current version number of the School ID service</returns>
-        public string getSchoolIDVersion()
+        public string GetSchoolIDVersion()
         {
             PingOperation pingOperation = new PingOperation(schoolIDClient);
-            return pingOperation.getSchoolIDVersion();
+            return pingOperation.GetSchoolIDVersion();
         }
 
         /// <summary>
         /// Retrieves a list of currently available Chains present in the School ID service.
         /// </summary>
         /// <returns>A Chain[] containing all active chains</returns>
-        public Chain[] getChains()
+        public Chain[] GetChains()
         {
             RetrieveChainsOperation retrieveChainsOperation = new RetrieveChainsOperation(schoolIDClient);
-            return retrieveChainsOperation.getChains();
+            return retrieveChainsOperation.GetChains();
         }
 
         /// <summary>
         /// Retrieves a list of currently available Sectors present in the School ID service.
         /// </summary>
         /// <returns>A Sector[] containing all active sectors</returns>
-        public Sector[] getSectors()
+        public Sector[] GetSectors()
         {
             RetrieveSectorsOperation retrieveSectorsOperation = new RetrieveSectorsOperation(schoolIDClient);
-            return retrieveSectorsOperation.getSectors();
+            return retrieveSectorsOperation.GetSectors();
+        }
+
+
+        public string GenerateSchoolID(string hpgn, string chainGuid, string sectorGuid)
+        {
+            return "";
         }
     }
 }

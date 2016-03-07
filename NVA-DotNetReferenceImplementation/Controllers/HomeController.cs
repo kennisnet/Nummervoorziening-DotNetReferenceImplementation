@@ -20,13 +20,13 @@ namespace NVA_DotNetReferenceImplementation.Controllers
             SchoolIDServiceUtil schoolIDServiceUtil = SchoolIDServiceUtil.Instance;
             
             // Status information
-            ViewBag.IsOnline = schoolIDServiceUtil.isSchoolIDAvailable();
-            ViewBag.DateTimeOnServer = schoolIDServiceUtil.getSchoolIDDateTime();
-            ViewBag.SchoolIDVersion = schoolIDServiceUtil.getSchoolIDVersion();
+            ViewBag.IsOnline = schoolIDServiceUtil.IsSchoolIDAvailable();
+            ViewBag.DateTimeOnServer = schoolIDServiceUtil.GetSchoolIDDateTime();
+            ViewBag.SchoolIDVersion = schoolIDServiceUtil.GetSchoolIDVersion();
 
             // Retrieve Chains
             List<string> chains = new List<string>();            
-            foreach (Chain chain in schoolIDServiceUtil.getChains())
+            foreach (Chain chain in schoolIDServiceUtil.GetChains())
             {
                 chains.Add(chain.name + " (" + chain.id + "): " + chain.description);
             }
@@ -34,7 +34,7 @@ namespace NVA_DotNetReferenceImplementation.Controllers
 
             // Retrieve Sectors
             List<string> sectors = new List<string>();
-            foreach (Sector sector in schoolIDServiceUtil.getSectors())
+            foreach (Sector sector in schoolIDServiceUtil.GetSectors())
             {
                 sectors.Add(sector.name + " (" + sector.id + "): " + sector.description);
             }

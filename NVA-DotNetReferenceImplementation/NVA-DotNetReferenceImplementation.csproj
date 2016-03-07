@@ -170,14 +170,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="SchoolID\Operations\PingOperation.cs" />
-    <Compile Include="SchoolID\Operations\RetrieveSectorsOperation.cs" />
-    <Compile Include="SchoolID\Operations\RetrieveChainsOperation.cs" />
-    <Compile Include="SchoolID\SchoolIDServiceUtil.cs" />
-    <Compile Include="SchoolID\SCrypter\Constants.cs" />
-    <Compile Include="SchoolID\SCrypter\Util.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SchoolID\SchoolID.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -232,6 +225,10 @@
     <ProjectReference Include="..\CryptSharp_2_1_0\CryptSharp\CryptSharp.csproj">
       <Project>{5e33051d-1471-4e5a-b94e-bd0e8ffff99e}</Project>
       <Name>CryptSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\SchoolID\SchoolID.csproj">
+      <Project>{05381b19-a711-48d3-a62a-29b8ce1debe8}</Project>
+      <Name>SchoolID</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>

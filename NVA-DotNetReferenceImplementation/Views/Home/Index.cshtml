@@ -3,12 +3,6 @@
 }
 
 <div>
-    <h1>Hash Result</h1>
-    <p">Output of the hash example (Used arguments: N:16384, r:8, p:1, passwd:secret, salt:rktYml0MIp9TC9u6Ny6uqw==)</p>
-    <p>Base64 notation: @ViewBag.Base64Hash</p>
-    <p>Hexadecimal notation: @ViewBag.HexHash</p>
-</div>
-<div>
     <h1>Ping Operation: Nummervoorziening status</h1>
     @if (ViewBag.IsOnline) {
         <p>Nummervoorziening is up and running</p>
@@ -33,4 +27,11 @@
     {
         <p>@sector</p>
     }
+</div>
+<div>
+    <h1>Hash Result</h1>
+    <p">
+        Output of the hash example (Used arguments: N:16384, r:8, p:1, passwd:secret, salt:rktYml0MIp9TC9u6Ny6uqw==)</p>
+        <p>Base64 notation: @ViewBag.Base64Hash</p>
+        <p>Hexadecimal notation: @ViewBag.HexHash</p>
 </div>

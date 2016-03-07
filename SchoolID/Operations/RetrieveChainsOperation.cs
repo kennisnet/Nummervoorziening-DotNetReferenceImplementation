@@ -15,7 +15,7 @@
         /// Sets up a RetrieveChain request, sends it through the provided School ID Client proxy class, retrieves the RetrieveChainsResponse and returns the provided Chain[].
         /// </summary>
         /// <returns>Chain[] containing active chains</returns>
-        public Chain[] getChains()
+        public Chain[] GetChains()
         {
             retrieveChainsRequestWrapper.retrieveChainsRequest = retrieveChainsRequest;
             retrieveChainsResponse retrieveChainsReponseWrapper = schoolIDClient.retrieveChains(retrieveChainsRequestWrapper);
