@@ -84,10 +84,17 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
             return retrieveSectorsOperation.GetSectors();
         }
 
-
+        /// <summary>
+        /// Invokes the School ID service to generate a School ID based on the hashed PGN, Chain ID and Sector ID
+        /// </summary>
+        /// <param name="hpgn">The scrypt hashed PGN</param>
+        /// <param name="chainGuid">A valid chain id</param>
+        /// <param name="sectorGuid">A valid sector id</param>
+        /// <returns>If no validation or operational errors, a School ID</returns>
         public string GenerateSchoolID(string hpgn, string chainGuid, string sectorGuid)
         {
-            return "";
+            RetrieveEckIdOperation retrieveEckIdOperation = new RetrieveEckIdOperation(schoolIDClient);
+            return retrieveEckIdOperation.GetEckId(hpgn, chainGuid, sectorGuid);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace NVA_DotNetReferenceImplementation.SCrypter
 {
-    public class Util
+    public class ScryptUtil
     {
         public byte[] GenerateHash(string input)
         {

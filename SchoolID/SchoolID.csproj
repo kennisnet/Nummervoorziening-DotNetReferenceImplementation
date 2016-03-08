@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Operations\RetrieveEckIdOperation.cs" />
     <Compile Include="Operations\PingOperation.cs" />
     <Compile Include="Operations\RetrieveChainsOperation.cs" />
     <Compile Include="Operations\RetrieveSectorsOperation.cs" />
@@ -48,7 +49,7 @@
     <Compile Include="SchoolID.cs" />
     <Compile Include="SchoolIDServiceUtil.cs" />
     <Compile Include="SCrypter\Constants.cs" />
-    <Compile Include="SCrypter\Util.cs" />
+    <Compile Include="SCrypter\ScryptUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CryptSharp_2_1_0\CryptSharp\CryptSharp.csproj">

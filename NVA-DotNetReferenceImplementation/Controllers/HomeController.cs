@@ -1,6 +1,4 @@
 ﻿using System.Web.Mvc;
-using CryptSharp.Utility;
-using System.Text;
 using System;
 using NVA_DotNetReferenceImplementation.SCrypter;
 using NVA_DotNetReferenceImplementation.SchoolID;
@@ -45,7 +43,7 @@ namespace NVA_DotNetReferenceImplementation.Controllers
 
 
             // Some scrypt tests
-            Util scryptUtil = new Util();
+            ScryptUtil scryptUtil = new ScryptUtil();
             byte[] hash = scryptUtil.GenerateHash("secret");
             ViewBag.Base64Hash = Convert.ToBase64String(hash);
             ViewBag.HexHash = BitConverter.ToString(hash).Replace("-", "").ToLower();
