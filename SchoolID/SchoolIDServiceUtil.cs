@@ -16,12 +16,31 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
         /// </summary>
         private SchoolIDClient schoolIDClient;
 
+        /// <summary>
+        /// The instance holding the Singleton object of SchoolIDServiceUtil
+        /// </summary>
         private static SchoolIDServiceUtil instance;
 
+        /// <summary>
+        /// Object to hold retrieved Chains during the session
+        /// </summary>
+        private static Chain[] chains;
+
+        /// <summary>
+        /// Object to hold retrieved Sectors during the session
+        /// </summary>
+        private static Sector[] sectors;
+
+        /// <summary>
+        /// Creates a new SchoolIDServiceUtil object if instance == null
+        /// </summary>
         private SchoolIDServiceUtil() {
             schoolIDClient = new SchoolIDClient();
         }
 
+        /// <summary>
+        /// Gets the Singleton SchoolIDServiceUtil instance
+        /// </summary>
         public static SchoolIDServiceUtil Instance
         {
             get
@@ -70,8 +89,13 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
         /// <returns>A Chain[] containing all active chains</returns>
         public Chain[] GetChains()
         {
-            RetrieveChainsOperation retrieveChainsOperation = new RetrieveChainsOperation(schoolIDClient);
-            return retrieveChainsOperation.GetChains();
+            if (chains == null || chains.Length == 0)
+            {
+                RetrieveChainsOperation retrieveChainsOperation = new RetrieveChainsOperation(schoolIDClient);
+                chains = retrieveChainsOperation.GetChains();
+            }
+
+            return chains;
         }
 
         /// <summary>
@@ -80,8 +104,13 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
         /// <returns>A Sector[] containing all active sectors</returns>
         public Sector[] GetSectors()
         {
-            RetrieveSectorsOperation retrieveSectorsOperation = new RetrieveSectorsOperation(schoolIDClient);
-            return retrieveSectorsOperation.GetSectors();
+            if (sectors == null || sectors.Length == 0)
+            {
+                RetrieveSectorsOperation retrieveSectorsOperation = new RetrieveSectorsOperation(schoolIDClient);
+                sectors = retrieveSectorsOperation.GetSectors();
+            }
+
+            return sectors;
         }
 
         /// <summary>

@@ -22,9 +22,9 @@ namespace ConsoleNVAClient
             // Status information
             if (schoolIDServiceUtil.IsSchoolIDAvailable())
             {
-                WritePingStatusOutput();
+                WritePingStatusOutput();               
                 WriteAvailableChains();
-                WriteAvailableSectors();
+                WriteAvailableSectors();                
                 
                 // Tests                
                 ExecuteClientTests();                

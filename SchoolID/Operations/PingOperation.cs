@@ -2,12 +2,19 @@
 
 namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
 {
+    /// <summary>
+    /// This class reflects the Ping operation of the Nummervoorziening service
+    /// </summary>
     class PingOperation
     {
         private SchoolIDClient schoolIDClient;
         private PingRequest pingRequest = new PingRequest();
         private pingRequest1 pingRequestWrapper = new pingRequest1();
 
+        /// <summary>
+        /// Sets up the PingOperation object with a reference to the SchoolIDClient proxy class
+        /// </summary>
+        /// <param name="schoolIDClient">An initialized SchoolIDClient proxy class</param>
         public PingOperation(SchoolIDClient schoolIDClient)
         {
             this.schoolIDClient = schoolIDClient;
@@ -58,15 +65,17 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
         /// <summary>
         /// Retrieves the current application version of the School ID service.
         /// </summary>
-        /// <returns>A string containing the version of the School ID service</returns>
+        /// <returns>A string containing the version of the School ID service, or an empty string upon error</returns>
         public string GetSchoolIDVersion()
         {
+            string applicationVersion = "";
+
             try
             {
                 pingRequestWrapper.pingRequest = pingRequest;
                 pingResponse1 pingResponseWrapper = schoolIDClient.ping(pingRequestWrapper);
                 PingResponse pingReponse = pingResponseWrapper.pingResponse;
-                return pingReponse.applicationVersion;
+                applicationVersion = pingReponse.applicationVersion;
             }
             catch (NullReferenceException nre)
             {
@@ -74,7 +83,7 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
                 System.Diagnostics.Debug.Write(nre.Message);
             }
 
-            return "";
+            return applicationVersion;
         }
     }
 }

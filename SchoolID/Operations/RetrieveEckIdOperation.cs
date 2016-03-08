@@ -1,17 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
+﻿namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
 {
+    /// <summary>
+    /// This class reflects the RetrieveEckId operation of the Nummervoorziening service
+    /// </summary>
     class RetrieveEckIdOperation
     {
         private SchoolIDClient schoolIDClient;
         private RetrieveEckIdRequest retrieveEckIdRequest = new RetrieveEckIdRequest();
         private retrieveEckIdRequest1 retrieveEckIdRequestWrapper = new retrieveEckIdRequest1();
 
+        /// <summary>
+        /// Sets up the RetrieveEckIdOperation object with a reference to the SchoolIDClient proxy class
+        /// </summary>
+        /// <param name="schoolIDClient">An initialized SchoolIDClient proxy class</param>
         public RetrieveEckIdOperation(SchoolIDClient schoolIDClient)
         {
             this.schoolIDClient = schoolIDClient;
