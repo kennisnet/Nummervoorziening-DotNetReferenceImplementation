@@ -1,6 +1,8 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NVA_DotNetReferenceImplementation.SchoolID.Operations;
+using NVA_DotNetReferenceImplementation.SchoolID;
+using Moq;
 
 namespace UnitTestProject
 {
@@ -24,7 +26,7 @@ namespace UnitTestProject
             PingOperation pingOperation = new PingOperation(schoolIDClient);
             Assert.AreEqual(expectedValue, pingOperation.IsAvailable());
         }
-
+        
         [TestMethod]
         public void GetSchoolIDDateTimeTest()
         {

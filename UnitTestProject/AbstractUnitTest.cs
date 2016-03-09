@@ -12,6 +12,7 @@ namespace UnitTestProject
         [TestInitialize()]
         public void initializeSchoolIDClientAndDisableSSL()
         {
+            // Disable SSL checks for now
             System.Net.ServicePointManager.ServerCertificateValidationCallback =
                 ((sender, certificate, chain, sslPolicyErrors) => true);
 
