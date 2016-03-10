@@ -8,7 +8,7 @@ namespace NVA_DotNetReferenceImplementation.SCrypter
     {
         public byte[] GenerateHash(string input)
         {
-            byte[] keyBytes = Encoding.UTF8.GetBytes(input);
+            byte[] keyBytes = Encoding.UTF8.GetBytes(input.ToLower());
             byte[] saltBytes = Convert.FromBase64String(Constants.SALT);
 
             return SCrypt.ComputeDerivedKey(

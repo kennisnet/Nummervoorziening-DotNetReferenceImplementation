@@ -88,7 +88,7 @@ namespace ConsoleNVAClient
             // Cases: valid requests
             Console.WriteLine();
             ExecuteClientTest("063138219", chains[0].id, sectors[0].id);
-            ExecuteClientTest("teacher@school.com", chains[0].id, sectors[0].id);
+            ExecuteClientTest("20DP teacher@school.com", chains[0].id, sectors[0].id);
             Console.WriteLine();
         }
 
