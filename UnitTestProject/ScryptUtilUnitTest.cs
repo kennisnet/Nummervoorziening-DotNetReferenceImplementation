@@ -8,11 +8,17 @@ using System.Threading.Tasks;
 
 namespace UnitTestProject
 {
+    /// <summary>
+    /// Demonstrates correct usage of the ScryptUtil class.
+    /// </summary>
     [TestClass]
     public class ScryptUtilUnitTest : AbstractUnitTest
     {
         string inputValue = "063138219";
 
+        /// <summary>
+        /// Tests that generated scrypt hash in Base64 notation is correct.
+        /// </summary>
         [TestMethod]
         public void GenerateBase64HashTest()
         {
@@ -22,6 +28,9 @@ namespace UnitTestProject
             Assert.AreEqual(expectedValue, scryptUtil.GenerateBase64Hash(inputValue));
         }
 
+        /// <summary>
+        /// Tests that generated scrypt hash in hexadecimal notation is correct.
+        /// </summary>
         [TestMethod]
         public void GenerateHexHashTest()
         {

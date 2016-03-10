@@ -1,6 +1,4 @@
-﻿using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NVA_DotNetReferenceImplementation.SchoolID.Operations;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace UnitTestProject
 {
@@ -9,6 +7,9 @@ namespace UnitTestProject
     {
         protected SchoolIDClient schoolIDClient;
 
+        /// <summary>
+        /// Setups Service Util for working with Nummervoorziening service and disables SSL check (for now).
+        /// </summary>
         [TestInitialize()]
         public void initializeSchoolIDClientAndDisableSSL()
         {

@@ -1,23 +1,18 @@
 ﻿using System;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using NVA_DotNetReferenceImplementation.SchoolID.Operations;
-using NVA_DotNetReferenceImplementation.SchoolID;
-using Moq;
 
 namespace UnitTestProject
 {
+    /// <summary>
+    /// Demonstrates correct usage of the "Ping" operation
+    /// </summary>
     [TestClass]
     public class PingOperationUnitTest : AbstractUnitTest
-    {   
-        [TestMethod]
-        public void GetSchoolIDVersionTest()
-        {
-            string expectedValue = "0.1.0-SNAPSHOT";
-
-            PingOperation pingOperation = new PingOperation(schoolIDClient);
-            Assert.AreEqual(expectedValue, pingOperation.GetSchoolIDVersion());
-        }
-
+    {
+        /// <summary>
+        /// Tests Nummervoorziening service availability.
+        /// </summary>
         [TestMethod]
         public void GetAvailabilityTest()
         {
@@ -26,7 +21,22 @@ namespace UnitTestProject
             PingOperation pingOperation = new PingOperation(schoolIDClient);
             Assert.AreEqual(expectedValue, pingOperation.IsAvailable());
         }
+
+        /// <summary>
+        /// Tests correct version of Nummervoorziening service.
+        /// </summary>
+        [TestMethod]
+        public void GetSchoolIDVersionTest()
+        {
+            string expectedValue = "0.1.0-SNAPSHOT";
+
+            PingOperation pingOperation = new PingOperation(schoolIDClient);
+            Assert.AreEqual(expectedValue, pingOperation.GetSchoolIDVersion());
+        }        
         
+        /// <summary>
+        /// Tests that time on server is not too different from local time.
+        /// </summary>
         [TestMethod]
         public void GetSchoolIDDateTimeTest()
         {
