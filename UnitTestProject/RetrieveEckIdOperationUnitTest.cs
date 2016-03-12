@@ -16,27 +16,12 @@ namespace UnitTestProject
         // HPgn based on PGN "20DP teacher@school.com"
         string validTeacherHpgn = "4cadf651ec0197909e6432cb8347369adba39f44276a5b3cd59d17066f10ab3e";
 
-        string validChainGuid;
-        string validSectorGuid;
+        string validChainGuid = "e7ec7d3c-c235-4513-bfb6-e54e66854795";
+        string validSectorGuid = "512e4729-03a4-43a2-95ba-758071d1b725";
 
         string invalidHpgn = "";
         string invalidChainGuid = "invalidchainguid";
         string invalidSectorGuid = "invalidsectorguid";
-
-        /// <summary>
-        /// Initializes the test by retrieving valid Chains and Sectors from the Nummervoorziening service.
-        /// </summary>
-        [TestInitialize]
-        public void GetEckIdInitializer()
-        {
-            // Retrieve a valid Chain from the Nummervoorziening service
-            RetrieveChainsOperation retrieveChainsOperation = new RetrieveChainsOperation(schoolIDClient);
-            validChainGuid = retrieveChainsOperation.GetChains()[0].id;
-
-            // Retrieve a valid Sector from the Nummervoorziening service
-            RetrieveSectorsOperation retrieveSectorsOperation = new RetrieveSectorsOperation(schoolIDClient);
-            validSectorGuid = retrieveSectorsOperation.GetSectors()[0].id;
-        }
 
         /// <summary>
         /// Tests that Nummervoorziening service throws error on invalid HPgn.
