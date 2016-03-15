@@ -62,7 +62,7 @@ namespace UnitTestProject
         [TestMethod]
         public void GetStudentSchoolIdTest()
         {
-            string expectedSchoolId = "https://school.id/pilot/998fc3e7c9add25be4369224e18d0876e7598480b184c6a35d8f49a49a3649040016f0aab6e292dd7da23292bd2f499e6018dfdab997d9408d80113d6dc72979";
+            string expectedSchoolId = "https://id.school/pilot/998fc3e7c9add25be4369224e18d0876e7598480b184c6a35d8f49a49a3649040016f0aab6e292dd7da23292bd2f499e6018dfdab997d9408d80113d6dc72979";
             
             RetrieveEckIdOperation retrieveEckIdOperation = new RetrieveEckIdOperation(schoolIDClient);
             string retrievedEckId = retrieveEckIdOperation.GetEckId(validStudentHpgn, validChainGuid, validSectorGuid);
@@ -75,7 +75,7 @@ namespace UnitTestProject
         [TestMethod]
         public void GetTeacherSchoolIdTest()
         {
-            string expectedSchoolId = "https://school.id/pilot/2650076c96066464e76063f92c6dd59c46bca515d9e7c0c8dd9ae1c1b733751a3ab20b50688b39dc633a04dbefc76ac2bbbd9e62abe3b68558dbbcb831148d62";
+            string expectedSchoolId = "https://id.school/pilot/2650076c96066464e76063f92c6dd59c46bca515d9e7c0c8dd9ae1c1b733751a3ab20b50688b39dc633a04dbefc76ac2bbbd9e62abe3b68558dbbcb831148d62";
 
             RetrieveEckIdOperation retrieveEckIdOperation = new RetrieveEckIdOperation(schoolIDClient);
             string retrievedEckId = retrieveEckIdOperation.GetEckId(validTeacherHpgn, validChainGuid, validSectorGuid);
