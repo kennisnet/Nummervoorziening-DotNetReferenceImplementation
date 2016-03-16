@@ -13,7 +13,8 @@ namespace UnitTestProject
     public class ReplaceEckIdOperationUnitTest : AbstractUnitTest
     {
         private static string validHpgnNewPrefix = "csharp01";
-        private static string validHpgnOldPrefix = "csharp02";
+        private static string validHpgnIntermediatePrefix = "csharp02";
+        private static string validHpgnOldPrefix = "csharp03";
         private static string validHpgnNew;
         private static string validHpgnOld;
 
@@ -137,6 +138,45 @@ namespace UnitTestProject
 
             // Assert that he Eck ID retrieved based on the new Hpgn equals the old Hpgn
             Assert.AreEqual(newEckId, finalEckId);
+        }
+
+        /// <summary>
+        /// Tests the Substitution functionality based on the output of the retrieve Eck ID functionality. In this case, a
+        /// substitution is submitted to substitution hpgn intermediate to hpgn old, and a second substitution from hpgn new 
+        /// to hpgn intermediate. The last substitution should give back hpgn old instead of hpgn intermediate, also when
+        /// retrieving the Eck Id based on hpgn new.
+        /// </summary>
+        [TestMethod]
+        public void ReplaceEckIdWithIntermediateTest()
+        {
+            RetrieveEckIdOperation retrieveEckIdOperation = new RetrieveEckIdOperation(schoolIDClient);
+            ReplaceEckIdOperation replaceEckIdOperation = new ReplaceEckIdOperation(schoolIDClient);
+
+            // Use a new set of values
+            ScryptUtil scryptUtil = new ScryptUtil();
+            string validHpgnNew = scryptUtil.GenerateHexHash(validHpgnNewPrefix + DateTime.Now.ToString("yyyyMMddHHmmss"));
+            string validHpgnIntermediate = scryptUtil.GenerateHexHash(validHpgnIntermediatePrefix + DateTime.Now.ToString("yyyyMMddHHmmss"));
+            string validHpgnOld = scryptUtil.GenerateHexHash(validHpgnOldPrefix + DateTime.Now.ToString("yyyyMMddHHmmss"));
+
+            // Use the datasets to retrieve the Eck IDs before substituting
+            string oldEckId = retrieveEckIdOperation.GetEckId(validHpgnOld, validChainGuid, validSectorGuid);
+            string intermediateEckId = retrieveEckIdOperation.GetEckId(validHpgnIntermediate, validChainGuid, validSectorGuid);
+
+            // Submit the substitutions
+            string eckIdFirstSubstitution = replaceEckIdOperation.ReplaceEckId(validHpgnIntermediate, validHpgnOld, validChainGuid, validSectorGuid, null);
+            string eckIdSecondSubstitution = replaceEckIdOperation.ReplaceEckId(validHpgnNew, validHpgnIntermediate, validChainGuid, validSectorGuid, null);
+
+            // Retrieve the Eck ID based on the new Hpgn, and check the result
+            string finalEckId = retrieveEckIdOperation.GetEckId(validHpgnNew, validChainGuid, validSectorGuid);
+
+            // Assert that the Eck ID retrieved from the first Replace Eck ID operation is correct
+            Assert.AreEqual(oldEckId, eckIdFirstSubstitution);
+
+            // Assert that the Eck ID retrieved from the second Replace Eck ID operation is correct
+            Assert.AreEqual(oldEckId, eckIdSecondSubstitution);
+
+            // Assert that he Eck ID retrieved based on the new Hpgn equals the old Hpgn
+            Assert.AreEqual(oldEckId, finalEckId);
         }
     }
 }
