@@ -17,6 +17,7 @@ namespace UnitTestProject
         private static string validHpgnOldPrefix = "csharp03";
         private static string validHpgnNew;
         private static string validHpgnOld;
+        private static int sequenceCounter = 0;
 
         string validChainGuid = "e7ec7d3c-c235-4513-bfb6-e54e66854795";
         string validSectorGuid = "512e4729-03a4-43a2-95ba-758071d1b725";
@@ -25,12 +26,19 @@ namespace UnitTestProject
         string invalidChainGuid = "invalidchainguid";
         string invalidSectorGuid = "invalidsectorguid";
 
+        public static int getSequentialNumber()
+        {
+            return sequenceCounter++;
+        }
+
         [ClassInitialize]
         public static void SetupValidHpgn(TestContext context)
         {
             ScryptUtil scryptUtil = new ScryptUtil();
-            validHpgnNew = scryptUtil.GenerateHexHash(validHpgnNewPrefix + DateTime.Now.ToString("yyyyMMddHHmmss"));
-            validHpgnOld = scryptUtil.GenerateHexHash(validHpgnOldPrefix + DateTime.Now.ToString("yyyyMMddHHmmss"));
+            validHpgnNew = scryptUtil.GenerateHexHash(validHpgnNewPrefix + getSequentialNumber() + 
+                DateTime.Now.ToString("yyyyMMddHHmmss"));
+            validHpgnOld = scryptUtil.GenerateHexHash(validHpgnOldPrefix + getSequentialNumber() + 
+                DateTime.Now.ToString("yyyyMMddHHmmss"));
         }
 
         /// <summary>
@@ -115,8 +123,10 @@ namespace UnitTestProject
 
             // Use a new set of values
             ScryptUtil scryptUtil = new ScryptUtil();
-            string validFutureHpgnNew = scryptUtil.GenerateHexHash(validHpgnNewPrefix + DateTime.Now.ToString("yyyyMMddHHmmss"));
-            string validFutureHpgnOld = scryptUtil.GenerateHexHash(validHpgnOldPrefix + DateTime.Now.ToString("yyyyMMddHHmmss"));
+            string validFutureHpgnNew = scryptUtil.GenerateHexHash(validHpgnNewPrefix + getSequentialNumber() + 
+                DateTime.Now.ToString("yyyyMMddHHmmss"));
+            string validFutureHpgnOld = scryptUtil.GenerateHexHash(validHpgnOldPrefix + getSequentialNumber() + 
+                DateTime.Now.ToString("yyyyMMddHHmmss"));
 
             // Use the initial dataset to retrieve the Eck ID
             string initialEckId = retrieveEckIdOperation.GetEckId(validFutureHpgnOld, validChainGuid, validSectorGuid);
@@ -154,9 +164,12 @@ namespace UnitTestProject
 
             // Use a new set of values
             ScryptUtil scryptUtil = new ScryptUtil();
-            string validHpgnNew = scryptUtil.GenerateHexHash(validHpgnNewPrefix + DateTime.Now.ToString("yyyyMMddHHmmss"));
-            string validHpgnIntermediate = scryptUtil.GenerateHexHash(validHpgnIntermediatePrefix + DateTime.Now.ToString("yyyyMMddHHmmss"));
-            string validHpgnOld = scryptUtil.GenerateHexHash(validHpgnOldPrefix + DateTime.Now.ToString("yyyyMMddHHmmss"));
+            string validHpgnNew = scryptUtil.GenerateHexHash(validHpgnNewPrefix + getSequentialNumber() + 
+                DateTime.Now.ToString("yyyyMMddHHmmss"));
+            string validHpgnIntermediate = scryptUtil.GenerateHexHash(validHpgnIntermediatePrefix + getSequentialNumber() + 
+                DateTime.Now.ToString("yyyyMMddHHmmss"));
+            string validHpgnOld = scryptUtil.GenerateHexHash(validHpgnOldPrefix + getSequentialNumber() + 
+                DateTime.Now.ToString("yyyyMMddHHmmss"));
 
             // Use the datasets to retrieve the Eck IDs before substituting
             string oldEckId = retrieveEckIdOperation.GetEckId(validHpgnOld, validChainGuid, validSectorGuid);
