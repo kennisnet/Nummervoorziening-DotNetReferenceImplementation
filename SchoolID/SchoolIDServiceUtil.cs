@@ -125,5 +125,20 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
             RetrieveEckIdOperation retrieveEckIdOperation = new RetrieveEckIdOperation(schoolIDClient);
             return retrieveEckIdOperation.GetEckId(hpgn, chainGuid, sectorGuid);
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="hpgnNew">The scrypt hashed new PGN, which will refer to the old HPGN instead</param>
+        /// <param name="hpgnOld">The scrypt hashed old PGN, which the new HPGN will refer to</param>
+        /// <param name="chainGuid">The specific, valid chain id for which the substitution applies</param>
+        /// <param name="sectorGuid">The specific, valid sector id for which the substitution applies</param>
+        /// <param name="effectiveDate">The date the substitution will become active (optional, default value: Now())</param>
+        /// <returns>If no validation or operational errors, a School ID based on the active substitution(s)</returns>
+        public string ReplaceEckID(string hpgnNew, string hpgnOld, string chainGuid, string sectorGuid, DateTime? effectiveDate)
+        {
+            ReplaceEckIdOperation replaceEckIdOperation = new ReplaceEckIdOperation(schoolIDClient);
+            return replaceEckIdOperation.ReplaceEckId(hpgnNew, hpgnOld, chainGuid, sectorGuid, effectiveDate);
+        }
     }
 }
