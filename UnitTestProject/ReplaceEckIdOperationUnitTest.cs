@@ -127,10 +127,7 @@ namespace UnitTestProject
                 DateTime.Now.ToString("yyyyMMddHHmmss"));
             string validFutureHpgnOld = scryptUtil.GenerateHexHash(validHpgnOldPrefix + getSequentialNumber() + 
                 DateTime.Now.ToString("yyyyMMddHHmmss"));
-
-            // Use the initial dataset to retrieve the Eck ID
-            string initialEckId = retrieveEckIdOperation.GetEckId(validFutureHpgnOld, validChainGuid, validSectorGuid);
-
+                       
             // Use the future Hpgn to retrieve the Eck ID based on the new Hpgn
             string newEckId = retrieveEckIdOperation.GetEckId(validFutureHpgnNew, validChainGuid, validSectorGuid);
 
@@ -146,7 +143,7 @@ namespace UnitTestProject
             // Assert that the Eck ID retrieved from the Replace Eck ID operation is correct
             Assert.AreEqual(newEckId, processedEckId);
 
-            // Assert that he Eck ID retrieved based on the new Hpgn equals the old Hpgn
+            // Assert that the Eck ID retrieved based on the new Hpgn equals the original value (thus not being substituted) 
             Assert.AreEqual(newEckId, finalEckId);
         }
 
