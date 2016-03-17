@@ -18,18 +18,6 @@ namespace UnitTestProject
         string validTeacherPgn = "20DP teacher@school.com";
 
         /// <summary>
-        /// Tests that generated scrypt hash in Base64 notation is correct.
-        /// </summary>
-        [TestMethod]
-        public void GenerateStudentBase64HashTest()
-        {
-            string expectedValue = "lSN80glj5jADRiAyRVCAmj35i74HdKNsNWv128imXns=";
-            ScryptUtil scryptUtil = new ScryptUtil();
-
-            Assert.AreEqual(expectedValue, scryptUtil.GenerateBase64Hash(validStudentPgn));
-        }
-
-        /// <summary>
         /// Tests that generated scrypt hash in hexadecimal notation is correct.
         /// </summary>
         [TestMethod]
@@ -39,18 +27,6 @@ namespace UnitTestProject
             ScryptUtil scryptUtil = new ScryptUtil();
 
             Assert.AreEqual(expectedValue, scryptUtil.GenerateHexHash(validStudentPgn));
-        }
-
-        /// <summary>
-        /// Tests that generated scrypt hash in Base64 notation is correct.
-        /// </summary>
-        [TestMethod]
-        public void GenerateTeacherBase64HashTest()
-        {
-            string expectedValue = "TK32UewBl5CeZDLLg0c2mtujn0Qnals81Z0XBm8Qqz4=";
-            ScryptUtil scryptUtil = new ScryptUtil();
-
-            Assert.AreEqual(expectedValue, scryptUtil.GenerateBase64Hash(validTeacherPgn));
         }
 
         /// <summary>

@@ -20,12 +20,7 @@ namespace NVA_DotNetReferenceImplementation.SCrypter
                 Constants.MAX_THREADS, 
                 Constants.DERIVED_KEY_LENGTH);
         }
-
-        public string GenerateBase64Hash(string input)
-        {
-            return Convert.ToBase64String(GenerateHash(input));
-        }
-
+        
         public string GenerateHexHash(string input)
         {
             return BitConverter.ToString(GenerateHash(input)).Replace("-", "").ToLower();
