@@ -16,9 +16,8 @@ namespace UnitTestProject
         // HPgn based on PGN "20DP teacher@school.com"
         string validTeacherHpgn = "4cadf651ec0197909e6432cb8347369adba39f44276a5b3cd59d17066f10ab3e";
 
-        string validChainGuid = "e7ec7d3c-c235-4513-bfb6-e54e66854795";
-        string validSectorGuid = "512e4729-03a4-43a2-95ba-758071d1b725";
-
+        string validChainGuid = "http://purl.edustandaard.nl/begrippenkader/e7ec7d3c-c235-4513-bfb6-e54e66854795";
+        string validSectorGuid = "http://purl.edustandaard.nl/begrippenkader/512e4729-03a4-43a2-95ba-758071d1b725";
         string invalidHpgn = "";
         string invalidChainGuid = "invalidchainguid";
         string invalidSectorGuid = "invalidsectorguid";
@@ -62,8 +61,11 @@ namespace UnitTestProject
         [TestMethod]
         public void GetStudentSchoolIdTest()
         {
-            string expectedSchoolId = "https://id.school/pilot/998fc3e7c9add25be4369224e18d0876e7598480b184c6a35d8f49a49a3649040016f0aab6e292dd7da23292bd2f499e6018dfdab997d9408d80113d6dc72979";
-            
+            string expectedSchoolId = "https://id.school/pilot/a7d5e96cbfc61cddcf9a918150d5137c6659497ecb435d97abfc60b7297c750a47a3163af49418acc73148d34915833b1cef077ba687c621aa40654906073571";
+
+
+
+
             RetrieveEckIdOperation retrieveEckIdOperation = new RetrieveEckIdOperation(schoolIDClient);
             string retrievedEckId = retrieveEckIdOperation.GetEckId(validStudentHpgn, validChainGuid, validSectorGuid);
             Assert.AreEqual(expectedSchoolId, retrievedEckId);
@@ -75,7 +77,7 @@ namespace UnitTestProject
         [TestMethod]
         public void GetTeacherSchoolIdTest()
         {
-            string expectedSchoolId = "https://id.school/pilot/2650076c96066464e76063f92c6dd59c46bca515d9e7c0c8dd9ae1c1b733751a3ab20b50688b39dc633a04dbefc76ac2bbbd9e62abe3b68558dbbcb831148d62";
+            string expectedSchoolId = "https://id.school/pilot/8dc3d9adad74ee2d588a6456be26da9faab1f0b1801bb15897f0e979ada55556aee041e329b27328259ba383af779080209c5c54f3db9b171bd43980aedc47c3";
 
             RetrieveEckIdOperation retrieveEckIdOperation = new RetrieveEckIdOperation(schoolIDClient);
             string retrievedEckId = retrieveEckIdOperation.GetEckId(validTeacherHpgn, validChainGuid, validSectorGuid);
