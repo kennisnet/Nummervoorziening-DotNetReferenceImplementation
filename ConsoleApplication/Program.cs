@@ -123,10 +123,7 @@ namespace ConsoleNVAClient
             ScryptUtil scryptUtil = new ScryptUtil();
 
             // Get the hash from the scrypt library
-            byte[] scryptHash = scryptUtil.GenerateHash(input);
-                        
-            // Return the hash in hexadecimal notation
-            return BitConverter.ToString(scryptHash).Replace("-", "").ToLower();            
+           return scryptUtil.GenerateHexHash(input);      
         }
 
         /// <summary>

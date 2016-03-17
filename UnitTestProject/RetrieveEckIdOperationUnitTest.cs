@@ -62,10 +62,7 @@ namespace UnitTestProject
         public void GetStudentSchoolIdTest()
         {
             string expectedSchoolId = "https://id.school/pilot/a7d5e96cbfc61cddcf9a918150d5137c6659497ecb435d97abfc60b7297c750a47a3163af49418acc73148d34915833b1cef077ba687c621aa40654906073571";
-
-
-
-
+                        
             RetrieveEckIdOperation retrieveEckIdOperation = new RetrieveEckIdOperation(schoolIDClient);
             string retrievedEckId = retrieveEckIdOperation.GetEckId(validStudentHpgn, validChainGuid, validSectorGuid);
             Assert.AreEqual(expectedSchoolId, retrievedEckId);
