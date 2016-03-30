@@ -41,6 +41,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SchoolIDBatch.cs" />
+    <Compile Include="Operations\RetrieveEckIdBatchOperation.cs" />
+    <Compile Include="Operations\SubmitEckIdBatchOperation.cs" />
     <Compile Include="Operations\ReplaceEckIdOperation.cs" />
     <Compile Include="Operations\RetrieveEckIdOperation.cs" />
     <Compile Include="Operations\PingOperation.cs" />

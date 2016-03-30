@@ -140,5 +140,11 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
             ReplaceEckIdOperation replaceEckIdOperation = new ReplaceEckIdOperation(schoolIDClient);
             return replaceEckIdOperation.ReplaceEckId(hpgnNew, hpgnOld, chainGuid, sectorGuid, effectiveDate);
         }
+
+
+        public void SubmitHpgnBatch()
+        {
+
+        } 
     }
 }
