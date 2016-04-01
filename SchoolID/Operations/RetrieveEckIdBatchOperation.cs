@@ -14,7 +14,7 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
         private retrieveEckIdBatchRequest1 retrieveEckIdBatchRequestWrapper = new retrieveEckIdBatchRequest1();
 
         private int BATCH_RETRIEVE_ATTEMPTS_COUNT = 10;
-        private int RETRIEVE_SCHOOL_ID_BATCH_TIMEOUT = 15000;
+        private int RETRIEVE_SCHOOL_ID_BATCH_TIMEOUT = 25000;
 
         /// <summary>
         /// Sets up the RetrieveSectorsOperation object with a reference to the SchoolIDClient proxy class
