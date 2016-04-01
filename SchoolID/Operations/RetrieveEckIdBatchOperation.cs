@@ -31,9 +31,7 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
             retrieveEckIdBatchRequest.batchIdentifier = new BatchIdentifier();
             retrieveEckIdBatchRequest.batchIdentifier.Value = batchIdentifier;
             retrieveEckIdBatchRequestWrapper.retrieveEckIdBatchRequest = retrieveEckIdBatchRequest;
-
-            bool breakLoop = false;
-
+            
             // Try to retrieve the Batch, retry if it is not ready yet (a FaultException will be thrown)
             for (int i = 0; i < BATCH_RETRIEVE_ATTEMPTS_COUNT && !breakLoop; i++)
             {
