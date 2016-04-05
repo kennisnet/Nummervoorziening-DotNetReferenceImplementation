@@ -1,11 +1,12 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
+using NVA_DotNetReferenceImplementation.SchoolID;
 
 namespace UnitTestProject
 {
     [TestClass]
     public abstract class AbstractUnitTest
     {
-        protected SchoolIDClient schoolIDClient;
+        protected SchoolIDServiceUtil schoolIDServiceUtil;
 
         /// <summary>
         /// Setups Service Util for working with Nummervoorziening service and disables SSL check (for now).
@@ -16,8 +17,8 @@ namespace UnitTestProject
             // Disable SSL checks for now
             System.Net.ServicePointManager.ServerCertificateValidationCallback =
                 ((sender, certificate, chain, sslPolicyErrors) => true);
-
-            schoolIDClient = new SchoolIDClient();
+            
+            schoolIDServiceUtil = SchoolIDServiceUtil.Instance;
         }
     }
 }

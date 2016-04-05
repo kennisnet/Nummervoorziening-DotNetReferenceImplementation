@@ -28,10 +28,7 @@ namespace UnitTestProject
         /// </summary>
         [TestMethod]
         public void SimpleSubmittingAndRetrievingBatchTest()
-        {
-            SubmitEckIdBatchOperation submitEckIdBatchOperation = new SubmitEckIdBatchOperation(schoolIDClient);
-            RetrieveEckIdBatchOperation retrieveEckIdBatchOperation = new RetrieveEckIdBatchOperation(schoolIDClient);
-
+        {     
             ScryptUtil scryptUtil = new ScryptUtil();
             SchoolIDBatch schoolIdBatch = new SchoolIDBatch();
             
@@ -41,10 +38,10 @@ namespace UnitTestProject
             listedHpgn.Add(2, scryptUtil.GenerateHexHash(validTeacherPgn));
             
             // Submit the batch, and fetch the identifier
-            string batchIdentifier = submitEckIdBatchOperation.SubmitHpgnBatch(listedHpgn, validChainGuid, validSectorGuid);
+            string batchIdentifier = schoolIDServiceUtil.SubmitHpgnBatch(listedHpgn, validChainGuid, validSectorGuid);
 
             // Retrieve the batch
-            schoolIdBatch = retrieveEckIdBatchOperation.RetrieveBatch(batchIdentifier);
+            schoolIdBatch = schoolIDServiceUtil.RetrieveEckIdBatch(batchIdentifier);
             
             // Test we received two EckIds in the Success List and compare their contents with the expected values
             Assert.AreEqual(2, schoolIdBatch.getSuccessList().Count);
@@ -57,10 +54,7 @@ namespace UnitTestProject
         /// </summary>
         [TestMethod]
         public void RetrievingBatchWithFailedItemsTest()
-        {
-            SubmitEckIdBatchOperation submitEckIdBatchOperation = new SubmitEckIdBatchOperation(schoolIDClient);
-            RetrieveEckIdBatchOperation retrieveEckIdBatchOperation = new RetrieveEckIdBatchOperation(schoolIDClient);
-
+        {     
             ScryptUtil scryptUtil = new ScryptUtil();
             SchoolIDBatch schoolIdBatch = new SchoolIDBatch();
 
@@ -70,10 +64,10 @@ namespace UnitTestProject
             listedHpgn.Add(2, INVALID_HPGN);
 
             // Submit the batch, and fetch the identifier
-            string batchIdentifier = submitEckIdBatchOperation.SubmitHpgnBatch(listedHpgn, validChainGuid, validSectorGuid);
+            string batchIdentifier = schoolIDServiceUtil.SubmitHpgnBatch(listedHpgn, validChainGuid, validSectorGuid);
 
             // Retrieve the batch
-            schoolIdBatch = retrieveEckIdBatchOperation.RetrieveBatch(batchIdentifier);
+            schoolIdBatch = schoolIDServiceUtil.RetrieveEckIdBatch(batchIdentifier);
 
             // Test we received two EckIds in the Failure List and make sure the error message is not null
             Assert.AreEqual(2, schoolIdBatch.getFailedList().Count);
@@ -89,9 +83,6 @@ namespace UnitTestProject
         [TestMethod]
         public void RetrievingBatchWithFailedAndProcessedValues()
         {
-            SubmitEckIdBatchOperation submitEckIdBatchOperation = new SubmitEckIdBatchOperation(schoolIDClient);
-            RetrieveEckIdBatchOperation retrieveEckIdBatchOperation = new RetrieveEckIdBatchOperation(schoolIDClient);
-
             ScryptUtil scryptUtil = new ScryptUtil();
             SchoolIDBatch schoolIdBatch = new SchoolIDBatch();
 
@@ -101,10 +92,10 @@ namespace UnitTestProject
             listedHpgn.Add(2, INVALID_HPGN);
 
             // Submit the batch, and fetch the identifier
-            string batchIdentifier = submitEckIdBatchOperation.SubmitHpgnBatch(listedHpgn, validChainGuid, validSectorGuid);
+            string batchIdentifier = schoolIDServiceUtil.SubmitHpgnBatch(listedHpgn, validChainGuid, validSectorGuid);
 
             // Retrieve the batch
-            schoolIdBatch = retrieveEckIdBatchOperation.RetrieveBatch(batchIdentifier);
+            schoolIdBatch = schoolIDServiceUtil.RetrieveEckIdBatch(batchIdentifier);
 
             // Test we received two EckIds, one in the Success List and one in the Failure List, 
             // and compare their contents with the expected values. Note that for retrieval from the appropriate Dictionaries
@@ -122,10 +113,7 @@ namespace UnitTestProject
         [TestMethod]
         [ExpectedException(typeof(FaultException))]
         public void RetrieveBatchTwoTimesTest()
-        {
-            SubmitEckIdBatchOperation submitEckIdBatchOperation = new SubmitEckIdBatchOperation(schoolIDClient);
-            RetrieveEckIdBatchOperation retrieveEckIdBatchOperation = new RetrieveEckIdBatchOperation(schoolIDClient);
-
+        {         
             ScryptUtil scryptUtil = new ScryptUtil();
             SchoolIDBatch schoolIdBatch = new SchoolIDBatch();
 
@@ -135,14 +123,14 @@ namespace UnitTestProject
             listedHpgn.Add(2, scryptUtil.GenerateHexHash(validTeacherPgn));
 
             // Submit the batch, and fetch the identifier
-            string batchIdentifier = submitEckIdBatchOperation.SubmitHpgnBatch(listedHpgn, validChainGuid, validSectorGuid);
+            string batchIdentifier = schoolIDServiceUtil.SubmitHpgnBatch(listedHpgn, validChainGuid, validSectorGuid);
 
             // Retrieve the batch
-            schoolIdBatch = retrieveEckIdBatchOperation.RetrieveBatch(batchIdentifier);
+            schoolIdBatch = schoolIDServiceUtil.RetrieveEckIdBatch(batchIdentifier);
             Assert.AreEqual(2, schoolIdBatch.getSuccessList().Count);
 
             // Retrieve the batch a second time
-            retrieveEckIdBatchOperation.RetrieveBatch(batchIdentifier);
+            schoolIDServiceUtil.RetrieveEckIdBatch(batchIdentifier);
         }
 
         /// <summary>
@@ -151,9 +139,8 @@ namespace UnitTestProject
         [TestMethod]
         [ExpectedException(typeof(FaultException))]
         public void RetrieveBatchWithInvalidIdentifier()
-        {
-            RetrieveEckIdBatchOperation retrieveEckIdBatchOperation = new RetrieveEckIdBatchOperation(schoolIDClient);
-            retrieveEckIdBatchOperation.RetrieveBatch(INVALID_BATCH_IDENTIFIER);
+        {            
+            schoolIDServiceUtil.RetrieveEckIdBatch(INVALID_BATCH_IDENTIFIER);
         }
     }
 }

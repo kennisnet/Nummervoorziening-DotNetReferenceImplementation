@@ -25,6 +25,11 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
             this.schoolIDClient = schoolIDClient;
         }
 
+        /// <summary>
+        /// Fetches a Batch based with the given identifier. Incorporates cooldown periods as well as possible Faults.
+        /// </summary>
+        /// <param name="batchIdentifier">The identifier of the batch to retrieve</param>
+        /// <returns>A populated SchoolIDBatch object</returns>
         public SchoolIDBatch RetrieveBatch(string batchIdentifier)
         {
             SchoolIDBatch schoolIdBatch = new SchoolIDBatch();

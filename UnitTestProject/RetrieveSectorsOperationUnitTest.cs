@@ -15,8 +15,7 @@ namespace UnitTestProject
         [TestMethod]
         public void GetSectorsTest()
         {
-            RetrieveSectorsOperation retrieveSectorsOperation = new RetrieveSectorsOperation(schoolIDClient);
-            Sector[] sectors = retrieveSectorsOperation.GetSectors();
+            Sector[] sectors = schoolIDServiceUtil.GetSectors();
 
             Assert.IsNotNull(sectors);
             Assert.IsTrue(sectors.Length > 0);

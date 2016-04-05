@@ -1,5 +1,11 @@
 ﻿using NVA_DotNetReferenceImplementation.SchoolID.Operations;
 using System;
+using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
+using System.Net;
+using System.Security.Cryptography.X509Certificates;
+using System.ServiceModel;
 
 namespace NVA_DotNetReferenceImplementation.SchoolID
 {
@@ -20,6 +26,16 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
         /// The instance holding the Singleton object of SchoolIDServiceUtil
         /// </summary>
         private static SchoolIDServiceUtil instance;
+        
+        private string PathToCertificate;
+
+        private string CertificatePassword;
+
+        private X509Certificate2 MyCertificate;
+        
+        private X509Certificate2 ServiceCertificate;
+
+        private EndpointIdentity MyIdentity;
 
         /// <summary>
         /// Object to hold retrieved Chains during the session
@@ -48,8 +64,41 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
                 if (instance == null)
                 {
                     instance = new SchoolIDServiceUtil();
+                    instance.InitializeCertificate();
                 }
                 return instance;
+            }
+        }
+
+        private void InitializeCertificate()
+        {
+            PathToCertificate = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, 
+                ConfigurationManager.AppSettings["certificateFileName"]);
+            CertificatePassword = ConfigurationManager.AppSettings["certificatePassword"];
+
+            string serviceCertPath = "";
+
+            // Try to read the certificate, and if successful, add it to the bundle of certificates
+            try
+            {
+                MyCertificate = new X509Certificate2(PathToCertificate, CertificatePassword);
+
+                serviceCertPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                    ConfigurationManager.AppSettings["certificateFileName"]);
+
+                ServiceCertificate = new X509Certificate2(serviceCertPath,
+                    ConfigurationManager.AppSettings["certificatePassword"]);
+                
+                MyIdentity = EndpointIdentity.CreateDnsIdentity(
+                    ConfigurationManager.AppSettings["certificateDnsIdentity"]);
+
+                string oin = ConfigurationManager.AppSettings["instanceOIN"];
+                
+                schoolIDClient.ClientCredentials.ClientCertificate.Certificate = MyCertificate;
+            }
+            catch (System.Security.Cryptography.CryptographicException crex)
+            {
+                System.Diagnostics.Debug.WriteLine("Cryptographic Exc: " + crex.Message + " - " + PathToCertificate + " - " + serviceCertPath);
             }
         }
 
@@ -127,7 +176,8 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
         }
 
         /// <summary>
-        /// 
+        /// Invokes the School ID service to substitute the new HPGN with the old HPGN, in order to be able to keep using
+        /// the old SchoolID even with a new BSN/PGN
         /// </summary>
         /// <param name="hpgnNew">The scrypt hashed new PGN, which will refer to the old HPGN instead</param>
         /// <param name="hpgnOld">The scrypt hashed old PGN, which the new HPGN will refer to</param>
@@ -141,10 +191,29 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
             return replaceEckIdOperation.ReplaceEckId(hpgnNew, hpgnOld, chainGuid, sectorGuid, effectiveDate);
         }
 
-
-        public void SubmitHpgnBatch()
+        /// <summary>
+        /// Translates the Dictionary to a ListedHpgn array and submits it to the Nummervoorziening service. The Batch Identifier is
+        /// returned as a String if the submitting succeeded.
+        /// </summary>
+        /// <param name="listedHpgn">A list of indexed Hpgn for which a School ID is requested</param>
+        /// <param name="chainGuid">A valid chain id</param>
+        /// <param name="sectorGuid">A valid sector id</param>
+        /// <returns>If successful, a String containing the Batch Identifier</returns>
+        public string SubmitHpgnBatch(Dictionary<int, string> hpgnDictionary, string chainGuid, string sectorGuid)
         {
+            SubmitEckIdBatchOperation submitEckIdBatchOperation = new SubmitEckIdBatchOperation(schoolIDClient);
+            return submitEckIdBatchOperation.SubmitHpgnBatch(hpgnDictionary, chainGuid, sectorGuid);
+        }
 
-        } 
+        /// <summary>
+        /// Fetches a Batch based with the given identifier. Incorporates cooldown periods as well as possible Faults.
+        /// </summary>
+        /// <param name="batchIdentifier">The identifier of the batch to retrieve</param>
+        /// <returns>A populated SchoolIDBatch object</returns>
+        public SchoolIDBatch RetrieveEckIdBatch(string batchIdentifier)
+        {
+            RetrieveEckIdBatchOperation retrieveEckIdBatchOperation = new RetrieveEckIdBatchOperation(schoolIDClient);
+            return retrieveEckIdBatchOperation.RetrieveBatch(batchIdentifier);
+        }
     }
 }

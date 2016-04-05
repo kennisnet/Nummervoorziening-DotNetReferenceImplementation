@@ -17,9 +17,7 @@ namespace UnitTestProject
         public void GetAvailabilityTest()
         {
             bool expectedValue = true;
-
-            PingOperation pingOperation = new PingOperation(schoolIDClient);
-            Assert.AreEqual(expectedValue, pingOperation.IsAvailable());
+            Assert.AreEqual(expectedValue, schoolIDServiceUtil.IsSchoolIDAvailable());
         }
 
         /// <summary>
@@ -29,9 +27,7 @@ namespace UnitTestProject
         public void GetSchoolIDVersionTest()
         {
             string expectedValue = "0.1.0-SNAPSHOT";
-
-            PingOperation pingOperation = new PingOperation(schoolIDClient);
-            Assert.AreEqual(expectedValue, pingOperation.GetSchoolIDVersion());
+            Assert.AreEqual(expectedValue, schoolIDServiceUtil.GetSchoolIDVersion());
         }        
         
         /// <summary>
@@ -40,10 +36,9 @@ namespace UnitTestProject
         [TestMethod]
         public void GetSchoolIDDateTimeTest()
         {
-            double allowedGapInMinutes = 180;
+            double allowedGapInMinutes = 180;   
 
-            PingOperation pingOperation = new PingOperation(schoolIDClient);
-            DateTime? timeOnServer = pingOperation.GetSchoolIDDateTime();
+            DateTime? timeOnServer = schoolIDServiceUtil.GetSchoolIDDateTime();
             DateTime currentDateTime = DateTime.Now;
 
             // Check if the DateTime we received is valid

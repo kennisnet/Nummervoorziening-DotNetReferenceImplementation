@@ -15,8 +15,7 @@ namespace UnitTestProject
         [TestMethod]
         public void GetChainsTest()
         {
-            RetrieveChainsOperation retrieveChainsOperation = new RetrieveChainsOperation(schoolIDClient);
-            Chain[] chains = retrieveChainsOperation.GetChains();
+            Chain[] chains = schoolIDServiceUtil.GetChains();
 
             Assert.IsNotNull(chains);
             Assert.IsTrue(chains.Length > 0);

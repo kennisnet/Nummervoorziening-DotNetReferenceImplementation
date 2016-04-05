@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 /// </summary>
 namespace NVA_DotNetReferenceImplementation.SchoolID
 {
-    class SchoolIDBatch
+    public class SchoolIDBatch
     {
         private Dictionary<int, string> successList;
 

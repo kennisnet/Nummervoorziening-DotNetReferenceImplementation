@@ -9,7 +9,7 @@ namespace ConsoleNVAClient
         private static SchoolIDServiceUtil schoolIDServiceUtil;
         private static Chain[] chains;
         private static Sector[] sectors;
-        
+
         /// <summary>
         /// Console application entrance of the Reference implementation to demonstrate how a Nummervoorziening client may communicate 
         /// with the Nummervoorziening service.
@@ -20,6 +20,7 @@ namespace ConsoleNVAClient
             // Disable SSL checks for now
             System.Net.ServicePointManager.ServerCertificateValidationCallback =
                 ((sender, certificate, chain, sslPolicyErrors) => true);
+            
 
             // Setup the Service Utility for School ID 
             schoolIDServiceUtil = SchoolIDServiceUtil.Instance;
@@ -29,14 +30,15 @@ namespace ConsoleNVAClient
             // Status information
             if (schoolIDServiceUtil.IsSchoolIDAvailable())
             {
-                WritePingStatusOutput();               
+                WritePingStatusOutput();
                 WriteAvailableChains();
                 WriteAvailableSectors();
 
                 // Tests               
-                Console.WriteLine(); 
-                ExecuteClientTests();                
-            } else
+                Console.WriteLine();
+                ExecuteClientTests();
+            }
+            else
             {
                 Console.WriteLine("School ID service is offline.");
             }
@@ -75,7 +77,7 @@ namespace ConsoleNVAClient
             // List available Sectors
             Console.WriteLine("Count of active sectors:\t" + sectors.Length);
         }
-        
+
         /// <summary>
         /// Initializes test cases
         /// </summary>
@@ -101,17 +103,18 @@ namespace ConsoleNVAClient
         private static void ExecuteClientTest(string input, string chainGuid, string sectorGuid)
         {
             string scryptHash = GenerateScryptHash(input);
-            try {
+            try
+            {
                 Console.WriteLine("Pgn:\t\t\t\t" + input);
                 Console.WriteLine("HPgn:\t\t\t\t" + scryptHash);
                 Console.WriteLine("Retrieved SchoolID:\t\t" + GenerateSchoolID(scryptHash, chainGuid, sectorGuid));
                 Console.WriteLine();
-            } 
+            }
             catch (Exception e)
             {
                 Console.WriteLine("Exception has been thrown: " + e.Message);
             }
-        }        
+        }
 
         /// <summary>
         /// Uses the scrypt library to provide a hexadecimal scrypt hash of the input
@@ -123,7 +126,7 @@ namespace ConsoleNVAClient
             ScryptUtil scryptUtil = new ScryptUtil();
 
             // Get the hash from the scrypt library
-           return scryptUtil.GenerateHexHash(input);      
+            return scryptUtil.GenerateHexHash(input);
         }
 
         /// <summary>

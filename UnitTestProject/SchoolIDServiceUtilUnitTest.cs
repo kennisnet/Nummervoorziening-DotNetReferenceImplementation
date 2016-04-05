@@ -6,14 +6,6 @@ namespace UnitTestProject
     [TestClass]
     public class SchoolIDServiceUtilUnitTest : AbstractUnitTest
     {
-        private SchoolIDServiceUtil schoolIDServiceUtil;
-
-        [TestInitialize]
-        public void InitializeSchoolIDServiceUtil()
-        {
-            schoolIDServiceUtil = SchoolIDServiceUtil.Instance;
-        }
-
         [TestMethod]
         public void CheckInstanceNotNullTest()
         {

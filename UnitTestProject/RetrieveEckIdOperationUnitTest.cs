@@ -29,8 +29,7 @@ namespace UnitTestProject
         [ExpectedException(typeof(FaultException))]
         public void GetEckIdInvalidHpgnTest()
         {
-            RetrieveEckIdOperation retrieveEckIdOperation = new RetrieveEckIdOperation(schoolIDClient);
-            retrieveEckIdOperation.GetEckId(invalidHpgn, validChainGuid, validSectorGuid);
+            schoolIDServiceUtil.GenerateSchoolID(invalidHpgn, validChainGuid, validSectorGuid);
         }
 
         /// <summary>
@@ -40,8 +39,7 @@ namespace UnitTestProject
         [ExpectedException(typeof(FaultException))]
         public void GetEckIdInvalidChainTest()
         {
-            RetrieveEckIdOperation retrieveEckIdOperation = new RetrieveEckIdOperation(schoolIDClient);
-            retrieveEckIdOperation.GetEckId(validStudentHpgn, invalidChainGuid, validSectorGuid);
+            schoolIDServiceUtil.GenerateSchoolID(validStudentHpgn, invalidChainGuid, validSectorGuid);
         }
 
         /// <summary>
@@ -51,8 +49,7 @@ namespace UnitTestProject
         [ExpectedException(typeof(FaultException))]
         public void GetEckIdInvalidSectorTest()
         {
-            RetrieveEckIdOperation retrieveEckIdOperation = new RetrieveEckIdOperation(schoolIDClient);
-            retrieveEckIdOperation.GetEckId(validStudentHpgn, validChainGuid, invalidSectorGuid);
+            schoolIDServiceUtil.GenerateSchoolID(validStudentHpgn, validChainGuid, invalidSectorGuid);
         }
 
         /// <summary>
@@ -62,9 +59,8 @@ namespace UnitTestProject
         public void GetStudentSchoolIdTest()
         {
             string expectedSchoolId = "https://id.school/pilot/a7d5e96cbfc61cddcf9a918150d5137c6659497ecb435d97abfc60b7297c750a47a3163af49418acc73148d34915833b1cef077ba687c621aa40654906073571";
-                        
-            RetrieveEckIdOperation retrieveEckIdOperation = new RetrieveEckIdOperation(schoolIDClient);
-            string retrievedEckId = retrieveEckIdOperation.GetEckId(validStudentHpgn, validChainGuid, validSectorGuid);
+            string retrievedEckId = schoolIDServiceUtil.GenerateSchoolID(validStudentHpgn, validChainGuid, validSectorGuid);
+
             Assert.AreEqual(expectedSchoolId, retrievedEckId);
         }
 
@@ -75,9 +71,8 @@ namespace UnitTestProject
         public void GetStudentSchoolIdUppercaseTest()
         {
             string expectedSchoolId = "https://id.school/pilot/a7d5e96cbfc61cddcf9a918150d5137c6659497ecb435d97abfc60b7297c750a47a3163af49418acc73148d34915833b1cef077ba687c621aa40654906073571";
+            string retrievedEckId = schoolIDServiceUtil.GenerateSchoolID(validStudentHpgn, validChainGuid, validSectorGuid);
 
-            RetrieveEckIdOperation retrieveEckIdOperation = new RetrieveEckIdOperation(schoolIDClient);
-            string retrievedEckId = retrieveEckIdOperation.GetEckId(validStudentHpgn, validChainGuid, validSectorGuid);
             Assert.AreEqual(expectedSchoolId, retrievedEckId);
         }
 
@@ -88,9 +83,8 @@ namespace UnitTestProject
         public void GetTeacherSchoolIdTest()
         {
             string expectedSchoolId = "https://id.school/pilot/8dc3d9adad74ee2d588a6456be26da9faab1f0b1801bb15897f0e979ada55556aee041e329b27328259ba383af779080209c5c54f3db9b171bd43980aedc47c3";
+            string retrievedEckId = schoolIDServiceUtil.GenerateSchoolID(validTeacherHpgn, validChainGuid, validSectorGuid);
 
-            RetrieveEckIdOperation retrieveEckIdOperation = new RetrieveEckIdOperation(schoolIDClient);
-            string retrievedEckId = retrieveEckIdOperation.GetEckId(validTeacherHpgn, validChainGuid, validSectorGuid);
             Assert.AreEqual(expectedSchoolId, retrievedEckId);
         }
     }

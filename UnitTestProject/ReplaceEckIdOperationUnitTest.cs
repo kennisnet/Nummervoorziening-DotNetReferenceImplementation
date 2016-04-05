@@ -48,8 +48,7 @@ namespace UnitTestProject
         [ExpectedException(typeof(FaultException))]
         public void ReplaceEckIdInvalidNewHpgnTest()
         {
-            ReplaceEckIdOperation replaceEckIdOperation = new ReplaceEckIdOperation(schoolIDClient);
-            replaceEckIdOperation.ReplaceEckId(invalidHpgn, validHpgnOld, validChainGuid, validSectorGuid, null);            
+            schoolIDServiceUtil.ReplaceEckID(invalidHpgn, validHpgnOld, validChainGuid, validSectorGuid, null);            
         }
 
         /// <summary>
@@ -59,8 +58,7 @@ namespace UnitTestProject
         [ExpectedException(typeof(FaultException))]
         public void ReplaceEckIdInvalidOldHpgnTest()
         {
-            ReplaceEckIdOperation replaceEckIdOperation = new ReplaceEckIdOperation(schoolIDClient);
-            replaceEckIdOperation.ReplaceEckId(validHpgnNew, invalidHpgn, validChainGuid, validSectorGuid, null);
+            schoolIDServiceUtil.ReplaceEckID(validHpgnNew, invalidHpgn, validChainGuid, validSectorGuid, null);
         }
 
         /// <summary>
@@ -69,9 +67,8 @@ namespace UnitTestProject
         [TestMethod]
         [ExpectedException(typeof(FaultException))]
         public void ReplaceEckIdInvalidChainTest()
-        {
-            ReplaceEckIdOperation replaceEckIdOperation = new ReplaceEckIdOperation(schoolIDClient);
-            replaceEckIdOperation.ReplaceEckId(validHpgnNew, validHpgnOld, invalidChainGuid, validSectorGuid, null);
+        {            
+            schoolIDServiceUtil.ReplaceEckID(validHpgnNew, validHpgnOld, invalidChainGuid, validSectorGuid, null);
         }
 
         /// <summary>
@@ -81,8 +78,7 @@ namespace UnitTestProject
         [ExpectedException(typeof(FaultException))]
         public void ReplaceEckIdInvalidSectorTest()
         {
-            ReplaceEckIdOperation replaceEckIdOperation = new ReplaceEckIdOperation(schoolIDClient);
-            replaceEckIdOperation.ReplaceEckId(validHpgnNew, validHpgnOld, validChainGuid, invalidSectorGuid, null);
+            schoolIDServiceUtil.ReplaceEckID(validHpgnNew, validHpgnOld, validChainGuid, invalidSectorGuid, null);
         }
 
         /// <summary>
@@ -91,18 +87,15 @@ namespace UnitTestProject
         /// </summary>
         [TestMethod]
         public void ReplaceEckIdNowTest()
-        {
-            RetrieveEckIdOperation retrieveEckIdOperation = new RetrieveEckIdOperation(schoolIDClient);
-            ReplaceEckIdOperation replaceEckIdOperation = new ReplaceEckIdOperation(schoolIDClient);
-
+        {            
             // Use the initial dataset to retrieve the Eck ID
-            string initialEckId = retrieveEckIdOperation.GetEckId(validHpgnOld, validChainGuid, validSectorGuid);
+            string initialEckId = schoolIDServiceUtil.GenerateSchoolID(validHpgnOld, validChainGuid, validSectorGuid);
 
             // Submit the substitution
-            string processedEckId = replaceEckIdOperation.ReplaceEckId(validHpgnNew, validHpgnOld, validChainGuid, validSectorGuid, null);
+            string processedEckId = schoolIDServiceUtil.ReplaceEckID(validHpgnNew, validHpgnOld, validChainGuid, validSectorGuid, null);
 
             // Retrieve the Eck ID based on the new Hpgn, and check the result
-            string finalEckId = retrieveEckIdOperation.GetEckId(validHpgnNew, validChainGuid, validSectorGuid);
+            string finalEckId = schoolIDServiceUtil.GenerateSchoolID(validHpgnNew, validChainGuid, validSectorGuid);
 
             // Assert that the Eck ID retrieved from the Replace Eck ID operation is correct
             Assert.AreEqual(initialEckId, processedEckId);
@@ -117,10 +110,7 @@ namespace UnitTestProject
         /// </summary>
         [TestMethod]
         public void ReplaceEckIdFutureTest()
-        {
-            RetrieveEckIdOperation retrieveEckIdOperation = new RetrieveEckIdOperation(schoolIDClient);
-            ReplaceEckIdOperation replaceEckIdOperation = new ReplaceEckIdOperation(schoolIDClient);
-
+        {            
             // Use a new set of values
             ScryptUtil scryptUtil = new ScryptUtil();
             string validFutureHpgnNew = scryptUtil.GenerateHexHash(validHpgnNewPrefix + getSequentialNumber() + 
@@ -129,16 +119,16 @@ namespace UnitTestProject
                 DateTime.Now.ToString("yyyyMMddHHmmss"));
                        
             // Use the future Hpgn to retrieve the Eck ID based on the new Hpgn
-            string newEckId = retrieveEckIdOperation.GetEckId(validFutureHpgnNew, validChainGuid, validSectorGuid);
+            string newEckId = schoolIDServiceUtil.GenerateSchoolID(validFutureHpgnNew, validChainGuid, validSectorGuid);
 
             // Set the effectuation date to a moment in the future
             DateTime effectuationDate = DateTime.Now.AddYears(1);
 
             // Submit the substitution
-            string processedEckId = replaceEckIdOperation.ReplaceEckId(validFutureHpgnNew, validFutureHpgnOld, validChainGuid, validSectorGuid, effectuationDate);
+            string processedEckId = schoolIDServiceUtil.ReplaceEckID(validFutureHpgnNew, validFutureHpgnOld, validChainGuid, validSectorGuid, effectuationDate);
 
             // Retrieve the Eck ID based on the new Hpgn, and check the result
-            string finalEckId = retrieveEckIdOperation.GetEckId(validFutureHpgnNew, validChainGuid, validSectorGuid);
+            string finalEckId = schoolIDServiceUtil.GenerateSchoolID(validFutureHpgnNew, validChainGuid, validSectorGuid);
 
             // Assert that the Eck ID retrieved from the Replace Eck ID operation is correct
             Assert.AreEqual(newEckId, processedEckId);
@@ -155,10 +145,7 @@ namespace UnitTestProject
         /// </summary>
         [TestMethod]
         public void ReplaceEckIdWithIntermediateTest()
-        {
-            RetrieveEckIdOperation retrieveEckIdOperation = new RetrieveEckIdOperation(schoolIDClient);
-            ReplaceEckIdOperation replaceEckIdOperation = new ReplaceEckIdOperation(schoolIDClient);
-
+        {      
             // Use a new set of values
             ScryptUtil scryptUtil = new ScryptUtil();
             string validHpgnNew = scryptUtil.GenerateHexHash(validHpgnNewPrefix + getSequentialNumber() + 
@@ -169,15 +156,15 @@ namespace UnitTestProject
                 DateTime.Now.ToString("yyyyMMddHHmmss"));
 
             // Use the datasets to retrieve the Eck IDs before substituting
-            string oldEckId = retrieveEckIdOperation.GetEckId(validHpgnOld, validChainGuid, validSectorGuid);
-            string intermediateEckId = retrieveEckIdOperation.GetEckId(validHpgnIntermediate, validChainGuid, validSectorGuid);
+            string oldEckId = schoolIDServiceUtil.GenerateSchoolID(validHpgnOld, validChainGuid, validSectorGuid);
+            string intermediateEckId = schoolIDServiceUtil.GenerateSchoolID(validHpgnIntermediate, validChainGuid, validSectorGuid);
 
             // Submit the substitutions
-            string eckIdFirstSubstitution = replaceEckIdOperation.ReplaceEckId(validHpgnIntermediate, validHpgnOld, validChainGuid, validSectorGuid, null);
-            string eckIdSecondSubstitution = replaceEckIdOperation.ReplaceEckId(validHpgnNew, validHpgnIntermediate, validChainGuid, validSectorGuid, null);
+            string eckIdFirstSubstitution = schoolIDServiceUtil.ReplaceEckID(validHpgnIntermediate, validHpgnOld, validChainGuid, validSectorGuid, null);
+            string eckIdSecondSubstitution = schoolIDServiceUtil.ReplaceEckID(validHpgnNew, validHpgnIntermediate, validChainGuid, validSectorGuid, null);
 
             // Retrieve the Eck ID based on the new Hpgn, and check the result
-            string finalEckId = retrieveEckIdOperation.GetEckId(validHpgnNew, validChainGuid, validSectorGuid);
+            string finalEckId = schoolIDServiceUtil.GenerateSchoolID(validHpgnNew, validChainGuid, validSectorGuid);
 
             // Assert that the Eck ID retrieved from the first Replace Eck ID operation is correct
             Assert.AreEqual(oldEckId, eckIdFirstSubstitution);
