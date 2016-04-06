@@ -26,12 +26,14 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
         /// <returns>TRUE if the service is up and running</returns>
         public bool IsAvailable()
         {
-            try {
+            try
+            {
                 pingRequestWrapper.pingRequest = pingRequest;
                 pingResponse1 pingResponseWrapper = schoolIDClient.ping(pingRequestWrapper);
                 PingResponse pingReponse = pingResponseWrapper.pingResponse;
                 return pingReponse.available;
-            } catch (NullReferenceException nre)
+            }
+            catch (NullReferenceException nre)
             {
                 // Empty response; Service seems to be down
                 System.Diagnostics.Debug.Write(nre.Message);

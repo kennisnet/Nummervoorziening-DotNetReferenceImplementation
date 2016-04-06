@@ -6,6 +6,8 @@ using System.IO;
 using System.Net;
 using System.Security.Cryptography.X509Certificates;
 using System.ServiceModel;
+using System.ServiceModel.Channels;
+using System.Xml;
 
 namespace NVA_DotNetReferenceImplementation.SchoolID
 {
@@ -17,6 +19,10 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
     /// </summary>
     public class SchoolIDServiceUtil
     {
+        private const string WS_ADDRESSING_NAMESPACE = "http://www.w3.org/2005/08/addressing";
+
+        private const string SOAP_ANONYMOUS_OIN = "http://www.w3.org/2005/08/addressing/anonymous?oin=";
+        
         /// <summary>
         /// The SOAP proxy class which can directly be used to communicate with the School ID SOAP service
         /// </summary>
@@ -65,6 +71,7 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
                 {
                     instance = new SchoolIDServiceUtil();
                     instance.InitializeCertificate();
+                    instance.SetupAddressingHeaders();
                 }
                 return instance;
             }
@@ -76,8 +83,11 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
                 ConfigurationManager.AppSettings["certificateFileName"]);
             CertificatePassword = ConfigurationManager.AppSettings["certificatePassword"];
 
+            // Explicitly set the configuration to use TLS 1.2
+            ServicePointManager.SecurityProtocol = SecurityProtocolType.Tls12;
+            
             string serviceCertPath = "";
-
+           
             // Try to read the certificate, and if successful, add it to the bundle of certificates
             try
             {
@@ -91,15 +101,27 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
                 
                 MyIdentity = EndpointIdentity.CreateDnsIdentity(
                     ConfigurationManager.AppSettings["certificateDnsIdentity"]);
-
-                string oin = ConfigurationManager.AppSettings["instanceOIN"];
                 
-                schoolIDClient.ClientCredentials.ClientCertificate.Certificate = MyCertificate;
+                schoolIDClient.ClientCredentials.ClientCertificate.Certificate = MyCertificate;                
             }
             catch (System.Security.Cryptography.CryptographicException crex)
             {
                 System.Diagnostics.Debug.WriteLine("Cryptographic Exc: " + crex.Message + " - " + PathToCertificate + " - " + serviceCertPath);
             }
+        }
+
+        private void SetupAddressingHeaders()
+        {
+            XmlDocument xmlDoc = new XmlDocument();
+            XmlNode xmlNode = xmlDoc.CreateNode(XmlNodeType.Element, "Address", WS_ADDRESSING_NAMESPACE);
+            xmlNode.InnerText = SOAP_ANONYMOUS_OIN + ConfigurationManager.AppSettings["instanceOIN"]; ;
+            
+            AddressHeader fromHeader = AddressHeader.CreateAddressHeader("From", WS_ADDRESSING_NAMESPACE, xmlNode);
+         
+            EndpointAddressBuilder endpointAddressBuilder = new EndpointAddressBuilder(schoolIDClient.Endpoint.Address);
+            endpointAddressBuilder.Headers.Add(fromHeader);
+            
+            schoolIDClient.Endpoint.Address = endpointAddressBuilder.ToEndpointAddress();
         }
 
         /// <summary>

@@ -71,7 +71,7 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
                         case "ContentAlreadyRetrievedException":                            
                         case "ContentRemovedException":
                         default:
-                            throw fe;
+                            throw;
                     }
                 }
             }

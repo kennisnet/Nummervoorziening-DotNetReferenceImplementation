@@ -36,7 +36,7 @@ namespace UnitTestProject
         [TestMethod]
         public void GetSchoolIDDateTimeTest()
         {
-            double allowedGapInMinutes = 180;   
+            double allowedGapInMinutes = 180;
 
             DateTime? timeOnServer = schoolIDServiceUtil.GetSchoolIDDateTime();
             DateTime currentDateTime = DateTime.Now;
