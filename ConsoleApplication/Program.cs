@@ -1,6 +1,7 @@
 ﻿using NVA_DotNetReferenceImplementation.SchoolID;
 using NVA_DotNetReferenceImplementation.SCrypter;
 using System;
+using System.ServiceModel;
 
 namespace ConsoleNVAClient
 {
@@ -27,22 +28,33 @@ namespace ConsoleNVAClient
 
             Console.WriteLine("Current server information:");
 
-            // Status information
-            if (schoolIDServiceUtil.IsSchoolIDAvailable())
-            {
-                WritePingStatusOutput();
-                WriteAvailableChains();
-                WriteAvailableSectors();
+            try {
+                // Status information
+                if (schoolIDServiceUtil.IsSchoolIDAvailable())
+                {
+                    WritePingStatusOutput();
+                    WriteAvailableChains();
+                    WriteAvailableSectors();
 
-                // Tests               
-                Console.WriteLine();
-                ExecuteClientTests();
+                    // Tests               
+                    Console.WriteLine();
+                    ExecuteClientTests();
+                }
+                else
+                {
+                    Console.WriteLine("School ID service is offline.");
+                }
             }
-            else
+            catch (FaultException fe) {
+                Console.WriteLine("Fault received: " + fe.Message);
+            }
+            catch (EndpointNotFoundException enfe)
             {
-                Console.WriteLine("School ID service is offline.");
+                Console.WriteLine("Configured Endpoint not found: " + enfe.Message);
             }
 
+            Console.WriteLine();
+            Console.WriteLine("Press any key to quit");
             Console.ReadLine();
         }
 
