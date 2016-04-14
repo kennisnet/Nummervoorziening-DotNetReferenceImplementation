@@ -58,7 +58,6 @@
     <Compile Include="AbstractUnitTest.cs" />
     <Compile Include="BatchOperationsUnitTest.cs" />
     <Compile Include="ReplaceEckIdOperationUnitTest.cs" />
-    <Compile Include="SchoolIDServiceUtilUnitTest.cs" />
     <Compile Include="ScryptUtilUnitTest.cs" />
     <Compile Include="RetrieveEckIdOperationUnitTest.cs" />
     <Compile Include="RetrieveSectorsOperationUnitTest.cs" />
@@ -83,7 +82,6 @@
     <None Include="CodeCoverage.runsettings">
       <SubType>Designer</SubType>
     </None>
-    <None Include="packages.config" />
     <None Include="testnvclient02.pfx">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
