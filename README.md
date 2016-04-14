@@ -23,6 +23,7 @@ Bij de ontwikkeling van Nummervoorziening - C#.NET Client Reference Application 
  * .NET v4.5.2 - Microsoft's .NET Framework
  * Visual Studio 2015 - Ontwikkelomgeving
    * svcutil.exe - Utility voor het creëren van WCF proxy service interface op basis van een WSDL
+ * CryptSharp v2.1.0 - Library voor het genereren van hashes middels diverse technologiën waaronder SCrypt
  * Fiddler - TLS/SSL debugging
  * Wireshark - TLS/SSL debugging
  * SOAP UI - Functional Testing framework for SOAP and REST APIs
@@ -119,7 +120,7 @@ De applicatie is gebouwd voor en getest onder Windows 8. Om de applicatie succes
  * App.config aangepast op basis van certificaat gegevens
  * De broncode is geladen in Visual Studio 2015. 
  * Er zijn geen aanvullende plugins en/of libraries benodigd.
- * Na een build worden de Unit Tests getoond in de Test Explorer, en kunnen deze worden uitgevoerd.
+ * Na een build van de Solution worden de Unit Tests getoond in de Test Explorer, en kunnen deze worden uitgevoerd.
 
 ## Licenties
  * **Nummervoorziening - C#.NET Client Reference Application**: Nog vast te stellen.
