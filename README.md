@@ -2,7 +2,7 @@
 
 ## Algemeen
 
-De Nummervoorziening - C#.NET Client Reference Application is een client implementatie in C#.NET dat als voorbeeld dient voor de communicatie met de Nummervoorziening applicatie binnen de Educatieve Contentketen. De applicatie is opgezet als een Visual C# Library aangevuld met een UnitTest Application en een Console Application. De C#.NET Client Reference Application implementeert globaal de volgende functionaliteiten;
+De Nummervoorziening - C#.NET Client Reference Application is een client implementatie in C#.NET dat middels diverse unit tests de communicatie met de Nummervoorziening applicatie binnen de Educatieve Contentketen aantoont. De applicatie is opgezet als een Visual C# Library aangevuld met een UnitTest Application en een Console Application. De C#.NET Client Reference Application implementeert globaal de volgende functionaliteiten;
  * Globale communicatie met de Nummervoorziening applicatie (PingOperation t.b.v. het vaststellen van een correcte verbinding met en werking van de Nummervoorziening applicatie).
  * Genereren van een eerste niveau hash van een PGN middels het SCrypt hashing algoritme.
  * Het opvragen van een ECK-ID bij de Nummervoorziening applicatie op basis van een gehashte PGN, een keten-id en sector-id (RetrieveEckIdOperation).
@@ -28,7 +28,7 @@ Bij de ontwikkeling van Nummervoorziening - C#.NET Client Reference Application 
  * SOAP UI - Functional Testing framework for SOAP and REST APIs
 
 ## Communicatie
-De Client Reference Application communiceren met de Nummervoorziening applicatie middels het SOAP-messaging protocol. Hierbij wordt het profiel 2W-be (tweeweg, Best Effort) zoals beschreven in de Edukoppeling Transactiestandaard versie 1.2 en Digikoppeling WUS 3.0 gevolgd. Praktisch gezien houdt dit het volgende in:
+De Client Reference Application communiceert met de Nummervoorziening applicatie middels het SOAP-messaging protocol. Hierbij wordt het profiel 2W-be (tweeweg, Best Effort) zoals beschreven in de Edukoppeling Transactiestandaard versie 1.2 en Digikoppeling WUS 3.0 gevolgd. Praktisch gezien houdt dit het volgende in:
  * synchrone uitwisselingen die geen faciliteiten voor betrouwbaarheid (ontvangstbevestigingen, duplicaateliminatie etc.) vereisen. Voorbeelden zijn toepassingen waar het eventueel verloren raken van sommige berichten niet problematisch is en waar snelle verwerking gewenst is.
  * gebaseerd op SOAP 1.1.
  * gebruik van de verplichte WS-Addressing 1.0 headers, waarbij de From header verplicht is, en de ReplyTo header niet wordt gebruikt.
@@ -119,13 +119,14 @@ De applicatie is gebouwd voor en getest onder Windows 8. Om de applicatie succes
  * App.config aangepast op basis van certificaat gegevens
  * De broncode is geladen in Visual Studio 2015. 
  * Er zijn geen aanvullende plugins en/of libraries benodigd.
+ * Na een build worden de Unit Tests getoond in de Test Explorer, en kunnen deze worden uitgevoerd.
 
 ## Licenties
  * **Nummervoorziening - C#.NET Client Reference Application**: Nog vast te stellen.
  * **CryptSharp**: Copyright (c) 2010, 2013 James F. Bellinger <http://www.zer7.com/software/cryptsharp>
 
 ## Contact
-Voor meer informatie kunt u contact opnemen met [Marc Fleischeuers](mailto:M.Fleischeuers@kennisnet.nl) of [Thomas Beekman](mailto:Beekman.Thomas@kpmg.nl).
+Voor meer informatie kunt u contact opnemen met [Marc Fleischeuers](mailto:M.Fleischeuers@kennisnet.nl).
 
 ** Copyright(c) 2016 [Stichting Kennisnet]**
 
