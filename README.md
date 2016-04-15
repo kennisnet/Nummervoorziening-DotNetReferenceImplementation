@@ -109,7 +109,6 @@ Voor het omzetten van een WSDL naar gegenereerde code zijn uit de .NET toolset g
 ```
 svcutil.exe /mc /syncOnly schoolid.wsdl
 ```
-De *svcutil.exe* bleek niet in staat diverse WS-Addressing policies (zoals ```<wsaw:UsingAddressing wsdl:required="true" />```) op een juiste manier te verwerken. Mits deze regel is toegevoegd aan de WSDL, toont de *svcutil.exe* een warning en genereerd deze geen output.config bestand. Bij het opnieuw genereren van de proxy class is het daarom aan te raden de verwijzingen naar WS-Addressing te verwijderen uit het WSDL bestand, en de relevante inhoud van de app.config over te nemen zoals geconfigureerd in deze Client Reference Application, welke handmatig is aangepast om te voldoen aan de vereisten van Edukoppeling Transactiestandaard en de onderliggende Digikoppeling 3.0 standaard.
 
 In de applicatie is de gegenereerde class één-op-één overgenomen: SchoolID.cs, De methodes eindigend op een 1, waaronder pingRequest1, pingResponse1 etc., zijn door de svcutil aangemaakte wrapper objecten, Zo is de pingRequest1() aangemaakt als een wrapper voor het pingRequest object, en wordt gebruikt als payload voor de pingOperation. Als antwoord van de pingOperation wordt de pingResponse1 teruggegeven, dat de pingResponse object bevat.
 
