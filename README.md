@@ -103,7 +103,7 @@ Het service model is ingericht om de configuratie van de SOAP endpoint binding t
 ## Ontwikkeling
 
 ### WSDL naar Proxy Class
-Voor de ontwikkeling van de applicatie is de WSDL als uitgangspunt genomen. De WSDL wordt aangeboden via een TLS/SSL beveiligde verbinding, waar de standaard .NET utilities niet (eenvoudig) bij kunnen. Het is daarom aan te raden de WSDL eerst te downloaden en lokaal op te slaan.
+Voor de ontwikkeling van de applicatie is de WSDL als uitgangspunt genomen. De gebruikte WSDL is onderdeel van de Reference Application package, en is te vinden in *SchoolID/Resources/schoolid.wsdl*.
 
 Voor het omzetten van een WSDL naar gegenereerde code zijn uit de .NET toolset grofweg twee utilities beschikbaar; *wsdl.exe* en *svcutil.exe*. De utility wsdl.exe zet een WSDL om in een webservice, waarbij de nieuwe class SoapHttpClientProtocol overerft. Het resultaat kan gebruikt worden als ASMX webservice. De utility *svcutil.exe* zet een WSDL om in een WCF proxy class (interface), die gebruikt kan worden door webservices door de interface te implementeren en de class SoapHttpClientProtocol te overerven. Omdat het nieuwere WCF door Microsoft is aangemerkt om ASMX services te vervangen, is voor de ontwikkeling van deze applicatie gekozen om de webservices middels WCF te implementeren. De gebruikte commando voor de utility is als volgt:
 ```
