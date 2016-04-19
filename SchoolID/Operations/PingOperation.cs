@@ -38,12 +38,7 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
             {
                 // Empty response; Service seems to be down
                 System.Diagnostics.Debug.Write(nre.Message);
-            }
-            catch (FaultException fe)
-            {
-                System.Diagnostics.Debug.Write("Fault Exception occured: " + fe.Message);
-                return false;
-            }
+            }           
 
             return false;
         }
