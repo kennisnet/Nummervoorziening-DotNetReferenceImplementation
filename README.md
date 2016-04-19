@@ -121,8 +121,15 @@ De applicatie is gebouwd voor en getest onder Windows 8. Om de applicatie succes
  * Er zijn geen aanvullende plugins en/of libraries benodigd.
  * Na een build van de Solution worden de Unit Tests getoond in de Test Explorer, en kunnen deze worden uitgevoerd.
 
+Client certificaten voor de communicatie met de Nummervoorziening applicatie op de Sandbox omgeving dient bij Kennisnet opgevraagd te worden. Voor de productieomgevingen is een valide PKI-Overheid certificaat vereist.
+
+## Omgevingen
+ * Sandboxomgeving: https://sandbox.id.school/
+ * Kwalificatieomgeving: https://kwalificatie.id.school/
+ * Productieomgeving: https://id.school/
+
 ## Licenties
- * **Nummervoorziening - C#.NET Client Reference Application**: Nog vast te stellen.
+ * **Nummervoorziening - C#.NET Client Reference Application**: Apache License, Version 2.0.
  * **CryptSharp**: Copyright (c) 2010, 2013 James F. Bellinger <http://www.zer7.com/software/cryptsharp>
 
 ## Contact

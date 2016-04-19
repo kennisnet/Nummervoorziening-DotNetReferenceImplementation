@@ -27,7 +27,7 @@ namespace ConsoleNVAClient
             schoolIDServiceUtil = SchoolIDServiceUtil.Instance;
 
             Console.WriteLine("Current server information:");
-
+            // @TODO check if authorized instead of stating offline
             try {
                 // Status information
                 if (schoolIDServiceUtil.IsSchoolIDAvailable())
