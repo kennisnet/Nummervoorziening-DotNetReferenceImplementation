@@ -124,6 +124,7 @@ De applicatie is gebouwd voor en getest onder Windows 8. Om de applicatie succes
 Client certificaten voor de communicatie met de Nummervoorziening applicatie op de Sandbox omgeving dient bij Kennisnet opgevraagd te worden. Voor de productieomgevingen is een valide PKI-Overheid certificaat vereist.
 
 ## Omgevingen
+ * Acceptatieomgeving: https://acceptatie.id.school/
  * Sandboxomgeving: https://sandbox.id.school/
  * Kwalificatieomgeving: https://kwalificatie.id.school/
  * Productieomgeving: https://id.school/
