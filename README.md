@@ -124,10 +124,10 @@ De applicatie is gebouwd voor en getest onder Windows 8. Om de applicatie succes
 Client certificaten voor de communicatie met de Nummervoorziening applicatie op de Sandbox omgeving dient bij Kennisnet opgevraagd te worden. Voor de productieomgevingen is een valide PKI-Overheid certificaat vereist.
 
 ## Omgevingen
- * Acceptatieomgeving: https://acceptatie.id.school/
- * Sandboxomgeving: https://sandbox.id.school/
- * Kwalificatieomgeving: https://kwalificatie.id.school/
- * Productieomgeving: https://id.school/
+ * Acceptatieomgeving: https://service-a.id.school/eck/ws/201509
+ * Sandboxomgeving: https://sandbox.id.school/eck/ws/201509
+ * Kwalificatieomgeving: https://kwalificatie.id.school/eck/ws/201509
+ * Productieomgeving: https://service.id.school/eck/ws/201509
 
 ## Licenties
  * **Nummervoorziening - C#.NET Client Reference Application**: Apache License, Version 2.0.
