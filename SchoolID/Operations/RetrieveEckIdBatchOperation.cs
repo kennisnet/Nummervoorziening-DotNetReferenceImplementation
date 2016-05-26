@@ -16,7 +16,6 @@ limitations under the License.
 */
 #endregion
 
-using System.Collections.Generic;
 using System.ServiceModel;
 using System.ServiceModel.Channels;
 using System.Threading;
