@@ -32,8 +32,8 @@ namespace UnitTestProject
     {
         string validStudentPgn = "063138219";
         string validTeacherPgn = "20DP teacher@school.com";
-        string validStudentEckId = "https://id.school/pilot/a7d5e96cbfc61cddcf9a918150d5137c6659497ecb435d97abfc60b7297c750a47a3163af49418acc73148d34915833b1cef077ba687c621aa40654906073571";
-        string validTeacherEckId = "https://id.school/pilot/8dc3d9adad74ee2d588a6456be26da9faab1f0b1801bb15897f0e979ada55556aee041e329b27328259ba383af779080209c5c54f3db9b171bd43980aedc47c3";
+        string validStudentEckId = "https://id.school/pilot/4b832082b9763b07864ba2365e14561ef66f9e4d6ffa936c4e0d72e444b32160fcf280406202e293a228ddf7e904140bce6b1d17525e73d0e54a57bf920f4ac9";
+        string validTeacherEckId = "https://id.school/pilot/d90c55703ea0144590a2c5b2d4f2b55b10158c6fb6feb20f8a098a7854810855c4308f8fd2944507f757e98287b4010729fe6b16c30e554a5bc2b9a2207786a3";
         string validChainGuid = "http://purl.edustandaard.nl/begrippenkader/e7ec7d3c-c235-4513-bfb6-e54e66854795";
         string validSectorGuid = "http://purl.edustandaard.nl/begrippenkader/512e4729-03a4-43a2-95ba-758071d1b725";
 
