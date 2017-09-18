@@ -23,483 +23,483 @@
                   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
                   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-  <wsdl:documentation>
-    Service: SchoolID (Nummervoorziening)
-    Version: 0.5-20170419
-    Contact: Marc Fleischeuers (M.Fleischeuers@kennisnet.nl)
+    <wsdl:documentation>
+        Service: SchoolID (Nummervoorziening)
+        Version: 0.5-20170419
+        Contact: Marc Fleischeuers (M.Fleischeuers@kennisnet.nl)
 
-    Uses WS:Addressing
-  </wsdl:documentation>
+        Uses WS:Addressing
+    </wsdl:documentation>
 
-  <wsdl:types>
-    <xsd:schema targetNamespace="http://id.school/eck/schemas/v1_0"
-                elementFormDefault="qualified">
-      <xsd:element name="pingRequest" type="sid:PingRequest"></xsd:element>
-      <xsd:element name="pingResponse" type="sid:PingResponse"></xsd:element>
-      <xsd:element name="retrieveStampseudonymRequest" type="sid:RetrieveStampseudonymRequest"></xsd:element>
-      <xsd:element name="retrieveStampseudonymResponse" type="sid:RetrieveStampseudonymResponse"></xsd:element>
-      <xsd:element name="retrieveEckIdRequest" type="sid:RetrieveEckIdRequest"></xsd:element>
-      <xsd:element name="retrieveEckIdResponse" type="sid:RetrieveEckIdResponse"></xsd:element>
-      <xsd:element name="submitEckIdBatchRequest" type="sid:SubmitEckIdBatchRequest"></xsd:element>
-      <xsd:element name="submitBatchResponse" type="sid:SubmitBatchResponse"></xsd:element>
-      <xsd:element name="submitStampseudonymBatchRequest" type="sid:SubmitEckIdBatchRequest"></xsd:element>
-      <xsd:element name="retrieveBatchRequest" type="sid:RetrieveBatchRequest"></xsd:element>
-      <xsd:element name="retrieveBatchResponse" type="sid:RetrieveBatchResponse"></xsd:element>
-      <xsd:element name="replaceStampseudonymRequest" type="sid:ReplaceStampseudonymRequest"></xsd:element>
-      <xsd:element name="replaceStampseudonymResponse" type="sid:ReplaceStampseudonymResponse"></xsd:element>
-      <xsd:element name="retrieveChainsRequest" type="sid:RetrieveChainsRequest"></xsd:element>
-      <xsd:element name="retrieveChainsResponse" type="sid:RetrieveChainsResponse"></xsd:element>
-      <xsd:element name="retrieveSectorsRequest" type="sid:RetrieveSectorsRequest"></xsd:element>
-      <xsd:element name="retrieveSectorsResponse" type="sid:RetrieveSectorsResponse"></xsd:element>
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://id.school/eck/schemas/v1_0"
+                    elementFormDefault="qualified">
+            <xsd:element name="pingRequest" type="sid:PingRequest"></xsd:element>
+            <xsd:element name="pingResponse" type="sid:PingResponse"></xsd:element>
+            <xsd:element name="retrieveStampseudonymRequest" type="sid:RetrieveStampseudonymRequest"></xsd:element>
+            <xsd:element name="retrieveStampseudonymResponse" type="sid:RetrieveStampseudonymResponse"></xsd:element>
+            <xsd:element name="retrieveEckIdRequest" type="sid:RetrieveEckIdRequest"></xsd:element>
+            <xsd:element name="retrieveEckIdResponse" type="sid:RetrieveEckIdResponse"></xsd:element>
+            <xsd:element name="submitEckIdBatchRequest" type="sid:SubmitEckIdBatchRequest"></xsd:element>
+            <xsd:element name="submitBatchResponse" type="sid:SubmitBatchResponse"></xsd:element>
+            <xsd:element name="submitStampseudonymBatchRequest" type="sid:SubmitStampseudonymBatchRequest"></xsd:element>
+            <xsd:element name="retrieveBatchRequest" type="sid:RetrieveBatchRequest"></xsd:element>
+            <xsd:element name="retrieveBatchResponse" type="sid:RetrieveBatchResponse"></xsd:element>
+            <xsd:element name="replaceStampseudonymRequest" type="sid:ReplaceStampseudonymRequest"></xsd:element>
+            <xsd:element name="replaceStampseudonymResponse" type="sid:ReplaceStampseudonymResponse"></xsd:element>
+            <xsd:element name="retrieveChainsRequest" type="sid:RetrieveChainsRequest"></xsd:element>
+            <xsd:element name="retrieveChainsResponse" type="sid:RetrieveChainsResponse"></xsd:element>
+            <xsd:element name="retrieveSectorsRequest" type="sid:RetrieveSectorsRequest"></xsd:element>
+            <xsd:element name="retrieveSectorsResponse" type="sid:RetrieveSectorsResponse"></xsd:element>
 
-      <xsd:complexType name="PingRequest">
-        <xsd:annotation>
-          <xsd:documentation>Request om te testen of de Nummervoorziening goed functioneert. Ook is in het antwoord het huidige versienummer van de Nummervoorziening applicatie te vinden.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="PingRequest">
+                <xsd:annotation>
+                    <xsd:documentation>Request om te testen of de Nummervoorziening goed functioneert. Ook is in het antwoord het huidige versienummer van de Nummervoorziening applicatie te vinden.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="PingResponse">
-        <xsd:annotation>
-          <xsd:documentation>Antwoord op een PingRequest</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="available" type="xsd:boolean"
-                       minOccurs="1" maxOccurs="1">
-            <xsd:annotation>
-              <xsd:documentation>Geeft True terug als de Nummervoorziening correct werkt.</xsd:documentation>
-            </xsd:annotation>
-          </xsd:element>
-          <xsd:element name="applicationVersion" type="xsd:string"
-                       minOccurs="1" maxOccurs="1">
-            <xsd:annotation>
-              <xsd:documentation>Het versienummer van de Nummervoorziening.</xsd:documentation>
-            </xsd:annotation>
-          </xsd:element>
-          <xsd:element name="systemTime" type="xsd:dateTime"
-                       minOccurs="1" maxOccurs="1">
-            <xsd:annotation>
-              <xsd:documentation>De systeemtijd op de Nummervoorziening server.</xsd:documentation>
-            </xsd:annotation>
-          </xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="PingResponse">
+                <xsd:annotation>
+                    <xsd:documentation>Antwoord op een PingRequest</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="available" type="xsd:boolean"
+                                 minOccurs="1" maxOccurs="1">
+                        <xsd:annotation>
+                            <xsd:documentation>Geeft True terug als de Nummervoorziening correct werkt.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="applicationVersion" type="xsd:string"
+                                 minOccurs="1" maxOccurs="1">
+                        <xsd:annotation>
+                            <xsd:documentation>Het versienummer van de Nummervoorziening.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                    <xsd:element name="systemTime" type="xsd:dateTime"
+                                 minOccurs="1" maxOccurs="1">
+                        <xsd:annotation>
+                            <xsd:documentation>De systeemtijd op de Nummervoorziening server.</xsd:documentation>
+                        </xsd:annotation>
+                    </xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="RetrieveStampseudonymRequest">
-        <xsd:annotation>
-          <xsd:documentation>Request parameters (1e niveau hash van het PGN) voor het genereren van een Stampseudoniem.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="hpgn" type="sid:HPgn" minOccurs="1" maxOccurs="1"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="RetrieveStampseudonymRequest">
+                <xsd:annotation>
+                    <xsd:documentation>Request parameters (1e niveau hash van het PGN) voor het genereren van een Stampseudoniem.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="hpgn" type="sid:HPgn" minOccurs="1" maxOccurs="1"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="RetrieveStampseudonymResponse">
-        <xsd:annotation>
-          <xsd:documentation>Response parameters ontvangen na het genereren van een Stampseudoniem. Wanneer de parameter voldoet aan de validatie en de verwerking goed is verlopen bevat het response het gegenereerde Stampseudoniem, anders wordt een Soap:fault teruggeven.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="stampseudonym" type="sid:Stampseudonym" minOccurs="1" maxOccurs="1"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="RetrieveStampseudonymResponse">
+                <xsd:annotation>
+                    <xsd:documentation>Response parameters ontvangen na het genereren van een Stampseudoniem. Wanneer de parameter voldoet aan de validatie en de verwerking goed is verlopen bevat het response het gegenereerde Stampseudoniem, anders wordt een Soap:fault teruggeven.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="stampseudonym" type="sid:Stampseudonym" minOccurs="1" maxOccurs="1"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="RetrieveEckIdRequest">
-        <xsd:annotation>
-          <xsd:documentation>Request parameters (het Stampseudoniem, keten ID en sector ID) voor het genereren van een ECK-ID.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="stampseudonym" type="sid:Stampseudonym" minOccurs="1" maxOccurs="1"></xsd:element>
-          <xsd:element name="chainId" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
-          <xsd:element name="sectorId" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="RetrieveEckIdRequest">
+                <xsd:annotation>
+                    <xsd:documentation>Request parameters (het Stampseudoniem, keten ID en sector ID) voor het genereren van een ECK-ID.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="stampseudonym" type="sid:Stampseudonym" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="chainId" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="sectorId" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="RetrieveEckIdResponse">
-        <xsd:annotation>
-          <xsd:documentation>Response parameters verstuurd na het genereren van een ECK-ID. Wanneer de parameters voldoen aan de validaties en de verwerking goed is verlopen bevat het response het gegenereerde ECK-ID, anders wordt een Soap:fault teruggeven.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="eckId" type="sid:EckId" minOccurs="1" maxOccurs="1"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="RetrieveEckIdResponse">
+                <xsd:annotation>
+                    <xsd:documentation>Response parameters verstuurd na het genereren van een ECK-ID. Wanneer de parameters voldoen aan de validaties en de verwerking goed is verlopen bevat het response het gegenereerde ECK-ID, anders wordt een Soap:fault teruggeven.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="eckId" type="sid:EckId" minOccurs="1" maxOccurs="1"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="SubmitEckIdBatchRequest">
-        <xsd:annotation>
-          <xsd:documentation>Request parameters (lijst van Stampseudoniemen, een keten ID en een sector ID) voor het genereren van meerdere ECK-IDs in een enkele aanroep. </xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="stampseudonymList" type="sid:ListedStampseudonym" minOccurs="1" maxOccurs="unbounded"></xsd:element>
-          <xsd:element name="chainId" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
-          <xsd:element name="sectorId" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="SubmitEckIdBatchRequest">
+                <xsd:annotation>
+                    <xsd:documentation>Request parameters (lijst van Stampseudoniemen, een keten ID en een sector ID) voor het genereren van meerdere ECK-IDs in een enkele aanroep. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="stampseudonymList" type="sid:ListedStampseudonym" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+                    <xsd:element name="chainId" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="sectorId" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="SubmitEckIdBatchRequest">
-        <xsd:annotation>
-          <xsd:documentation>Request parameters (lijst van 1e niveau hashes van PGNs) voor het genereren van meerdere Stampseudoniemen in een enkele aanroep. </xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="hpgnList" type="sid:ListedHpgn" minOccurs="1" maxOccurs="unbounded"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="SubmitStampseudonymBatchRequest">
+                <xsd:annotation>
+                    <xsd:documentation>Request parameters (lijst van 1e niveau hashes van PGNs) voor het genereren van meerdere Stampseudoniemen in een enkele aanroep. </xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="hpgnList" type="sid:ListedHpgn" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="SubmitBatchResponse">
-        <xsd:annotation>
-          <xsd:documentation>Response parameters ontvangen na het ontvangen van de batch. Wanneer de parameters voldoen aan de validaties bevat de response de batch identifier, anders wordt een Soap:fault teruggeven.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="batchIdentifier" type="sid:BatchIdentifier" minOccurs="1" maxOccurs="1"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="SubmitBatchResponse">
+                <xsd:annotation>
+                    <xsd:documentation>Response parameters ontvangen na het ontvangen van de batch. Wanneer de parameters voldoen aan de validaties bevat de response de batch identifier, anders wordt een Soap:fault teruggeven.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="batchIdentifier" type="sid:BatchIdentifier" minOccurs="1" maxOccurs="1"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="RetrieveBatchRequest">
-        <xsd:annotation>
-          <xsd:documentation>Request parameters (batch identifier) voor het opvragen van het resultaat van een batchverwerking.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="batchIdentifier" type="sid:BatchIdentifier" minOccurs="1" maxOccurs="1"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="RetrieveBatchRequest">
+                <xsd:annotation>
+                    <xsd:documentation>Request parameters (batch identifier) voor het opvragen van het resultaat van een batchverwerking.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="batchIdentifier" type="sid:BatchIdentifier" minOccurs="1" maxOccurs="1"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="RetrieveBatchResponse">
-        <xsd:annotation>
-          <xsd:documentation>Response parameters ontvangen na het ontvangen van de batch. Wanneer de batch identifier correct is en de batchverwerking is voltooid bevat de response de batch met per element dezelfde index als gebruikt in de aanroep, anders wordt een Soap:fault teruggeven.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="success" type="sid:ListedEntitySuccess" minOccurs="0" maxOccurs="unbounded"></xsd:element>
-          <xsd:element name="failed" type="sid:ListedEntityFailure" minOccurs="0" maxOccurs="unbounded"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="RetrieveBatchResponse">
+                <xsd:annotation>
+                    <xsd:documentation>Response parameters ontvangen na het ontvangen van de batch. Wanneer de batch identifier correct is en de batchverwerking is voltooid bevat de response de batch met per element dezelfde index als gebruikt in de aanroep, anders wordt een Soap:fault teruggeven.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="success" type="sid:ListedEntitySuccess" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+                    <xsd:element name="failed" type="sid:ListedEntityFailure" minOccurs="0" maxOccurs="unbounded"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="ReplaceStampseudonymRequest">
-        <xsd:annotation>
-          <xsd:documentation>Request parameters (het oude 1e niveau hash van het PGN en het nieuwe 1e niveau hash van het PGN) voor het vervangen van een nieuwe 1e niveau hash van het PGN door het oude 1e niveau hash van het PGN. Indien geen effectiveDate is opgegeven zal de wijziging direct ingaan.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="hpgnOld" type="sid:HPgn" minOccurs="1" maxOccurs="1"></xsd:element>
-          <xsd:element name="hpgnNew" type="sid:HPgn" minOccurs="1" maxOccurs="1"></xsd:element>
-          <xsd:element name="effectiveDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="ReplaceStampseudonymRequest">
+                <xsd:annotation>
+                    <xsd:documentation>Request parameters (het oude 1e niveau hash van het PGN en het nieuwe 1e niveau hash van het PGN) voor het vervangen van een nieuwe 1e niveau hash van het PGN door het oude 1e niveau hash van het PGN. Indien geen effectiveDate is opgegeven zal de wijziging direct ingaan.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="hpgnOld" type="sid:HPgn" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="hpgnNew" type="sid:HPgn" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="effectiveDate" type="xsd:dateTime" minOccurs="0" maxOccurs="1"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="ReplaceStampseudonymResponse">
-        <xsd:annotation>
-          <xsd:documentation>Response parameters ontvangen na het vervangen van een 1e niveau hash van het PGN. Wanneer de parameters voldoen aan de validaties en de verwerking goed is verlopen bevat de response het Stampseudoniem, anders wordt een Soap:fault teruggegeven.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="stampseudonym" type="sid:Stampseudonym" minOccurs="1" maxOccurs="1"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="ReplaceStampseudonymResponse">
+                <xsd:annotation>
+                    <xsd:documentation>Response parameters ontvangen na het vervangen van een 1e niveau hash van het PGN. Wanneer de parameters voldoen aan de validaties en de verwerking goed is verlopen bevat de response het Stampseudoniem, anders wordt een Soap:fault teruggegeven.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="stampseudonym" type="sid:Stampseudonym" minOccurs="1" maxOccurs="1"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="RetrieveChainsRequest">
-        <xsd:annotation>
-          <xsd:documentation>Request parameters voor het opvragen van ondersteunde ketens.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="RetrieveChainsRequest">
+                <xsd:annotation>
+                    <xsd:documentation>Request parameters voor het opvragen van ondersteunde ketens.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="RetrieveChainsResponse">
-        <xsd:annotation>
-          <xsd:documentation>Response ontvangen na het opvragen van ketens. Per keten wordt weergegeven of deze valide is. Bij fouten in de verwerking wordt een Fault teruggeven.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="chain" type="sid:Chain" minOccurs="1" maxOccurs="unbounded"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="RetrieveChainsResponse">
+                <xsd:annotation>
+                    <xsd:documentation>Response ontvangen na het opvragen van ketens. Per keten wordt weergegeven of deze valide is. Bij fouten in de verwerking wordt een Fault teruggeven.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="chain" type="sid:Chain" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="RetrieveSectorsRequest">
-        <xsd:annotation>
-          <xsd:documentation>Request parameters voor het opvragen van ondersteunde sectors.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="RetrieveSectorsRequest">
+                <xsd:annotation>
+                    <xsd:documentation>Request parameters voor het opvragen van ondersteunde sectors.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="RetrieveSectorsResponse">
-        <xsd:annotation>
-          <xsd:documentation>Response ontvangen na het opvragen van sectors. Per sector wordt weergegeven of deze valide is. Bij fouten in de verwerking wordt een Fault teruggeven.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="sector" type="sid:Sector" minOccurs="1" maxOccurs="unbounded"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="RetrieveSectorsResponse">
+                <xsd:annotation>
+                    <xsd:documentation>Response ontvangen na het opvragen van sectors. Per sector wordt weergegeven of deze valide is. Bij fouten in de verwerking wordt een Fault teruggeven.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="sector" type="sid:Sector" minOccurs="1" maxOccurs="unbounded"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="HPgn">
-        <xsd:annotation>
-          <xsd:documentation>1e niveau hash van het PGN.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:simpleContent>
-          <xsd:extension base="xsd:string"></xsd:extension>
-        </xsd:simpleContent>
-      </xsd:complexType>
+            <xsd:complexType name="HPgn">
+                <xsd:annotation>
+                    <xsd:documentation>1e niveau hash van het PGN.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                    <xsd:extension base="xsd:string"></xsd:extension>
+                </xsd:simpleContent>
+            </xsd:complexType>
 
-      <xsd:complexType name="ListedHpgn">
-        <xsd:annotation>
-          <xsd:documentation>1e niveau hash van het PGN met volgnummer.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="index" type="xsd:int"></xsd:element>
-          <xsd:element name="hPgn" type="sid:HPgn"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="ListedHpgn">
+                <xsd:annotation>
+                    <xsd:documentation>1e niveau hash van het PGN met volgnummer.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="index" type="xsd:int"></xsd:element>
+                    <xsd:element name="hPgn" type="sid:HPgn"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="Stampseudonym">
-        <xsd:annotation>
-          <xsd:documentation>Het Stampseudoniem.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:simpleContent>
-          <xsd:extension base="xsd:string"></xsd:extension>
-        </xsd:simpleContent>
-      </xsd:complexType>
+            <xsd:complexType name="Stampseudonym">
+                <xsd:annotation>
+                    <xsd:documentation>Het Stampseudoniem.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                    <xsd:extension base="xsd:string"></xsd:extension>
+                </xsd:simpleContent>
+            </xsd:complexType>
 
-      <xsd:complexType name="ListedStampseudonym">
-        <xsd:annotation>
-          <xsd:documentation>Het Stampseudoniem met volgnummer.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="index" type="xsd:int"></xsd:element>
-          <xsd:element name="stampseudonym" type="sid:Stampseudonym"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="ListedStampseudonym">
+                <xsd:annotation>
+                    <xsd:documentation>Het Stampseudoniem met volgnummer.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="index" type="xsd:int"></xsd:element>
+                    <xsd:element name="stampseudonym" type="sid:Stampseudonym"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="BatchIdentifier">
-        <xsd:annotation>
-          <xsd:documentation>Kenmerk om het resultaat van de operatie op te halen.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:simpleContent>
-          <xsd:extension base="xsd:string"></xsd:extension>
-        </xsd:simpleContent>
-      </xsd:complexType>
+            <xsd:complexType name="BatchIdentifier">
+                <xsd:annotation>
+                    <xsd:documentation>Kenmerk om het resultaat van de operatie op te halen.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                    <xsd:extension base="xsd:string"></xsd:extension>
+                </xsd:simpleContent>
+            </xsd:complexType>
 
-      <xsd:complexType name="ListedEntitySuccess">
-        <xsd:annotation>
-          <xsd:documentation>Succesvolle gegenereerde entiteiten (Stampseudoniem of ECK-ID) met volgnummer.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="index" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
-          <xsd:element name="value" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="ListedEntitySuccess">
+                <xsd:annotation>
+                    <xsd:documentation>Succesvolle gegenereerde entiteiten (Stampseudoniem of ECK-ID) met volgnummer.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="index" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="value" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="ListedEntityFailure">
-        <xsd:annotation>
-          <xsd:documentation>Niet succesvol gegenereerde entiteiten (Stampseudoniem of ECK-ID) met volgnummer en foutomschrijving.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="index" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
-          <xsd:element name="errorMessage" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="ListedEntityFailure">
+                <xsd:annotation>
+                    <xsd:documentation>Niet succesvol gegenereerde entiteiten (Stampseudoniem of ECK-ID) met volgnummer en foutomschrijving.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="index" type="xsd:int" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="errorMessage" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="EckId">
-        <xsd:annotation>
-          <xsd:documentation>Het ECK-ID.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:simpleContent>
-          <xsd:extension base="xsd:string"></xsd:extension>
-        </xsd:simpleContent>
-      </xsd:complexType>
+            <xsd:complexType name="EckId">
+                <xsd:annotation>
+                    <xsd:documentation>Het ECK-ID.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:simpleContent>
+                    <xsd:extension base="xsd:string"></xsd:extension>
+                </xsd:simpleContent>
+            </xsd:complexType>
 
-      <xsd:complexType name="Sector">
-        <xsd:annotation>
-          <xsd:documentation>Omschrijving van een sector.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
-          <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
-          <xsd:element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
-          <xsd:element name="lastEdited" type="xsd:dateTime" minOccurs="1" maxOccurs="1"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
+            <xsd:complexType name="Sector">
+                <xsd:annotation>
+                    <xsd:documentation>Omschrijving van een sector.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="lastEdited" type="xsd:dateTime" minOccurs="1" maxOccurs="1"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
 
-      <xsd:complexType name="Chain">
-        <xsd:annotation>
-          <xsd:documentation>Omschrijving van een keten.</xsd:documentation>
-        </xsd:annotation>
-        <xsd:sequence>
-          <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
-          <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
-          <xsd:element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
-          <xsd:element name="lastEdited" type="xsd:dateTime" minOccurs="1" maxOccurs="1"></xsd:element>
-        </xsd:sequence>
-      </xsd:complexType>
-    </xsd:schema>
-  </wsdl:types>
+            <xsd:complexType name="Chain">
+                <xsd:annotation>
+                    <xsd:documentation>Omschrijving van een keten.</xsd:documentation>
+                </xsd:annotation>
+                <xsd:sequence>
+                    <xsd:element name="id" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="name" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="description" type="xsd:string" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="lastEdited" type="xsd:dateTime" minOccurs="1" maxOccurs="1"></xsd:element>
+                </xsd:sequence>
+            </xsd:complexType>
+        </xsd:schema>
+    </wsdl:types>
 
-  <wsdl:message name="pingRequest">
-    <wsdl:part name="pingRequest" element="sid:pingRequest"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="pingResponse">
-    <wsdl:part name="pingResponse" element="sid:pingResponse"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="retrieveStampseudonymRequest">
-    <wsdl:part name="retrieveStampseudonymRequest" element="sid:retrieveStampseudonymRequest"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="retrieveStampseudonymResponse">
-    <wsdl:part name="retrieveStampseudonymResponse" element="sid:retrieveStampseudonymResponse"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="retrieveEckIdRequest">
-    <wsdl:part name="retrieveEckIdRequest" element="sid:retrieveEckIdRequest"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="retrieveEckIdResponse">
-    <wsdl:part name="retrieveEckIdResponse" element="sid:retrieveEckIdResponse"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="submitEckIdBatchRequest">
-    <wsdl:part name="submitEckIdBatchRequest" element="sid:submitEckIdBatchRequest"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="submitStampseudonymBatchRequest">
-    <wsdl:part name="submitStampseudonymBatchRequest" element="sid:submitStampseudonymBatchRequest"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="submitBatchResponse">
-    <wsdl:part name="submitBatchResponse" element="sid:submitBatchResponse"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="retrieveBatchRequest">
-    <wsdl:part name="retrieveBatchRequest" element="sid:retrieveBatchRequest"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="retrieveBatchResponse">
-    <wsdl:part name="retrieveBatchResponse" element="sid:retrieveBatchResponse"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="replaceStampseudonymRequest">
-    <wsdl:part name="replaceStampseudonymRequest" element="sid:replaceStampseudonymRequest"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="replaceStampseudonymResponse">
-    <wsdl:part name="replaceStampseudonymResponse" element="sid:replaceStampseudonymResponse"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="retrieveChainsRequest">
-    <wsdl:part name="retrieveChainsRequest" element="sid:retrieveChainsRequest"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="retrieveChainsResponse">
-    <wsdl:part name="retrieveChainsResponse" element="sid:retrieveChainsResponse"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="retrieveSectorsRequest">
-    <wsdl:part name="retrieveSectorsRequest" element="sid:retrieveSectorsRequest"></wsdl:part>
-  </wsdl:message>
-  <wsdl:message name="retrieveSectorsResponse">
-    <wsdl:part name="retrieveSectorsResponse" element="sid:retrieveSectorsResponse"></wsdl:part>
-  </wsdl:message>
+    <wsdl:message name="pingRequest">
+        <wsdl:part name="pingRequest" element="sid:pingRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="pingResponse">
+        <wsdl:part name="pingResponse" element="sid:pingResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="retrieveStampseudonymRequest">
+        <wsdl:part name="retrieveStampseudonymRequest" element="sid:retrieveStampseudonymRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="retrieveStampseudonymResponse">
+        <wsdl:part name="retrieveStampseudonymResponse" element="sid:retrieveStampseudonymResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="retrieveEckIdRequest">
+        <wsdl:part name="retrieveEckIdRequest" element="sid:retrieveEckIdRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="retrieveEckIdResponse">
+        <wsdl:part name="retrieveEckIdResponse" element="sid:retrieveEckIdResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="submitEckIdBatchRequest">
+        <wsdl:part name="submitEckIdBatchRequest" element="sid:submitEckIdBatchRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="submitStampseudonymBatchRequest">
+        <wsdl:part name="submitStampseudonymBatchRequest" element="sid:submitStampseudonymBatchRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="submitBatchResponse">
+        <wsdl:part name="submitBatchResponse" element="sid:submitBatchResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="retrieveBatchRequest">
+        <wsdl:part name="retrieveBatchRequest" element="sid:retrieveBatchRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="retrieveBatchResponse">
+        <wsdl:part name="retrieveBatchResponse" element="sid:retrieveBatchResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="replaceStampseudonymRequest">
+        <wsdl:part name="replaceStampseudonymRequest" element="sid:replaceStampseudonymRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="replaceStampseudonymResponse">
+        <wsdl:part name="replaceStampseudonymResponse" element="sid:replaceStampseudonymResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="retrieveChainsRequest">
+        <wsdl:part name="retrieveChainsRequest" element="sid:retrieveChainsRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="retrieveChainsResponse">
+        <wsdl:part name="retrieveChainsResponse" element="sid:retrieveChainsResponse"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="retrieveSectorsRequest">
+        <wsdl:part name="retrieveSectorsRequest" element="sid:retrieveSectorsRequest"></wsdl:part>
+    </wsdl:message>
+    <wsdl:message name="retrieveSectorsResponse">
+        <wsdl:part name="retrieveSectorsResponse" element="sid:retrieveSectorsResponse"></wsdl:part>
+    </wsdl:message>
 
-  <wsdl:portType name="SchoolID">
-    <wsdl:documentation>Omschrijving van de Nummervoorziening interface.</wsdl:documentation>
+    <wsdl:portType name="SchoolID">
+        <wsdl:documentation>Omschrijving van de Nummervoorziening interface.</wsdl:documentation>
 
-    <wsdl:operation name="ping">
-      <wsdl:documentation>Service om te testen of de Nummervoorziening goed functioneert. Ook is in het antwoord het huidige versienummer van de Nummervoorziening service te vinden.</wsdl:documentation>
-      <wsdl:input message="sid:pingRequest"></wsdl:input>
-      <wsdl:output message="sid:pingResponse"></wsdl:output>
-    </wsdl:operation>
+        <wsdl:operation name="ping">
+            <wsdl:documentation>Service om te testen of de Nummervoorziening goed functioneert. Ook is in het antwoord het huidige versienummer van de Nummervoorziening service te vinden.</wsdl:documentation>
+            <wsdl:input message="sid:pingRequest"></wsdl:input>
+            <wsdl:output message="sid:pingResponse"></wsdl:output>
+        </wsdl:operation>
 
-    <wsdl:operation name="retrieveStampseudonym">
-      <wsdl:documentation>Service om op basis van de gegeven input een enkel Stampseudoniem te genereren.</wsdl:documentation>
-      <wsdl:input message="sid:retrieveStampseudonymRequest"/>
-      <wsdl:output message="sid:retrieveStampseudonymResponse"/>
-    </wsdl:operation>
+        <wsdl:operation name="retrieveStampseudonym">
+            <wsdl:documentation>Service om op basis van de gegeven input een enkel Stampseudoniem te genereren.</wsdl:documentation>
+            <wsdl:input message="sid:retrieveStampseudonymRequest"/>
+            <wsdl:output message="sid:retrieveStampseudonymResponse"/>
+        </wsdl:operation>
 
-    <wsdl:operation name="retrieveEckId">
-      <wsdl:documentation>Service om op basis van de gegeven input een enkel ECK-ID te genereren.</wsdl:documentation>
-      <wsdl:input message="sid:retrieveEckIdRequest"/>
-      <wsdl:output message="sid:retrieveEckIdResponse"/>
-    </wsdl:operation>
+        <wsdl:operation name="retrieveEckId">
+            <wsdl:documentation>Service om op basis van de gegeven input een enkel ECK-ID te genereren.</wsdl:documentation>
+            <wsdl:input message="sid:retrieveEckIdRequest"/>
+            <wsdl:output message="sid:retrieveEckIdResponse"/>
+        </wsdl:operation>
 
-    <wsdl:operation name="submitEckIdBatch">
-      <wsdl:documentation>Service om meerdere ECK-IDs te genereren op basis van een geindexeerde lijst. Als response wordt een batch identifier teruggegeven die kan worden gebruikt bij het aanroepen van de service retrieveBatch. De oorspronkelijke indices gebruikt als input van de submitEckIdBatch service worden hergebruikt voor het resultaat van de retrieveBatch service.</wsdl:documentation>
-      <wsdl:input message="sid:submitEckIdBatchRequest"></wsdl:input>
-      <wsdl:output message="sid:submitBatchResponse"></wsdl:output>
-    </wsdl:operation>
+        <wsdl:operation name="submitEckIdBatch">
+            <wsdl:documentation>Service om meerdere ECK-IDs te genereren op basis van een geindexeerde lijst. Als response wordt een batch identifier teruggegeven die kan worden gebruikt bij het aanroepen van de service retrieveBatch. De oorspronkelijke indices gebruikt als input van de submitEckIdBatch service worden hergebruikt voor het resultaat van de retrieveBatch service.</wsdl:documentation>
+            <wsdl:input message="sid:submitEckIdBatchRequest"></wsdl:input>
+            <wsdl:output message="sid:submitBatchResponse"></wsdl:output>
+        </wsdl:operation>
 
-    <wsdl:operation name="submitStampseudonymBatch">
-      <wsdl:documentation>Service om meerdere Stampseudoniemen te genereren op basis van een geindexeerde lijst. Als response wordt een batch identifier teruggegeven die kan worden gebruikt bij het aanroepen van de service retrieveBatch. De oorspronkelijke indices gebruikt als input van de submitStampseudonymBatch service worden hergebruikt voor het resultaat van de retrieveBatch service.</wsdl:documentation>
-      <wsdl:input message="sid:submitStampseudonymBatchRequest"></wsdl:input>
-      <wsdl:output message="sid:submitBatchResponse"></wsdl:output>
-    </wsdl:operation>
+        <wsdl:operation name="submitStampseudonymBatch">
+            <wsdl:documentation>Service om meerdere Stampseudoniemen te genereren op basis van een geindexeerde lijst. Als response wordt een batch identifier teruggegeven die kan worden gebruikt bij het aanroepen van de service retrieveBatch. De oorspronkelijke indices gebruikt als input van de submitStampseudonymBatch service worden hergebruikt voor het resultaat van de retrieveBatch service.</wsdl:documentation>
+            <wsdl:input message="sid:submitStampseudonymBatchRequest"></wsdl:input>
+            <wsdl:output message="sid:submitBatchResponse"></wsdl:output>
+        </wsdl:operation>
 
-    <wsdl:operation name="retrieveBatch">
-      <wsdl:documentation>Service om op basis van een batch identifier de status van een batchverwerking op te vragen danwel het resultaat van de batchverwerking op te halen.</wsdl:documentation>
-      <wsdl:input message="sid:retrieveBatchRequest"></wsdl:input>
-      <wsdl:output message="sid:retrieveBatchResponse"></wsdl:output>
-    </wsdl:operation>
+        <wsdl:operation name="retrieveBatch">
+            <wsdl:documentation>Service om op basis van een batch identifier de status van een batchverwerking op te vragen danwel het resultaat van de batchverwerking op te halen.</wsdl:documentation>
+            <wsdl:input message="sid:retrieveBatchRequest"></wsdl:input>
+            <wsdl:output message="sid:retrieveBatchResponse"></wsdl:output>
+        </wsdl:operation>
 
-    <wsdl:operation name="replaceStampseudonym">
-      <wsdl:documentation>Service om bij een gewijzigde 1e niveau hash van het PGN het oude 1e niveau hash van het PGN te kunnen handhaven.</wsdl:documentation>
-      <wsdl:input message="sid:replaceStampseudonymRequest"></wsdl:input>
-      <wsdl:output message="sid:replaceStampseudonymResponse"></wsdl:output>
-    </wsdl:operation>
+        <wsdl:operation name="replaceStampseudonym">
+            <wsdl:documentation>Service om bij een gewijzigde 1e niveau hash van het PGN het oude 1e niveau hash van het PGN te kunnen handhaven.</wsdl:documentation>
+            <wsdl:input message="sid:replaceStampseudonymRequest"></wsdl:input>
+            <wsdl:output message="sid:replaceStampseudonymResponse"></wsdl:output>
+        </wsdl:operation>
 
-    <wsdl:operation name="retrieveChains">
-      <wsdl:documentation>Service om de ondersteunde ketens binnen Nummervoorziening op te kunnen vragen.</wsdl:documentation>
-      <wsdl:input message="sid:retrieveChainsRequest"></wsdl:input>
-      <wsdl:output message="sid:retrieveChainsResponse"></wsdl:output>
-    </wsdl:operation>
+        <wsdl:operation name="retrieveChains">
+            <wsdl:documentation>Service om de ondersteunde ketens binnen Nummervoorziening op te kunnen vragen.</wsdl:documentation>
+            <wsdl:input message="sid:retrieveChainsRequest"></wsdl:input>
+            <wsdl:output message="sid:retrieveChainsResponse"></wsdl:output>
+        </wsdl:operation>
 
-    <wsdl:operation name="retrieveSectors">
-      <wsdl:documentation>Service om de ondersteunde sectoren binnen Nummervoorziening op te kunnen vragen.</wsdl:documentation>
-      <wsdl:input message="sid:retrieveSectorsRequest"></wsdl:input>
-      <wsdl:output message="sid:retrieveSectorsResponse"></wsdl:output>
-    </wsdl:operation>
-  </wsdl:portType>
+        <wsdl:operation name="retrieveSectors">
+            <wsdl:documentation>Service om de ondersteunde sectoren binnen Nummervoorziening op te kunnen vragen.</wsdl:documentation>
+            <wsdl:input message="sid:retrieveSectorsRequest"></wsdl:input>
+            <wsdl:output message="sid:retrieveSectorsResponse"></wsdl:output>
+        </wsdl:operation>
+    </wsdl:portType>
 
-  <wsdl:binding name="SchoolIDSoapBinding" type="sid:SchoolID">
-    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
-    <wsaw:UsingAddressing wsdl:required="true" />
+    <wsdl:binding name="SchoolIDSoapBinding" type="sid:SchoolID">
+        <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
+        <!-- wsaw:UsingAddressing wsdl:required="true" / -->
 
-    <wsdl:operation name="ping">
-      <soap:operation soapAction="http://id.school/eck/schemas/v1_0/ping" />
-      <wsdl:input><soap:body use="literal" /></wsdl:input>
-      <wsdl:output><soap:body use="literal" /></wsdl:output>
-    </wsdl:operation>
+        <wsdl:operation name="ping">
+            <soap:operation soapAction="http://id.school/eck/schemas/v1_0/ping" />
+            <wsdl:input><soap:body use="literal" /></wsdl:input>
+            <wsdl:output><soap:body use="literal" /></wsdl:output>
+        </wsdl:operation>
 
-    <wsdl:operation name="retrieveStampseudonym">
-      <soap:operation soapAction="http://id.school/eck/schemas/v1_0/retrieveStampseudonym" />
-      <wsdl:input><soap:body use="literal" /></wsdl:input>
-      <wsdl:output><soap:body use="literal" /></wsdl:output>
-    </wsdl:operation>
+        <wsdl:operation name="retrieveStampseudonym">
+            <soap:operation soapAction="http://id.school/eck/schemas/v1_0/retrieveStampseudonym" />
+            <wsdl:input><soap:body use="literal" /></wsdl:input>
+            <wsdl:output><soap:body use="literal" /></wsdl:output>
+        </wsdl:operation>
 
-    <wsdl:operation name="retrieveEckId">
-      <soap:operation soapAction="http://id.school/eck/schemas/v1_0/retrieveEckId" />
-      <wsdl:input><soap:body use="literal" /></wsdl:input>
-      <wsdl:output><soap:body use="literal" /></wsdl:output>
-    </wsdl:operation>
+        <wsdl:operation name="retrieveEckId">
+            <soap:operation soapAction="http://id.school/eck/schemas/v1_0/retrieveEckId" />
+            <wsdl:input><soap:body use="literal" /></wsdl:input>
+            <wsdl:output><soap:body use="literal" /></wsdl:output>
+        </wsdl:operation>
 
-    <wsdl:operation name="submitEckIdBatch">
-      <soap:operation soapAction="http://id.school/eck/schemas/v1_0/submitEckIdBatch" />
-      <wsdl:input><soap:body use="literal" /></wsdl:input>
-      <wsdl:output><soap:body use="literal" /></wsdl:output>
-    </wsdl:operation>
+        <wsdl:operation name="submitEckIdBatch">
+            <soap:operation soapAction="http://id.school/eck/schemas/v1_0/submitEckIdBatch" />
+            <wsdl:input><soap:body use="literal" /></wsdl:input>
+            <wsdl:output><soap:body use="literal" /></wsdl:output>
+        </wsdl:operation>
 
-    <wsdl:operation name="submitStampseudonymBatch">
-      <soap:operation soapAction="http://id.school/eck/schemas/v1_0/submitStampseudonymBatch" />
-      <wsdl:input><soap:body use="literal" /></wsdl:input>
-      <wsdl:output><soap:body use="literal" /></wsdl:output>
-    </wsdl:operation>
+        <wsdl:operation name="submitStampseudonymBatch">
+            <soap:operation soapAction="http://id.school/eck/schemas/v1_0/submitStampseudonymBatch" />
+            <wsdl:input><soap:body use="literal" /></wsdl:input>
+            <wsdl:output><soap:body use="literal" /></wsdl:output>
+        </wsdl:operation>
 
-    <wsdl:operation name="retrieveBatch">
-      <soap:operation soapAction="http://id.school/eck/schemas/v1_0/retrieveBatch" />
-      <wsdl:input><soap:body use="literal" /></wsdl:input>
-      <wsdl:output><soap:body use="literal" /></wsdl:output>
-    </wsdl:operation>
+        <wsdl:operation name="retrieveBatch">
+            <soap:operation soapAction="http://id.school/eck/schemas/v1_0/retrieveBatch" />
+            <wsdl:input><soap:body use="literal" /></wsdl:input>
+            <wsdl:output><soap:body use="literal" /></wsdl:output>
+        </wsdl:operation>
 
-    <wsdl:operation name="replaceStampseudonym">
-      <soap:operation soapAction="http://id.school/eck/schemas/v1_0/replaceStampseudonym" />
-      <wsdl:input><soap:body use="literal" /></wsdl:input>
-      <wsdl:output><soap:body use="literal" /></wsdl:output>
-    </wsdl:operation>
+        <wsdl:operation name="replaceStampseudonym">
+            <soap:operation soapAction="http://id.school/eck/schemas/v1_0/replaceStampseudonym" />
+            <wsdl:input><soap:body use="literal" /></wsdl:input>
+            <wsdl:output><soap:body use="literal" /></wsdl:output>
+        </wsdl:operation>
 
-    <wsdl:operation name="retrieveChains">
-      <soap:operation soapAction="http://id.school/eck/schemas/v1_0/retrieveChains" />
-      <wsdl:input><soap:body use="literal" /></wsdl:input>
-      <wsdl:output><soap:body use="literal" /></wsdl:output>
-    </wsdl:operation>
+        <wsdl:operation name="retrieveChains">
+            <soap:operation soapAction="http://id.school/eck/schemas/v1_0/retrieveChains" />
+            <wsdl:input><soap:body use="literal" /></wsdl:input>
+            <wsdl:output><soap:body use="literal" /></wsdl:output>
+        </wsdl:operation>
 
-    <wsdl:operation name="retrieveSectors">
-      <soap:operation soapAction="http://id.school/eck/schemas/v1_0/retrieveSectors" />
-      <wsdl:input><soap:body use="literal" /></wsdl:input>
-      <wsdl:output><soap:body use="literal" /></wsdl:output>
-    </wsdl:operation>
-  </wsdl:binding>
+        <wsdl:operation name="retrieveSectors">
+            <soap:operation soapAction="http://id.school/eck/schemas/v1_0/retrieveSectors" />
+            <wsdl:input><soap:body use="literal" /></wsdl:input>
+            <wsdl:output><soap:body use="literal" /></wsdl:output>
+        </wsdl:operation>
+    </wsdl:binding>
 
-  <wsdl:service name="SchoolIDService">
-    <wsdl:port binding="sid:SchoolIDSoapBinding" name="SchoolIDSoap10">
-      <soap:address location="https://id.school/service/201703" />
-    </wsdl:port>
-  </wsdl:service>
+    <wsdl:service name="SchoolIDService">
+        <wsdl:port binding="sid:SchoolIDSoapBinding" name="SchoolIDSoap10">
+            <soap:address location="https://id.school/service/201703" />
+        </wsdl:port>
+    </wsdl:service>
 </wsdl:definitions>
