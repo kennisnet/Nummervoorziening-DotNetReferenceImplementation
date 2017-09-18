@@ -1,4 +1,4 @@
-﻿#region License
+#region License
 /*
 Copyright 2016, Stichting Kennisnet
 
@@ -16,38 +16,70 @@ limitations under the License.
 */
 #endregion
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NVA_DotNetReferenceImplementation.SchoolID.Operations;
-using System.ServiceModel;
-
 namespace UnitTestProject
-{   
+{
+    using System.ServiceModel;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     /// <summary>
     /// Demonstrates the correct usage of the "Retrieve EckId" operation
     /// </summary>
     [TestClass]
     public class RetrieveEckIdOperationUnitTest : AbstractUnitTest
     {
-        // HPgn based on PGN "063138219"
-        string validStudentHpgn = "95237cd20963e630034620324550809a3df98bbe0774a36c356bf5dbc8a65e7b";
+        /// <summary>
+        /// Stampseudonym based on PGN "063138219"
+        /// </summary>
+        private string validStudentStampseudonym = "https://id.school/sppilot/d0f58d6544562db32383d9fbd7e7d1c6857f9eb8fdaf43db9ac4fac8f3c6897cc6149985fe4a7b91b9be09a11c65b6bfd4d900357b0c96336b5521aaee261cf7";
 
-        // HPgn based on PGN "20DP teacher@school.com"
-        string validTeacherHpgn = "4cadf651ec0197909e6432cb8347369adba39f44276a5b3cd59d17066f10ab3e";
+        /// <summary>
+        /// Stampseudonym based on PGN "20DP teacher@school.com"
+        /// </summary>
+        private string validTeacherStampseudonym = "https://id.school/sppilot/e16ce3e75ee460e371972bb5b9f0ffee4e6bbdb0d3e0f059f7bf09592a70bb0a5cacf228ca8f1b855f280202c53cf8637c4a911d63969580aaae11ac72a33da4";
 
-        string validChainGuid = "http://purl.edustandaard.nl/begrippenkader/e7ec7d3c-c235-4513-bfb6-e54e66854795";
-        string validSectorGuid = "http://purl.edustandaard.nl/begrippenkader/512e4729-03a4-43a2-95ba-758071d1b725";
-        string invalidHpgn = "";
-        string invalidChainGuid = "invalidchainguid";
-        string invalidSectorGuid = "invalidsectorguid";
+        /// <summary>
+        /// Valid SchoolId for student
+        /// </summary>
+        private string validStudentSchoolId = "https://id.school/pilot/e046daed612e3d3903792c3d7e74b2a6b5993cb1b2f6fec6767e41301d526ffec6082a8c2b3e999734eb4cfabb98297111e850bc41fa1f77b6b15c6a7c7d03dc";
+
+        /// <summary>
+        /// Valid SchoolId for student
+        /// </summary>
+        private string validTeacherSchoolId = "https://id.school/pilot/903a199fde822072dc7ebd64a771f1e17c3d8223d155e0279d8fd1fe7075b67479521a32c9c2ebbd50c1169b53e3e92cfdda46baf87a54bb9a8314dbd6678424";
+
+        /// <summary>
+        /// A valid chain guid
+        /// </summary>
+        private string validChainGuid = "http://purl.edustandaard.nl/begrippenkader/e7ec7d3c-c235-4513-bfb6-e54e66854795";
+
+        /// <summary>
+        /// A valid sector guid
+        /// </summary>
+        private string validSectorGuid = "http://purl.edustandaard.nl/begrippenkader/512e4729-03a4-43a2-95ba-758071d1b725";
+
+        /// <summary>
+        /// An invalid hpgn (empty)
+        /// </summary>
+        private string invalidStampseudonym = string.Empty;
+
+        /// <summary>
+        /// An invalid chain guid
+        /// </summary>
+        private string invalidChainGuid = "invalidchainguid";
+
+        /// <summary>
+        /// An invalid sector guid
+        /// </summary>
+        private string invalidSectorGuid = "invalidsectorguid";
 
         /// <summary>
         /// Tests that Nummervoorziening service throws error on invalid HPgn.
         /// </summary>
         [TestMethod]
         [ExpectedException(typeof(FaultException))]
-        public void GetEckIdInvalidHpgnTest()
+        public void GetEckIdInvalidStampseudonymTest()
         {
-            schoolIDServiceUtil.GenerateSchoolID(invalidHpgn, validChainGuid, validSectorGuid);
+            this.schoolIDServiceUtil.GenerateSchoolID(this.invalidStampseudonym, this.validChainGuid, this.validSectorGuid);
         }
 
         /// <summary>
@@ -57,7 +89,7 @@ namespace UnitTestProject
         [ExpectedException(typeof(FaultException))]
         public void GetEckIdInvalidChainTest()
         {
-            schoolIDServiceUtil.GenerateSchoolID(validStudentHpgn, invalidChainGuid, validSectorGuid);
+            this.schoolIDServiceUtil.GenerateSchoolID(this.validStudentStampseudonym, this.invalidChainGuid, this.validSectorGuid);
         }
 
         /// <summary>
@@ -67,7 +99,7 @@ namespace UnitTestProject
         [ExpectedException(typeof(FaultException))]
         public void GetEckIdInvalidSectorTest()
         {
-            schoolIDServiceUtil.GenerateSchoolID(validStudentHpgn, validChainGuid, invalidSectorGuid);
+            this.schoolIDServiceUtil.GenerateSchoolID(this.validStudentStampseudonym, this.validChainGuid, this.invalidSectorGuid);
         }
 
         /// <summary>
@@ -76,34 +108,44 @@ namespace UnitTestProject
         [TestMethod]
         public void GetStudentSchoolIdTest()
         {
-            string expectedSchoolId = "https://id.school/pilot/a7d5e96cbfc61cddcf9a918150d5137c6659497ecb435d97abfc60b7297c750a47a3163af49418acc73148d34915833b1cef077ba687c621aa40654906073571";
-            string retrievedEckId = schoolIDServiceUtil.GenerateSchoolID(validStudentHpgn, validChainGuid, validSectorGuid);
-
-            Assert.AreEqual(expectedSchoolId, retrievedEckId);
+            string retrievedSchoolId = this.schoolIDServiceUtil.GenerateSchoolID(this.validStudentStampseudonym, this.validChainGuid, this.validSectorGuid);
+            Assert.AreEqual(this.validStudentSchoolId, retrievedSchoolId);
         }
-
-        /// <summary>
-        /// Tests that Nummervoorziening service returns correct SchoolID on valid student parameters.
-        /// </summary>
-        [TestMethod]
-        public void GetStudentSchoolIdUppercaseTest()
-        {
-            string expectedSchoolId = "https://id.school/pilot/a7d5e96cbfc61cddcf9a918150d5137c6659497ecb435d97abfc60b7297c750a47a3163af49418acc73148d34915833b1cef077ba687c621aa40654906073571";
-            string retrievedEckId = schoolIDServiceUtil.GenerateSchoolID(validStudentHpgn, validChainGuid, validSectorGuid);
-
-            Assert.AreEqual(expectedSchoolId, retrievedEckId);
-        }
-
+        
         /// <summary>
         /// Tests that Nummervoorziening service returns correct SchoolID on valid teacher parameters.
         /// </summary>
         [TestMethod]
         public void GetTeacherSchoolIdTest()
         {
-            string expectedSchoolId = "https://id.school/pilot/8dc3d9adad74ee2d588a6456be26da9faab1f0b1801bb15897f0e979ada55556aee041e329b27328259ba383af779080209c5c54f3db9b171bd43980aedc47c3";
-            string retrievedEckId = schoolIDServiceUtil.GenerateSchoolID(validTeacherHpgn, validChainGuid, validSectorGuid);
+            string retrievedSchoolId = this.schoolIDServiceUtil.GenerateSchoolID(this.validTeacherStampseudonym, this.validChainGuid, this.validSectorGuid);
+            Assert.AreEqual(this.validTeacherSchoolId, retrievedSchoolId);
+        }
 
-            Assert.AreEqual(expectedSchoolId, retrievedEckId);
+        /// <summary>
+        /// Tests that Nummervoorziening service returns correct SchoolID on valid teacher parameters that based on output of GenerateStampseudonym service.
+        /// </summary>
+        [TestMethod]
+        public void GetStudentSchoolIdAfterRetrieveStampseudonymTest()
+        {
+            string validStudentHpgn = "9735dfd2235eaeb5f0300886bcc99c82ffc1d6420c4e0bde8de7218def2135fa";
+            string stampseudonym = this.schoolIDServiceUtil.GenerateStampseudonym(validStudentHpgn);  
+            
+            string retrievedSchoolId = this.schoolIDServiceUtil.GenerateSchoolID(stampseudonym, this.validChainGuid, this.validSectorGuid);
+            Assert.AreEqual(this.validStudentSchoolId, retrievedSchoolId);
+        }
+
+        /// <summary>
+        /// Tests that Nummervoorziening service returns correct SchoolID on valid student parameters that based on output of GenerateStampseudonym service.
+        /// </summary>
+        [TestMethod]
+        public void GetTeacherSchoolIdAfterRetrieveStampseudonymTest()
+        {
+            string validTeacherHpgn = "0b870ff044775ef0360655c40d5b284b7e3ae2b72207a6894794d787eb019e60";
+            string stampseudonym = this.schoolIDServiceUtil.GenerateStampseudonym(validTeacherHpgn);
+
+            string retrievedSchoolId = this.schoolIDServiceUtil.GenerateSchoolID(stampseudonym, this.validChainGuid, this.validSectorGuid);
+            Assert.AreEqual(this.validTeacherSchoolId, retrievedSchoolId);
         }
     }
 }

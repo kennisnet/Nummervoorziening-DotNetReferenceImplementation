@@ -16,12 +16,11 @@ limitations under the License.
 */
 #endregion
 
-using System;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NVA_DotNetReferenceImplementation.SchoolID.Operations;
-
 namespace UnitTestProject
 {
+    using System;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     /// <summary>
     /// Demonstrates correct usage of the "Ping" operation
     /// </summary>
@@ -34,8 +33,7 @@ namespace UnitTestProject
         [TestMethod]
         public void GetAvailabilityTest()
         {
-            bool expectedValue = true;
-            Assert.AreEqual(expectedValue, schoolIDServiceUtil.IsSchoolIDAvailable());
+            Assert.AreEqual(true, this.schoolIDServiceUtil.IsSchoolIDAvailable());
         }
 
         /// <summary>
@@ -44,8 +42,8 @@ namespace UnitTestProject
         [TestMethod]
         public void GetSchoolIDVersionTest()
         {
-            string expectedValue = "0.1.0-SNAPSHOT";
-            Assert.AreEqual(expectedValue, schoolIDServiceUtil.GetSchoolIDVersion());
+            string expectedValue = "1.0.3-SNAPSHOT";
+            Assert.AreEqual(expectedValue, this.schoolIDServiceUtil.GetSchoolIDVersion());
         }        
         
         /// <summary>
@@ -56,7 +54,7 @@ namespace UnitTestProject
         {
             double allowedGapInMinutes = 180;
 
-            DateTime? timeOnServer = schoolIDServiceUtil.GetSchoolIDDateTime();
+            DateTime? timeOnServer = this.schoolIDServiceUtil.GetSchoolIDDateTime();
             DateTime currentDateTime = DateTime.Now;
 
             // Check if the DateTime we received is valid

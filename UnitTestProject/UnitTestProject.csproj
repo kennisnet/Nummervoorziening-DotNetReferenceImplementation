@@ -57,7 +57,8 @@
   <ItemGroup>
     <Compile Include="AbstractUnitTest.cs" />
     <Compile Include="BatchOperationsUnitTest.cs" />
-    <Compile Include="ReplaceEckIdOperationUnitTest.cs" />
+    <Compile Include="ReplaceStampseudonymOperationUnitTest.cs" />
+    <Compile Include="RetrieveStampseudonymOperationUnitTest.cs" />
     <Compile Include="ScryptUtilUnitTest.cs" />
     <Compile Include="RetrieveEckIdOperationUnitTest.cs" />
     <Compile Include="RetrieveSectorsOperationUnitTest.cs" />

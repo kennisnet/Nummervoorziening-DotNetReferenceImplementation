@@ -16,54 +16,111 @@ limitations under the License.
 */
 #endregion
 
-using NVA_DotNetReferenceImplementation.SchoolID;
-using NVA_DotNetReferenceImplementation.SCrypter;
-using System;
-using System.ServiceModel;
-
 namespace ConsoleNVAClient
 {
-    class Program
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.ServiceModel;
+    using NVA_DotNetReferenceImplementation.SchoolID;
+    using NVA_DotNetReferenceImplementation.SCrypter;
+
+    /// <summary>
+    /// The main entry point for the program. This function demonstrates work with Web Services via SchoolID project.
+    /// </summary>
+    public class Program
     {
+        /// <summary>
+        /// Object to store the proxy class which is used to communicate with the Nummervoorziening service
+        /// </summary>
         private static SchoolIDServiceUtil schoolIDServiceUtil;
+
+        /// <summary>
+        /// Chains retrieved from the Nummervoorziening service
+        /// </summary>
         private static Chain[] chains;
+
+        /// <summary>
+        /// Sectors retrieved from the Nummervoorziening service
+        /// </summary>
         private static Sector[] sectors;
+
+        /// <summary>
+        /// An example PGN of a student
+        /// </summary>
+        private static string studentPgn = "063138219";
+
+        /// <summary>
+        /// An example PGN of a teacher
+        /// </summary>
+        private static string teacherPgn = "20DP teacher@school.com";
 
         /// <summary>
         /// Console application entrance of the Reference implementation to demonstrate how a Nummervoorziening client may communicate 
         /// with the Nummervoorziening service.
         /// </summary>
         /// <param name="args">Optional parameters (not used)</param>
-        static void Main(string[] args)
+        public static void Main(string[] args)
         {
             // Disable SSL checks for now
             System.Net.ServicePointManager.ServerCertificateValidationCallback =
-                ((sender, certificate, chain, sslPolicyErrors) => true);
+                (sender, certificate, chain, sslPolicyErrors) => true;
             
-
             // Setup the Service Utility for School ID 
             schoolIDServiceUtil = SchoolIDServiceUtil.Instance;
 
             Console.WriteLine("Current server information:");
-            // @TODO check if authorized instead of stating offline
-            try {
+
+            try
+            {
                 // Status information
                 if (schoolIDServiceUtil.IsSchoolIDAvailable())
                 {
+                    // Print some information about the service
                     WritePingStatusOutput();
+
+                    // List available chains
                     WriteAvailableChains();
+
+                    // List available sectors
                     WriteAvailableSectors();
 
-                    // Tests               
-                    Console.WriteLine();
-                    ExecuteClientTests();
+                    // Retrieve a Stampseudonym
+                    Console.WriteLine("\nRetrieving Stampseudonym:");
+                    Console.WriteLine("Pgn:\t\t\t\t" + studentPgn);
+                    string studentHpgn = GenerateScryptHash(studentPgn);
+                    Console.WriteLine("HPgn:\t\t\t\t" + studentHpgn);
+                    string studentStampseudonym = ExecuteCreateStampseudonymTest(studentHpgn);
+                    Console.WriteLine("Retrieved Stampseudonym:\t" + studentStampseudonym + "\n");
+                    Console.WriteLine("Pgn:\t\t\t\t" + teacherPgn);
+                    string teacherHpgn = GenerateScryptHash(teacherPgn);
+                    Console.WriteLine("HPgn:\t\t\t\t" + teacherHpgn);
+                    string teacherStampseudonym = ExecuteCreateStampseudonymTest(teacherHpgn);
+                    Console.WriteLine("Retrieved Stampseudonym:\t" + teacherStampseudonym + "\n");
+
+                    // Execute a batch operation for retrieving Stampseudonyms
+                    Dictionary<int, string> listedHpgnDictionary = new Dictionary<int, string>();
+                    listedHpgnDictionary.Add(0, studentHpgn);
+                    listedHpgnDictionary.Add(1, teacherHpgn);
+
+                    Console.WriteLine("Submitting Stampseudonym batch (with the same input)");
+                    ExecuteStampseudonymBatchTest(listedHpgnDictionary);
+
+                    // Retrieve a SchoolID
+                    Console.WriteLine("\nRetrieving SchoolID for first active sector and first active chain:");
+                    Console.WriteLine("Chain Guid:\t\t\t" + chains[0].id);
+                    Console.WriteLine("Sector Guid:\t\t\t" + sectors[0].id);
+                    
+                    ExecuteCreateEckIdTest(studentStampseudonym, chains[0].id, sectors[0].id);
+                    ExecuteCreateEckIdTest(teacherStampseudonym, chains[0].id, sectors[0].id);
                 }
                 else
                 {
-                    Console.WriteLine("School ID service is offline.");
+                    Console.WriteLine("School ID service is offline or you are not authorized to use it.");
                 }
             }
-            catch (FaultException fe) {
+            catch (FaultException fe)
+            {
                 Console.WriteLine("Fault received: " + fe.Message);
             }
             catch (EndpointNotFoundException enfe)
@@ -109,35 +166,67 @@ namespace ConsoleNVAClient
         }
 
         /// <summary>
-        /// Initializes test cases
+        /// Executes tests for retrieving Stampseudonym based on PGN
         /// </summary>
-        private static void ExecuteClientTests()
+        /// <param name="hpgn">The Pgn that is hashed and send to Nummervoorziening</param>
+        /// <returns>The Stampseudonym for the HPgn</returns>
+        private static string ExecuteCreateStampseudonymTest(string hpgn)
         {
-            Console.WriteLine("Retrieving SchoolID for first active sector and first active chain:");
-            Console.WriteLine("ChainId:\t\t\t" + chains[0].id);
-            Console.WriteLine("SectorId:\t\t\t" + sectors[0].id);
+            // Retrieve Stampseudonym from Nummervoorziening service
+            return schoolIDServiceUtil.GenerateStampseudonym(hpgn);
+        }
 
-            // Cases: valid requests
-            Console.WriteLine();
-            ExecuteClientTest("063138219", chains[0].id, sectors[0].id);
-            ExecuteClientTest("20DP teacher@school.com", chains[0].id, sectors[0].id);
-            Console.WriteLine();
+        /// <summary>
+        /// Executes tests submitting and retrieving Stampseudonym batch
+        /// </summary>
+        /// <param name="listedHpgnDictionary">An indexed list of HPGNs</param>
+        private static void ExecuteStampseudonymBatchTest(Dictionary<int, string> listedHpgnDictionary)
+        {
+            try
+            {
+                string batchIdentifier = schoolIDServiceUtil.SubmitStampseudonymBatch(listedHpgnDictionary);
+                Console.WriteLine("Batch identifier:\t\t" + batchIdentifier);
+                Console.WriteLine("Waiting for processing...");
+                SchoolIDBatch stampseudonymBatch = schoolIDServiceUtil.RetrieveBatch(batchIdentifier);
+
+                if (stampseudonymBatch != null)
+                {
+                    string successList = stampseudonymBatch.getSuccessList().Count > 0
+                                             ? stampseudonymBatch.getSuccessList()
+                                                 .Select(x => x.Key + "=" + x.Value)
+                                                 .Aggregate((s1, s2) => s1 + ", " + s2)
+                                             : string.Empty;
+                    string failedList = stampseudonymBatch.getFailedList().Count > 0
+                                             ? stampseudonymBatch.getSuccessList()
+                                                 .Select(x => x.Key + "=" + x.Value)
+                                                 .Aggregate((s1, s2) => s1 + ", " + s2)
+                                             : string.Empty;
+                    Console.WriteLine("Generated Stampseudonyms:\t{" + successList + "}");
+                    Console.WriteLine("Failed Stampseudonyms:\t{" + failedList + "}");
+                }
+                else
+                {
+                    Console.WriteLine("Error occured: StampseudonymBatch is null.");
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception has been thrown: " + e.Message);
+            }
         }
 
         /// <summary>
         /// Executes test cases
         /// </summary>
-        /// <param name="input">The PGN input</param>
+        /// <param name="stampseudonym">The Stampseudonym input</param>
         /// <param name="chainGuid">A valid Chain Guid</param>
         /// <param name="sectorGuid">A valid Sector Guid</param>
-        private static void ExecuteClientTest(string input, string chainGuid, string sectorGuid)
+        private static void ExecuteCreateEckIdTest(string stampseudonym, string chainGuid, string sectorGuid)
         {
-            string scryptHash = GenerateScryptHash(input);
             try
             {
-                Console.WriteLine("Pgn:\t\t\t\t" + input);
-                Console.WriteLine("HPgn:\t\t\t\t" + scryptHash);
-                Console.WriteLine("Retrieved SchoolID:\t\t" + GenerateSchoolID(scryptHash, chainGuid, sectorGuid));
+                Console.WriteLine("Retrieved SchoolID:\t\t" + GenerateSchoolID(stampseudonym, chainGuid, sectorGuid));
                 Console.WriteLine();
             }
             catch (Exception e)
@@ -158,17 +247,17 @@ namespace ConsoleNVAClient
             // Get the hash from the scrypt library
             return scryptUtil.GenerateHexHash(input);
         }
-
+        
         /// <summary>
         /// Wrapper function to retrieve a SchoolID
         /// </summary>
-        /// <param name="scryptHash">A scrypt hash of a PGN</param>
+        /// <param name="hpgn">A scrypt hash of a PGN</param>
         /// <param name="chainGuid">A valid Chain Guid</param>
         /// <param name="sectorGuid">A valid Sector Guid</param>
-        /// <returns></returns>
-        private static string GenerateSchoolID(string scryptHash, string chainGuid, string sectorGuid)
+        /// <returns>The generated Stampseudonym</returns>
+        private static string GenerateSchoolID(string hpgn, string chainGuid, string sectorGuid)
         {
-            return schoolIDServiceUtil.GenerateSchoolID(scryptHash, chainGuid, sectorGuid);
+            return schoolIDServiceUtil.GenerateSchoolID(hpgn, chainGuid, sectorGuid);
         }
     }
 }

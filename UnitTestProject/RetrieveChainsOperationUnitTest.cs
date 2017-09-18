@@ -16,11 +16,10 @@ limitations under the License.
 */
 #endregion
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NVA_DotNetReferenceImplementation.SchoolID.Operations;
-
 namespace UnitTestProject
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     /// <summary>
     /// Demonstrates correct usage of the "Retrieve Chains" operation.
     /// </summary>
@@ -33,7 +32,7 @@ namespace UnitTestProject
         [TestMethod]
         public void GetChainsTest()
         {
-            Chain[] chains = schoolIDServiceUtil.GetChains();
+            Chain[] chains = this.schoolIDServiceUtil.GetChains();
 
             Assert.IsNotNull(chains);
             Assert.IsTrue(chains.Length > 0);

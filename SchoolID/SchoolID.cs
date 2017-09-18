@@ -11,35 +11,43 @@
 
 
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ServiceModel.ServiceContractAttribute(Namespace = "http://id.school/eck/schemas/v1_0", ConfigurationName = "SchoolID")]
+[System.ServiceModel.ServiceContractAttribute(Namespace="http://id.school/eck/schemas/v1_0", ConfigurationName="SchoolID")]
 public interface SchoolID
 {
-
-    [System.ServiceModel.OperationContractAttribute(Action = "http://id.school/eck/schemas/v1_0/ping", ReplyAction = "*")]
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://id.school/eck/schemas/v1_0/ping", ReplyAction="*")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     pingResponse1 ping(pingRequest1 request);
-
-    [System.ServiceModel.OperationContractAttribute(Action = "http://id.school/eck/schemas/v1_0/retrieveEckId", ReplyAction = "*")]
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://id.school/eck/schemas/v1_0/retrieveStampseudonym", ReplyAction="*")]
+    [System.ServiceModel.XmlSerializerFormatAttribute()]
+    retrieveStampseudonymResponse1 retrieveStampseudonym(retrieveStampseudonymRequest1 request);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://id.school/eck/schemas/v1_0/retrieveEckId", ReplyAction="*")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     retrieveEckIdResponse1 retrieveEckId(retrieveEckIdRequest1 request);
-
-    [System.ServiceModel.OperationContractAttribute(Action = "http://id.school/eck/schemas/v1_0/submitEckIdBatch", ReplyAction = "*")]
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://id.school/eck/schemas/v1_0/submitEckIdBatch", ReplyAction="*")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
-    submitEckIdBatchResponse1 submitEckIdBatch(submitEckIdBatchRequest1 request);
-
-    [System.ServiceModel.OperationContractAttribute(Action = "http://id.school/eck/schemas/v1_0/retrieveEckIdBatch", ReplyAction = "*")]
+    submitEckIdBatchResponse submitEckIdBatch(submitEckIdBatchRequest1 request);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://id.school/eck/schemas/v1_0/submitStampseudonymBatch", ReplyAction="*")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
-    retrieveEckIdBatchResponse1 retrieveEckIdBatch(retrieveEckIdBatchRequest1 request);
-
-    [System.ServiceModel.OperationContractAttribute(Action = "http://id.school/eck/schemas/v1_0/replaceEckId", ReplyAction = "*")]
+    submitEckIdBatchResponse submitStampseudonymBatch(submitStampseudonymBatchRequest request);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://id.school/eck/schemas/v1_0/retrieveBatch", ReplyAction="*")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
-    replaceEckIdResponse1 replaceEckId(replaceEckIdRequest1 request);
-
-    [System.ServiceModel.OperationContractAttribute(Action = "http://id.school/eck/schemas/v1_0/retrieveChains", ReplyAction = "*")]
+    retrieveBatchResponse1 retrieveBatch(retrieveBatchRequest1 request);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://id.school/eck/schemas/v1_0/replaceStampseudonym", ReplyAction="*")]
+    [System.ServiceModel.XmlSerializerFormatAttribute()]
+    replaceStampseudonymResponse1 replaceStampseudonym(replaceStampseudonymRequest1 request);
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://id.school/eck/schemas/v1_0/retrieveChains", ReplyAction="*")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     retrieveChainsResponse retrieveChains(retrieveChainsRequest1 request);
-
-    [System.ServiceModel.OperationContractAttribute(Action = "http://id.school/eck/schemas/v1_0/retrieveSectors", ReplyAction = "*")]
+    
+    [System.ServiceModel.OperationContractAttribute(Action="http://id.school/eck/schemas/v1_0/retrieveSectors", ReplyAction="*")]
     [System.ServiceModel.XmlSerializerFormatAttribute()]
     retrieveSectorsResponse retrieveSectors(retrieveSectorsRequest1 request);
 }
@@ -49,7 +57,7 @@ public interface SchoolID
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
 public partial class PingRequest
 {
 }
@@ -59,20 +67,20 @@ public partial class PingRequest
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
 public partial class Sector
 {
-
+    
     private string idField;
-
+    
     private string nameField;
-
+    
     private string descriptionField;
-
+    
     private System.DateTime lastEditedField;
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public string id
     {
         get
@@ -84,9 +92,9 @@ public partial class Sector
             this.idField = value;
         }
     }
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 1)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string name
     {
         get
@@ -98,9 +106,9 @@ public partial class Sector
             this.nameField = value;
         }
     }
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 2)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public string description
     {
         get
@@ -112,9 +120,9 @@ public partial class Sector
             this.descriptionField = value;
         }
     }
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 3)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
     public System.DateTime lastEdited
     {
         get
@@ -133,7 +141,7 @@ public partial class Sector
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
 public partial class RetrieveSectorsRequest
 {
 }
@@ -143,20 +151,20 @@ public partial class RetrieveSectorsRequest
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
 public partial class Chain
 {
-
+    
     private string idField;
-
+    
     private string nameField;
-
+    
     private string descriptionField;
-
+    
     private System.DateTime lastEditedField;
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public string id
     {
         get
@@ -168,9 +176,9 @@ public partial class Chain
             this.idField = value;
         }
     }
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 1)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string name
     {
         get
@@ -182,9 +190,9 @@ public partial class Chain
             this.nameField = value;
         }
     }
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 2)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public string description
     {
         get
@@ -196,9 +204,9 @@ public partial class Chain
             this.descriptionField = value;
         }
     }
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 3)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=3)]
     public System.DateTime lastEdited
     {
         get
@@ -217,7 +225,7 @@ public partial class Chain
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
 public partial class RetrieveChainsRequest
 {
 }
@@ -227,23 +235,23 @@ public partial class RetrieveChainsRequest
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
-public partial class ReplaceEckIdResponse
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
+public partial class ReplaceStampseudonymResponse
 {
-
-    private EckId eckIdField;
-
+    
+    private Stampseudonym stampseudonymField;
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
-    public EckId eckId
+    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+    public Stampseudonym stampseudonym
     {
         get
         {
-            return this.eckIdField;
+            return this.stampseudonymField;
         }
         set
         {
-            this.eckIdField = value;
+            this.stampseudonymField = value;
         }
     }
 }
@@ -253,12 +261,12 @@ public partial class ReplaceEckIdResponse
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
-public partial class EckId
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
+public partial class Stampseudonym
 {
-
+    
     private string valueField;
-
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlTextAttribute()]
     public string Value
@@ -279,24 +287,20 @@ public partial class EckId
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
-public partial class ReplaceEckIdRequest
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
+public partial class ReplaceStampseudonymRequest
 {
-
+    
     private HPgn hpgnOldField;
-
+    
     private HPgn hpgnNewField;
-
-    private string chainIdField;
-
-    private string sectorIdField;
-
+    
     private System.DateTime effectiveDateField;
-
+    
     private bool effectiveDateFieldSpecified;
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public HPgn hpgnOld
     {
         get
@@ -308,9 +312,9 @@ public partial class ReplaceEckIdRequest
             this.hpgnOldField = value;
         }
     }
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 1)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public HPgn hpgnNew
     {
         get
@@ -322,37 +326,9 @@ public partial class ReplaceEckIdRequest
             this.hpgnNewField = value;
         }
     }
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 2)]
-    public string chainId
-    {
-        get
-        {
-            return this.chainIdField;
-        }
-        set
-        {
-            this.chainIdField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 3)]
-    public string sectorId
-    {
-        get
-        {
-            return this.sectorIdField;
-        }
-        set
-        {
-            this.sectorIdField = value;
-        }
-    }
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 4)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public System.DateTime effectiveDate
     {
         get
@@ -364,7 +340,7 @@ public partial class ReplaceEckIdRequest
             this.effectiveDateField = value;
         }
     }
-
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlIgnoreAttribute()]
     public bool effectiveDateSpecified
@@ -385,12 +361,12 @@ public partial class ReplaceEckIdRequest
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
 public partial class HPgn
 {
-
+    
     private string valueField;
-
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlTextAttribute()]
     public string Value
@@ -411,16 +387,16 @@ public partial class HPgn
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
-public partial class ListedEckIdFailure
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
+public partial class ListedEntityFailure
 {
-
+    
     private int indexField;
-
+    
     private string errorMessageField;
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public int index
     {
         get
@@ -432,9 +408,9 @@ public partial class ListedEckIdFailure
             this.indexField = value;
         }
     }
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 1)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string errorMessage
     {
         get
@@ -453,16 +429,16 @@ public partial class ListedEckIdFailure
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
-public partial class ListedEckIdSuccess
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
+public partial class ListedEntitySuccess
 {
-
+    
     private int indexField;
-
-    private EckId eckIdField;
-
+    
+    private string valueField;
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public int index
     {
         get
@@ -474,18 +450,18 @@ public partial class ListedEckIdSuccess
             this.indexField = value;
         }
     }
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 1)]
-    public EckId eckId
+    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+    public string value
     {
         get
         {
-            return this.eckIdField;
+            return this.valueField;
         }
         set
         {
-            this.eckIdField = value;
+            this.valueField = value;
         }
     }
 }
@@ -495,17 +471,17 @@ public partial class ListedEckIdSuccess
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
-public partial class RetrieveEckIdBatchResponse
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
+public partial class RetrieveBatchResponse
 {
-
-    private ListedEckIdSuccess[] successField;
-
-    private ListedEckIdFailure[] failedField;
-
+    
+    private ListedEntitySuccess[] successField;
+    
+    private ListedEntityFailure[] failedField;
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("success", Order = 0)]
-    public ListedEckIdSuccess[] success
+    [System.Xml.Serialization.XmlElementAttribute("success", Order=0)]
+    public ListedEntitySuccess[] success
     {
         get
         {
@@ -516,10 +492,10 @@ public partial class RetrieveEckIdBatchResponse
             this.successField = value;
         }
     }
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("failed", Order = 1)]
-    public ListedEckIdFailure[] failed
+    [System.Xml.Serialization.XmlElementAttribute("failed", Order=1)]
+    public ListedEntityFailure[] failed
     {
         get
         {
@@ -537,14 +513,14 @@ public partial class RetrieveEckIdBatchResponse
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
-public partial class RetrieveEckIdBatchRequest
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
+public partial class RetrieveBatchRequest
 {
-
+    
     private BatchIdentifier batchIdentifierField;
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public BatchIdentifier batchIdentifier
     {
         get
@@ -563,12 +539,12 @@ public partial class RetrieveEckIdBatchRequest
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
 public partial class BatchIdentifier
 {
-
+    
     private string valueField;
-
+    
     /// <remarks/>
     [System.Xml.Serialization.XmlTextAttribute()]
     public string Value
@@ -589,42 +565,16 @@ public partial class BatchIdentifier
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
-public partial class SubmitEckIdBatchResponse
-{
-
-    private BatchIdentifier batchIdentifierField;
-
-    /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
-    public BatchIdentifier batchIdentifier
-    {
-        get
-        {
-            return this.batchIdentifierField;
-        }
-        set
-        {
-            this.batchIdentifierField = value;
-        }
-    }
-}
-
-/// <remarks/>
-[System.CodeDom.Compiler.GeneratedCodeAttribute("svcutil", "4.6.81.0")]
-[System.SerializableAttribute()]
-[System.Diagnostics.DebuggerStepThroughAttribute()]
-[System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
 public partial class ListedHpgn
 {
-
+    
     private int indexField;
-
+    
     private HPgn hPgnField;
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public int index
     {
         get
@@ -636,9 +586,9 @@ public partial class ListedHpgn
             this.indexField = value;
         }
     }
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 1)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public HPgn hPgn
     {
         get
@@ -657,32 +607,100 @@ public partial class ListedHpgn
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
-public partial class SubmitEckIdBatchRequest
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
+public partial class SubmitBatchResponse
 {
-
-    private ListedHpgn[] hpgnListField;
-
-    private string chainIdField;
-
-    private string sectorIdField;
-
+    
+    private BatchIdentifier batchIdentifierField;
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute("hpgnList", Order = 0)]
-    public ListedHpgn[] hpgnList
+    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+    public BatchIdentifier batchIdentifier
     {
         get
         {
-            return this.hpgnListField;
+            return this.batchIdentifierField;
         }
         set
         {
-            this.hpgnListField = value;
+            this.batchIdentifierField = value;
         }
     }
+}
 
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("svcutil", "4.6.81.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
+public partial class ListedStampseudonym
+{
+    
+    private int indexField;
+    
+    private Stampseudonym stampseudonymField;
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 1)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+    public int index
+    {
+        get
+        {
+            return this.indexField;
+        }
+        set
+        {
+            this.indexField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
+    public Stampseudonym stampseudonym
+    {
+        get
+        {
+            return this.stampseudonymField;
+        }
+        set
+        {
+            this.stampseudonymField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("svcutil", "4.6.81.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
+public partial class SubmitEckIdBatchRequest
+{
+    
+    private ListedStampseudonym[] stampseudonymListField;
+    
+    private string chainIdField;
+    
+    private string sectorIdField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute("stampseudonymList", Order=0)]
+    public ListedStampseudonym[] stampseudonymList
+    {
+        get
+        {
+            return this.stampseudonymListField;
+        }
+        set
+        {
+            this.stampseudonymListField = value;
+        }
+    }
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string chainId
     {
         get
@@ -694,9 +712,9 @@ public partial class SubmitEckIdBatchRequest
             this.chainIdField = value;
         }
     }
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 2)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public string sectorId
     {
         get
@@ -715,14 +733,40 @@ public partial class SubmitEckIdBatchRequest
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
+public partial class EckId
+{
+    
+    private string valueField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlTextAttribute()]
+    public string Value
+    {
+        get
+        {
+            return this.valueField;
+        }
+        set
+        {
+            this.valueField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("svcutil", "4.6.81.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
 public partial class RetrieveEckIdResponse
 {
-
+    
     private EckId eckIdField;
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public EckId eckId
     {
         get
@@ -741,32 +785,32 @@ public partial class RetrieveEckIdResponse
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
 public partial class RetrieveEckIdRequest
 {
-
-    private HPgn hpgnField;
-
+    
+    private Stampseudonym stampseudonymField;
+    
     private string chainIdField;
-
+    
     private string sectorIdField;
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
-    public HPgn hpgn
+    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+    public Stampseudonym stampseudonym
     {
         get
         {
-            return this.hpgnField;
+            return this.stampseudonymField;
         }
         set
         {
-            this.hpgnField = value;
+            this.stampseudonymField = value;
         }
     }
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 1)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string chainId
     {
         get
@@ -778,9 +822,9 @@ public partial class RetrieveEckIdRequest
             this.chainIdField = value;
         }
     }
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 2)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public string sectorId
     {
         get
@@ -799,18 +843,70 @@ public partial class RetrieveEckIdRequest
 [System.SerializableAttribute()]
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.ComponentModel.DesignerCategoryAttribute("code")]
-[System.Xml.Serialization.XmlTypeAttribute(Namespace = "http://id.school/eck/schemas/v1_0")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
+public partial class RetrieveStampseudonymResponse
+{
+    
+    private Stampseudonym stampseudonymField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+    public Stampseudonym stampseudonym
+    {
+        get
+        {
+            return this.stampseudonymField;
+        }
+        set
+        {
+            this.stampseudonymField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("svcutil", "4.6.81.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
+public partial class RetrieveStampseudonymRequest
+{
+    
+    private HPgn hpgnField;
+    
+    /// <remarks/>
+    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
+    public HPgn hpgn
+    {
+        get
+        {
+            return this.hpgnField;
+        }
+        set
+        {
+            this.hpgnField = value;
+        }
+    }
+}
+
+/// <remarks/>
+[System.CodeDom.Compiler.GeneratedCodeAttribute("svcutil", "4.6.81.0")]
+[System.SerializableAttribute()]
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.ComponentModel.DesignerCategoryAttribute("code")]
+[System.Xml.Serialization.XmlTypeAttribute(Namespace="http://id.school/eck/schemas/v1_0")]
 public partial class PingResponse
 {
-
+    
     private bool availableField;
-
+    
     private string applicationVersionField;
-
+    
     private System.DateTime systemTimeField;
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 0)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=0)]
     public bool available
     {
         get
@@ -822,9 +918,9 @@ public partial class PingResponse
             this.availableField = value;
         }
     }
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 1)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=1)]
     public string applicationVersion
     {
         get
@@ -836,9 +932,9 @@ public partial class PingResponse
             this.applicationVersionField = value;
         }
     }
-
+    
     /// <remarks/>
-    [System.Xml.Serialization.XmlElementAttribute(Order = 2)]
+    [System.Xml.Serialization.XmlElementAttribute(Order=2)]
     public System.DateTime systemTime
     {
         get
@@ -854,17 +950,17 @@ public partial class PingResponse
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
 public partial class pingRequest1
 {
-
-    [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://id.school/eck/schemas/v1_0", Order = 0)]
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://id.school/eck/schemas/v1_0", Order=0)]
     public PingRequest pingRequest;
-
+    
     public pingRequest1()
     {
     }
-
+    
     public pingRequest1(PingRequest pingRequest)
     {
         this.pingRequest = pingRequest;
@@ -873,17 +969,17 @@ public partial class pingRequest1
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
 public partial class pingResponse1
 {
-
-    [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://id.school/eck/schemas/v1_0", Order = 0)]
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://id.school/eck/schemas/v1_0", Order=0)]
     public PingResponse pingResponse;
-
+    
     public pingResponse1()
     {
     }
-
+    
     public pingResponse1(PingResponse pingResponse)
     {
         this.pingResponse = pingResponse;
@@ -892,17 +988,55 @@ public partial class pingResponse1
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class retrieveStampseudonymRequest1
+{
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://id.school/eck/schemas/v1_0", Order=0)]
+    public RetrieveStampseudonymRequest retrieveStampseudonymRequest;
+    
+    public retrieveStampseudonymRequest1()
+    {
+    }
+    
+    public retrieveStampseudonymRequest1(RetrieveStampseudonymRequest retrieveStampseudonymRequest)
+    {
+        this.retrieveStampseudonymRequest = retrieveStampseudonymRequest;
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class retrieveStampseudonymResponse1
+{
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://id.school/eck/schemas/v1_0", Order=0)]
+    public RetrieveStampseudonymResponse retrieveStampseudonymResponse;
+    
+    public retrieveStampseudonymResponse1()
+    {
+    }
+    
+    public retrieveStampseudonymResponse1(RetrieveStampseudonymResponse retrieveStampseudonymResponse)
+    {
+        this.retrieveStampseudonymResponse = retrieveStampseudonymResponse;
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
 public partial class retrieveEckIdRequest1
 {
-
-    [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://id.school/eck/schemas/v1_0", Order = 0)]
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://id.school/eck/schemas/v1_0", Order=0)]
     public RetrieveEckIdRequest retrieveEckIdRequest;
-
+    
     public retrieveEckIdRequest1()
     {
     }
-
+    
     public retrieveEckIdRequest1(RetrieveEckIdRequest retrieveEckIdRequest)
     {
         this.retrieveEckIdRequest = retrieveEckIdRequest;
@@ -911,17 +1045,17 @@ public partial class retrieveEckIdRequest1
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
 public partial class retrieveEckIdResponse1
 {
-
-    [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://id.school/eck/schemas/v1_0", Order = 0)]
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://id.school/eck/schemas/v1_0", Order=0)]
     public RetrieveEckIdResponse retrieveEckIdResponse;
-
+    
     public retrieveEckIdResponse1()
     {
     }
-
+    
     public retrieveEckIdResponse1(RetrieveEckIdResponse retrieveEckIdResponse)
     {
         this.retrieveEckIdResponse = retrieveEckIdResponse;
@@ -930,17 +1064,17 @@ public partial class retrieveEckIdResponse1
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
 public partial class submitEckIdBatchRequest1
 {
-
-    [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://id.school/eck/schemas/v1_0", Order = 0)]
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://id.school/eck/schemas/v1_0", Order=0)]
     public SubmitEckIdBatchRequest submitEckIdBatchRequest;
-
+    
     public submitEckIdBatchRequest1()
     {
     }
-
+    
     public submitEckIdBatchRequest1(SubmitEckIdBatchRequest submitEckIdBatchRequest)
     {
         this.submitEckIdBatchRequest = submitEckIdBatchRequest;
@@ -949,112 +1083,132 @@ public partial class submitEckIdBatchRequest1
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
-public partial class submitEckIdBatchResponse1
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class submitEckIdBatchResponse
 {
-
-    [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://id.school/eck/schemas/v1_0", Order = 0)]
-    public SubmitEckIdBatchResponse submitEckIdBatchResponse;
-
-    public submitEckIdBatchResponse1()
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://id.school/eck/schemas/v1_0", Order=0)]
+    public SubmitBatchResponse submitBatchResponse;
+    
+    public submitEckIdBatchResponse()
     {
     }
-
-    public submitEckIdBatchResponse1(SubmitEckIdBatchResponse submitEckIdBatchResponse)
+    
+    public submitEckIdBatchResponse(SubmitBatchResponse submitBatchResponse)
     {
-        this.submitEckIdBatchResponse = submitEckIdBatchResponse;
+        this.submitBatchResponse = submitBatchResponse;
     }
 }
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
-public partial class retrieveEckIdBatchRequest1
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class submitStampseudonymBatchRequest
 {
-
-    [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://id.school/eck/schemas/v1_0", Order = 0)]
-    public RetrieveEckIdBatchRequest retrieveEckIdBatchRequest;
-
-    public retrieveEckIdBatchRequest1()
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Name="submitStampseudonymBatchRequest", Namespace="http://id.school/eck/schemas/v1_0", Order=0)]
+    [System.Xml.Serialization.XmlArrayItemAttribute("hpgnList", IsNullable=false)]
+    public ListedHpgn[] submitStampseudonymBatchRequest1;
+    
+    public submitStampseudonymBatchRequest()
     {
     }
-
-    public retrieveEckIdBatchRequest1(RetrieveEckIdBatchRequest retrieveEckIdBatchRequest)
+    
+    public submitStampseudonymBatchRequest(ListedHpgn[] submitStampseudonymBatchRequest1)
     {
-        this.retrieveEckIdBatchRequest = retrieveEckIdBatchRequest;
+        this.submitStampseudonymBatchRequest1 = submitStampseudonymBatchRequest1;
     }
 }
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
-public partial class retrieveEckIdBatchResponse1
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class retrieveBatchRequest1
 {
-
-    [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://id.school/eck/schemas/v1_0", Order = 0)]
-    public RetrieveEckIdBatchResponse retrieveEckIdBatchResponse;
-
-    public retrieveEckIdBatchResponse1()
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://id.school/eck/schemas/v1_0", Order=0)]
+    public RetrieveBatchRequest retrieveBatchRequest;
+    
+    public retrieveBatchRequest1()
     {
     }
-
-    public retrieveEckIdBatchResponse1(RetrieveEckIdBatchResponse retrieveEckIdBatchResponse)
+    
+    public retrieveBatchRequest1(RetrieveBatchRequest retrieveBatchRequest)
     {
-        this.retrieveEckIdBatchResponse = retrieveEckIdBatchResponse;
+        this.retrieveBatchRequest = retrieveBatchRequest;
     }
 }
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
-public partial class replaceEckIdRequest1
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class retrieveBatchResponse1
 {
-
-    [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://id.school/eck/schemas/v1_0", Order = 0)]
-    public ReplaceEckIdRequest replaceEckIdRequest;
-
-    public replaceEckIdRequest1()
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://id.school/eck/schemas/v1_0", Order=0)]
+    public RetrieveBatchResponse retrieveBatchResponse;
+    
+    public retrieveBatchResponse1()
     {
     }
-
-    public replaceEckIdRequest1(ReplaceEckIdRequest replaceEckIdRequest)
+    
+    public retrieveBatchResponse1(RetrieveBatchResponse retrieveBatchResponse)
     {
-        this.replaceEckIdRequest = replaceEckIdRequest;
+        this.retrieveBatchResponse = retrieveBatchResponse;
     }
 }
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
-public partial class replaceEckIdResponse1
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class replaceStampseudonymRequest1
 {
-
-    [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://id.school/eck/schemas/v1_0", Order = 0)]
-    public ReplaceEckIdResponse replaceEckIdResponse;
-
-    public replaceEckIdResponse1()
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://id.school/eck/schemas/v1_0", Order=0)]
+    public ReplaceStampseudonymRequest replaceStampseudonymRequest;
+    
+    public replaceStampseudonymRequest1()
     {
     }
-
-    public replaceEckIdResponse1(ReplaceEckIdResponse replaceEckIdResponse)
+    
+    public replaceStampseudonymRequest1(ReplaceStampseudonymRequest replaceStampseudonymRequest)
     {
-        this.replaceEckIdResponse = replaceEckIdResponse;
+        this.replaceStampseudonymRequest = replaceStampseudonymRequest;
     }
 }
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+public partial class replaceStampseudonymResponse1
+{
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://id.school/eck/schemas/v1_0", Order=0)]
+    public ReplaceStampseudonymResponse replaceStampseudonymResponse;
+    
+    public replaceStampseudonymResponse1()
+    {
+    }
+    
+    public replaceStampseudonymResponse1(ReplaceStampseudonymResponse replaceStampseudonymResponse)
+    {
+        this.replaceStampseudonymResponse = replaceStampseudonymResponse;
+    }
+}
+
+[System.Diagnostics.DebuggerStepThroughAttribute()]
+[System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
 public partial class retrieveChainsRequest1
 {
-
-    [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://id.school/eck/schemas/v1_0", Order = 0)]
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://id.school/eck/schemas/v1_0", Order=0)]
     public RetrieveChainsRequest retrieveChainsRequest;
-
+    
     public retrieveChainsRequest1()
     {
     }
-
+    
     public retrieveChainsRequest1(RetrieveChainsRequest retrieveChainsRequest)
     {
         this.retrieveChainsRequest = retrieveChainsRequest;
@@ -1063,18 +1217,18 @@ public partial class retrieveChainsRequest1
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
 public partial class retrieveChainsResponse
 {
-
-    [System.ServiceModel.MessageBodyMemberAttribute(Name = "retrieveChainsResponse", Namespace = "http://id.school/eck/schemas/v1_0", Order = 0)]
-    [System.Xml.Serialization.XmlArrayItemAttribute("chain", IsNullable = false)]
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Name="retrieveChainsResponse", Namespace="http://id.school/eck/schemas/v1_0", Order=0)]
+    [System.Xml.Serialization.XmlArrayItemAttribute("chain", IsNullable=false)]
     public Chain[] retrieveChainsResponse1;
-
+    
     public retrieveChainsResponse()
     {
     }
-
+    
     public retrieveChainsResponse(Chain[] retrieveChainsResponse1)
     {
         this.retrieveChainsResponse1 = retrieveChainsResponse1;
@@ -1083,17 +1237,17 @@ public partial class retrieveChainsResponse
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
 public partial class retrieveSectorsRequest1
 {
-
-    [System.ServiceModel.MessageBodyMemberAttribute(Namespace = "http://id.school/eck/schemas/v1_0", Order = 0)]
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Namespace="http://id.school/eck/schemas/v1_0", Order=0)]
     public RetrieveSectorsRequest retrieveSectorsRequest;
-
+    
     public retrieveSectorsRequest1()
     {
     }
-
+    
     public retrieveSectorsRequest1(RetrieveSectorsRequest retrieveSectorsRequest)
     {
         this.retrieveSectorsRequest = retrieveSectorsRequest;
@@ -1102,18 +1256,18 @@ public partial class retrieveSectorsRequest1
 
 [System.Diagnostics.DebuggerStepThroughAttribute()]
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-[System.ServiceModel.MessageContractAttribute(IsWrapped = false)]
+[System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
 public partial class retrieveSectorsResponse
 {
-
-    [System.ServiceModel.MessageBodyMemberAttribute(Name = "retrieveSectorsResponse", Namespace = "http://id.school/eck/schemas/v1_0", Order = 0)]
-    [System.Xml.Serialization.XmlArrayItemAttribute("sector", IsNullable = false)]
+    
+    [System.ServiceModel.MessageBodyMemberAttribute(Name="retrieveSectorsResponse", Namespace="http://id.school/eck/schemas/v1_0", Order=0)]
+    [System.Xml.Serialization.XmlArrayItemAttribute("sector", IsNullable=false)]
     public Sector[] retrieveSectorsResponse1;
-
+    
     public retrieveSectorsResponse()
     {
     }
-
+    
     public retrieveSectorsResponse(Sector[] retrieveSectorsResponse1)
     {
         this.retrieveSectorsResponse1 = retrieveSectorsResponse1;
@@ -1129,61 +1283,71 @@ public interface SchoolIDChannel : SchoolID, System.ServiceModel.IClientChannel
 [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
 public partial class SchoolIDClient : System.ServiceModel.ClientBase<SchoolID>, SchoolID
 {
-
+    
     public SchoolIDClient()
     {
     }
-
-    public SchoolIDClient(string endpointConfigurationName) :
+    
+    public SchoolIDClient(string endpointConfigurationName) : 
             base(endpointConfigurationName)
     {
     }
-
-    public SchoolIDClient(string endpointConfigurationName, string remoteAddress) :
+    
+    public SchoolIDClient(string endpointConfigurationName, string remoteAddress) : 
             base(endpointConfigurationName, remoteAddress)
     {
     }
-
-    public SchoolIDClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) :
+    
+    public SchoolIDClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
             base(endpointConfigurationName, remoteAddress)
     {
     }
-
-    public SchoolIDClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) :
+    
+    public SchoolIDClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
             base(binding, remoteAddress)
     {
     }
-
+    
     public pingResponse1 ping(pingRequest1 request)
     {
         return base.Channel.ping(request);
     }
-
+    
+    public retrieveStampseudonymResponse1 retrieveStampseudonym(retrieveStampseudonymRequest1 request)
+    {
+        return base.Channel.retrieveStampseudonym(request);
+    }
+    
     public retrieveEckIdResponse1 retrieveEckId(retrieveEckIdRequest1 request)
     {
         return base.Channel.retrieveEckId(request);
     }
-
-    public submitEckIdBatchResponse1 submitEckIdBatch(submitEckIdBatchRequest1 request)
+    
+    public submitEckIdBatchResponse submitEckIdBatch(submitEckIdBatchRequest1 request)
     {
         return base.Channel.submitEckIdBatch(request);
     }
-
-    public retrieveEckIdBatchResponse1 retrieveEckIdBatch(retrieveEckIdBatchRequest1 request)
+    
+    public submitEckIdBatchResponse submitStampseudonymBatch(submitStampseudonymBatchRequest request)
     {
-        return base.Channel.retrieveEckIdBatch(request);
+        return base.Channel.submitStampseudonymBatch(request);
     }
-
-    public replaceEckIdResponse1 replaceEckId(replaceEckIdRequest1 request)
+    
+    public retrieveBatchResponse1 retrieveBatch(retrieveBatchRequest1 request)
     {
-        return base.Channel.replaceEckId(request);
+        return base.Channel.retrieveBatch(request);
     }
-
+    
+    public replaceStampseudonymResponse1 replaceStampseudonym(replaceStampseudonymRequest1 request)
+    {
+        return base.Channel.replaceStampseudonym(request);
+    }
+    
     public retrieveChainsResponse retrieveChains(retrieveChainsRequest1 request)
     {
         return base.Channel.retrieveChains(request);
     }
-
+    
     public retrieveSectorsResponse retrieveSectors(retrieveSectorsRequest1 request)
     {
         return base.Channel.retrieveSectors(request);

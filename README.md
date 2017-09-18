@@ -5,6 +5,7 @@
 De Nummervoorziening - C#.NET Client Reference Application is een client implementatie in C#.NET dat middels diverse unit tests de communicatie met de Nummervoorziening applicatie binnen de Educatieve Contentketen aantoont. De applicatie is opgezet als een Visual C# Library aangevuld met een UnitTest Application en een Console Application. De C#.NET Client Reference Application implementeert globaal de volgende functionaliteiten;
  * Globale communicatie met de Nummervoorziening applicatie (PingOperation t.b.v. het vaststellen van een correcte verbinding met en werking van de Nummervoorziening applicatie).
  * Genereren van een eerste niveau hash van een PGN middels het SCrypt hashing algoritme.
+ * Het opvragen van een Stampseudoniem bij de Nummervoorziening op basis van een gehashte PGN (RetrieveStampseudoniemOperation).
  * Het opvragen van een ECK-ID bij de Nummervoorziening applicatie op basis van een gehashte PGN, een keten-id en sector-id (RetrieveEckIdOperation).
  * Het opvragen van ondersteunde ketens bij de Nummervoorziening applicatie (RetrieveChainsOperation).
  * Het opvragen van ondersteunde sectoren bij de Nummervoorziening applicatie (RetrieveSectorsOperation).
@@ -15,7 +16,7 @@ De Nummervoorziening - C#.NET Client Reference Application is een client impleme
 Voor alle bovenstaande functionaliteiten wordt gebruik gemaakt van SOAP Messaging tussen de verschillende actoren. Authenticatie vindt plaats middels PKI-Certificaten die over TLS worden uitgewisseld. Aanvullende informatie over Nummervoorziening kan gevonden worden op de [Edukoppeling Wiki] van [Stichting Kennisnet].  
 
 ## Version
-0.1-20160414
+0.2-20170329
 
 ## Gebruikte Technologiën
 
@@ -54,6 +55,7 @@ De Client Reference Application communiceert met de Nummervoorziening applicatie
   * *RetrieveEckIdBatchOperation.cs*
   * *RetrieveEckIdOperation.cs*
   * *RetrieveSectorsOperation.cs*
+  * *RetrieveStampseudoniemOperation.cs*
   * *SubmitEckIdBatchOperation.cs*
   * **Resources**: Aanvullende bestanden ter ondersteuning van de Solution.
     * *schoolid.wsdl*: De WSDL welke is gebruikt als input voor de *svcutil.exe* utility.
@@ -73,6 +75,7 @@ De Client Reference Application communiceert met de Nummervoorziening applicatie
  * **RetrieveChainsOperationUnitTest.cs**: Voorbeeldcode voor het uitvoeren van een Retrieve Chains Operation: het ophalen van ondersteunde ketens in de Nummervoorziening applicatie.
  * **RetrieveEckIdOperationUnitTest.cs**: Voorbeeldcode voor het uitvoeren van een Retrieve Eck ID Operation: het ophalen van een enkele ECK ID in de Nummervoorziening applicatie op basis van een eerste niveau hash, keten id en sector id.
  * **RetrieveSectorsOperationUnitTest.cs**: Voorbeeldcode voor het uitvoeren van een Retrieve Sectors Operation: het ophalen van ondersteunde sectoren in de Nummervoorziening applicatie.
+ * **RetrieveStampseudoniemOperationUnitTest.cs**: Voorbeeldcode voor het uitvoeren van een Retrieve Stampseudoniem Operation: het ophalen van een enkele ECK ID in de Nummervoorziening applicatie op basis van een eerste niveau hash.
  * **ScryptUtilUnitTest.cs**: Voorbeeldcode voor het genereren van een eerste niveau hash op basis van een PGN.
 
 ## Applicatie Configuratie
@@ -110,6 +113,8 @@ Voor het omzetten van een WSDL naar gegenereerde code zijn uit de .NET toolset g
 svcutil.exe /mc /syncOnly schoolid.wsdl
 ```
 
+Omdat deze tool de wsaw:UsingAddressing property niet kent, is het wellicht nodig om deze eerst uit de WSDL te verwijderen voordat de svcutil successvol kan worden uitgevoerd. Het weglaten van deze property heeft functioneel geen consequenties, zolang de WCF configuratie juist is vormgegeven.
+
 In de applicatie is de gegenereerde class één-op-één overgenomen: SchoolID.cs, De methodes eindigend op een 1, waaronder pingRequest1, pingResponse1 etc., zijn door de svcutil aangemaakte wrapper objecten, Zo is de pingRequest1() aangemaakt als een wrapper voor het pingRequest object, en wordt gebruikt als payload voor de pingOperation. Als antwoord van de pingOperation wordt de pingResponse1 teruggegeven, dat de pingResponse object bevat.
 
 ## Installatie
@@ -124,10 +129,10 @@ De applicatie is gebouwd voor en getest onder Windows 8. Om de applicatie succes
 Client certificaten voor de communicatie met de Nummervoorziening applicatie op de Sandbox omgeving dient bij Kennisnet opgevraagd te worden. Voor de productieomgevingen is een valide PKI-Overheid certificaat vereist.
 
 ## Omgevingen
- * Acceptatieomgeving: https://service-a.id.school/eck/ws/201509
- * Sandboxomgeving: https://service-s.id.school/eck/ws/201509
- * Kwalificatieomgeving: https://service-q.id.school/eck/ws/201509
- * Productieomgeving: https://service.id.school/eck/ws/201509
+ * Acceptatieomgeving: https://service-a.id.school/eck/ws/201703
+ * Sandboxomgeving: https://service-s.id.school/eck/ws/201703
+ * Kwalificatieomgeving: https://service-q.id.school/eck/ws/201703
+ * Productieomgeving: https://service.id.school/eck/ws/201703
 
 ## Licenties
  * **Nummervoorziening - C#.NET Client Reference Application**: Apache License, Version 2.0.

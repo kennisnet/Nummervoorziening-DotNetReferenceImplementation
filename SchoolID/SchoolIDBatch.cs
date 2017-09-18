@@ -65,7 +65,7 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
         /// Sets the Dictionary with indexes of passed hashed PGN as keys and School IDs as values
         /// </summary>
         /// <param name="successList">ListedEckIdSuccess array with indexes of passed hashed PGN as keys and School IDs as values</param>
-        public void setSuccessList(ListedEckIdSuccess[] successList)
+        public void setSuccessList(ListedEntitySuccess[] successList)
         {
             setSuccessList(listedEckIdSuccessToDictionary(successList));
         }
@@ -84,7 +84,7 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
         /// Sets the Dictionary with indexes of passed hashed PGN as keys and error messages as values
         /// </summary>
         /// <param name="failureList">ListedEckIdFailure array with indexes of passed hashed PGN as keys and error messages as values</param>
-        public void setFailedList(ListedEckIdFailure[] failureList)
+        public void setFailedList(ListedEntityFailure[] failureList)
         {
             setFailedList(listedEckIdFailureToDictionary(failureList));
         }
@@ -113,14 +113,14 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
         /// </summary>
         /// <param name="successList">Array of ListedEckIdSuccess</param>
         /// <returns>Dictionary</returns>
-        private Dictionary<int, string> listedEckIdSuccessToDictionary(ListedEckIdSuccess[] successList)
+        private Dictionary<int, string> listedEckIdSuccessToDictionary(ListedEntitySuccess[] successList)
         {
             Dictionary<int, string> successDictionary = new Dictionary<int, string>();
             if (successList != null)
             {
-                foreach (ListedEckIdSuccess successEntry in successList)
+                foreach (ListedEntitySuccess successEntry in successList)
                 {
-                    successDictionary.Add(successEntry.index, successEntry.eckId.Value);
+                    successDictionary.Add(successEntry.index, successEntry.value);
                 }
             }
 
@@ -132,12 +132,12 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
         /// </summary>
         /// <param name="failureList">Array of ListedEckIdFailure</param>
         /// <returns>Dictionary</returns>
-        private Dictionary<int, string> listedEckIdFailureToDictionary(ListedEckIdFailure[] failureList)
+        private Dictionary<int, string> listedEckIdFailureToDictionary(ListedEntityFailure[] failureList)
         {
             Dictionary<int, string> failureDictionary = new Dictionary<int, string>();
             if (failureList != null)
             {
-                foreach (ListedEckIdFailure failureEntry in failureList)
+                foreach (ListedEntityFailure failureEntry in failureList)
                 {
                     failureDictionary.Add(failureEntry.index, failureEntry.errorMessage);
                 }

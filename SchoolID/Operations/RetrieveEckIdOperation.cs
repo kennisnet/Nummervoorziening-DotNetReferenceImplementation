@@ -21,14 +21,25 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
     /// <summary>
     /// This class reflects the RetrieveEckId operation of the Nummervoorziening service
     /// </summary>
-    class RetrieveEckIdOperation
+    public class RetrieveEckIdOperation
     {
-        private SchoolIDClient schoolIDClient;
-        private RetrieveEckIdRequest retrieveEckIdRequest = new RetrieveEckIdRequest();
-        private retrieveEckIdRequest1 retrieveEckIdRequestWrapper = new retrieveEckIdRequest1();
+        /// <summary>
+        /// The SchoolID object for communication with the service
+        /// </summary>
+        private readonly SchoolIDClient schoolIDClient;
 
         /// <summary>
-        /// Sets up the RetrieveEckIdOperation object with a reference to the SchoolIDClient proxy class
+        /// The actual Retrieve Eck Id Request object
+        /// </summary>
+        private readonly RetrieveEckIdRequest retrieveEckIdRequest = new RetrieveEckIdRequest();
+
+        /// <summary>
+        /// The wrapper class containing the request to be send to the service
+        /// </summary>
+        private readonly retrieveEckIdRequest1 retrieveEckIdRequestWrapper = new retrieveEckIdRequest1();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RetrieveEckIdOperation" /> class with a reference to the ShoolIDClient proxy class
         /// </summary>
         /// <param name="schoolIDClient">An initialized SchoolIDClient proxy class</param>
         public RetrieveEckIdOperation(SchoolIDClient schoolIDClient)
@@ -39,21 +50,21 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
         /// <summary>
         /// Provides the parameters as a RetrieveEckIdRequest to the Nummervoorziening service, fetches the RetrieveEckIdResponse and returns the ECK ID.
         /// </summary>
-        /// <param name="input">The scrypt hashed PGN</param>
+        /// <param name="stampseudonym">The Stampseudonym</param>
         /// <param name="chainGuid">A valid chain id</param>
         /// <param name="sectorGuid">A valid sector id</param>
         /// <returns>The generated School ID</returns>
-        public string GetEckId(string input, string chainGuid, string sectorGuid)
+        public string GetEckId(string stampseudonym, string chainGuid, string sectorGuid)
         {
-            HPgn hpgn = new HPgn();
-            hpgn.Value = input;
+            Stampseudonym stampseudonymWrapped = new Stampseudonym();
+            stampseudonymWrapped.Value = stampseudonym;
 
-            retrieveEckIdRequest.hpgn = hpgn;
-            retrieveEckIdRequest.chainId = chainGuid;
-            retrieveEckIdRequest.sectorId = sectorGuid;
-            retrieveEckIdRequestWrapper.retrieveEckIdRequest = retrieveEckIdRequest;
+            this.retrieveEckIdRequest.stampseudonym = stampseudonymWrapped;
+            this.retrieveEckIdRequest.chainId = chainGuid;
+            this.retrieveEckIdRequest.sectorId = sectorGuid;
+            this.retrieveEckIdRequestWrapper.retrieveEckIdRequest = this.retrieveEckIdRequest;
 
-            retrieveEckIdResponse1 retrieveEckIdResponseWrapper = schoolIDClient.retrieveEckId(retrieveEckIdRequestWrapper);
+            retrieveEckIdResponse1 retrieveEckIdResponseWrapper = this.schoolIDClient.retrieveEckId(this.retrieveEckIdRequestWrapper);
             RetrieveEckIdResponse retrieveEckIdResponse = retrieveEckIdResponseWrapper.retrieveEckIdResponse;
 
             EckId eckId = retrieveEckIdResponse.eckId;

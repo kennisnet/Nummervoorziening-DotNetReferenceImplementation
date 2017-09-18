@@ -16,28 +16,49 @@ limitations under the License.
 */
 #endregion
 
-using System.ServiceModel;
-using System.ServiceModel.Channels;
-using System.Threading;
-using System.Xml;
-using System.Xml.XPath;
-
 namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
 {
-    class RetrieveEckIdBatchOperation
-    {
-        private SchoolIDClient schoolIDClient;
-        private RetrieveEckIdBatchRequest retrieveEckIdBatchRequest = new RetrieveEckIdBatchRequest();
-        private retrieveEckIdBatchRequest1 retrieveEckIdBatchRequestWrapper = new retrieveEckIdBatchRequest1();
+    using System.ServiceModel;
+    using System.ServiceModel.Channels;
+    using System.Threading;
+    using System.Xml;
+    using System.Xml.XPath;
 
+    /// <summary>
+    /// This class reflects the Retrieve Batch operation of the Nummervoorziening service
+    /// </summary>
+    public class RetrieveBatchOperation
+    {
+        /// <summary>
+        /// The SchoolID object for communication with the service
+        /// </summary>
+        private SchoolIDClient schoolIDClient;
+
+        /// <summary>
+        /// The actual Retrieve Batch Request object
+        /// </summary>
+        private readonly RetrieveBatchRequest retrieveBatchRequest = new RetrieveBatchRequest();
+
+        /// <summary>
+        /// The wrapper class containing the request to be send to the service
+        /// </summary>
+        private readonly retrieveBatchRequest1 retrieveBatchRequestWrapper = new retrieveBatchRequest1();
+
+        /// <summary>
+        /// Amount of times to try to retrieve a batch before failing
+        /// </summary>
         private int BATCH_RETRIEVE_ATTEMPTS_COUNT = 10;
+
+        /// <summary>
+        /// Amount of time in milliseconds to wait before retrying to fetch a batch
+        /// </summary>
         private int RETRIEVE_SCHOOL_ID_BATCH_TIMEOUT = 25000;
 
         /// <summary>
-        /// Sets up the RetrieveSectorsOperation object with a reference to the SchoolIDClient proxy class
+        /// Initializes a new instance of the <see cref="RetrieveBatchOperation" /> class with a reference to the ShoolIDClient proxy class
         /// </summary>
         /// <param name="schoolIDClient">An initialized SchoolIDClient proxy class</param>
-        public RetrieveEckIdBatchOperation(SchoolIDClient schoolIDClient)
+        public RetrieveBatchOperation(SchoolIDClient schoolIDClient)
         {
             this.schoolIDClient = schoolIDClient;
         }
@@ -50,40 +71,41 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
         public SchoolIDBatch RetrieveBatch(string batchIdentifier)
         {
             SchoolIDBatch schoolIdBatch = new SchoolIDBatch();
-            retrieveEckIdBatchRequest.batchIdentifier = new BatchIdentifier();
-            retrieveEckIdBatchRequest.batchIdentifier.Value = batchIdentifier;
-            retrieveEckIdBatchRequestWrapper.retrieveEckIdBatchRequest = retrieveEckIdBatchRequest;
+            this.retrieveBatchRequest.batchIdentifier = new BatchIdentifier();
+            this.retrieveBatchRequest.batchIdentifier.Value = batchIdentifier;
+            this.retrieveBatchRequestWrapper.retrieveBatchRequest = this.retrieveBatchRequest;
             
             // Try to retrieve the Batch, retry if it is not ready yet (a FaultException will be thrown)
-            for (int i = 0; i < BATCH_RETRIEVE_ATTEMPTS_COUNT; i++)
+            for (int i = 0; i < this.BATCH_RETRIEVE_ATTEMPTS_COUNT; i++)
             {
-                Thread.Sleep(RETRIEVE_SCHOOL_ID_BATCH_TIMEOUT);
+                Thread.Sleep(this.RETRIEVE_SCHOOL_ID_BATCH_TIMEOUT);
 
                 try
                 {
-                    retrieveEckIdBatchResponse1 retrieveEckIdBatchResponseWrapper =
-                        schoolIDClient.retrieveEckIdBatch(retrieveEckIdBatchRequestWrapper);
+                    retrieveBatchResponse1 retrieveBatchResponseWrapper =
+                        this.schoolIDClient.retrieveBatch(this.retrieveBatchRequestWrapper);
 
-                    RetrieveEckIdBatchResponse retrieveEckIdBatchResponse =
-                        retrieveEckIdBatchResponseWrapper.retrieveEckIdBatchResponse;
+                    RetrieveBatchResponse retrieveBatchResponse =
+                        retrieveBatchResponseWrapper.retrieveBatchResponse;
 
-                    ListedEckIdSuccess[] successListedEckId = retrieveEckIdBatchResponse.success;
-                    ListedEckIdFailure[] failureListedEckId = retrieveEckIdBatchResponse.failed;
+                    ListedEntitySuccess[] successListed = retrieveBatchResponse.success;
+                    ListedEntityFailure[] failureListed = retrieveBatchResponse.failed;
 
-                    schoolIdBatch.setSuccessList(retrieveEckIdBatchResponse.success);
-                    schoolIdBatch.setFailedList(retrieveEckIdBatchResponse.failed);
+                    schoolIdBatch.setSuccessList(retrieveBatchResponse.success);
+                    schoolIdBatch.setFailedList(retrieveBatchResponse.failed);
 
                     break;
                 }
                 catch (FaultException fe)
                 {
                     // Exception is thrown, retrieve the responsible actor to verify the cause
-                    switch(GetFaultActorFromException(fe))
+                    switch (this.GetFaultActorFromException(fe))
                     {
                         // NotFinishedException & TemporaryBlockedException: Wait for the cooling down period to pass, and try again
                         case "NotFinishedException":
                         case "TemporaryBlockedException":
                             break;
+
                         // ContentAlreadyRetrievedException & ContentRemovedException: No use in trying again, so break the loop                
                         case "ContentAlreadyRetrievedException":                            
                         case "ContentRemovedException":
@@ -123,7 +145,7 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
                 }
             }
 
-            return "";
+            return string.Empty;
         }
     }
 }

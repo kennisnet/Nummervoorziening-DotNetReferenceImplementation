@@ -16,27 +16,32 @@ limitations under the License.
 */
 #endregion
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NVA_DotNetReferenceImplementation.SchoolID;
-
 namespace UnitTestProject
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NVA_DotNetReferenceImplementation.SchoolID;
+
+    /// <summary>
+    /// Class to instantiate the unit tests
+    /// </summary>
     [TestClass]
     public abstract class AbstractUnitTest
     {
+        /// <summary>
+        /// Object to store the proxy class which is used to communicate with the Nummervoorziening service
+        /// </summary>
         protected SchoolIDServiceUtil schoolIDServiceUtil;
 
         /// <summary>
         /// Setups Service Util for working with Nummervoorziening service and disables SSL check (for now).
         /// </summary>
-        [TestInitialize()]
+        [TestInitialize]
         public void initializeSchoolIDClientAndDisableSSL()
         {
             // Disable SSL checks for now
-            System.Net.ServicePointManager.ServerCertificateValidationCallback =
-                ((sender, certificate, chain, sslPolicyErrors) => true);
+            System.Net.ServicePointManager.ServerCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
             
-            schoolIDServiceUtil = SchoolIDServiceUtil.Instance;
+            this.schoolIDServiceUtil = SchoolIDServiceUtil.Instance;
         }
     }
 }

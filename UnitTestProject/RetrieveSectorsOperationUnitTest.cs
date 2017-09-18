@@ -16,11 +16,10 @@ limitations under the License.
 */
 #endregion
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NVA_DotNetReferenceImplementation.SchoolID.Operations;
-
 namespace UnitTestProject
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+
     /// <summary>
     /// Demonstrates correct usage of the "Retrieve Sectors" operation.
     /// </summary>
@@ -33,7 +32,7 @@ namespace UnitTestProject
         [TestMethod]
         public void GetSectorsTest()
         {
-            Sector[] sectors = schoolIDServiceUtil.GetSectors();
+            Sector[] sectors = this.schoolIDServiceUtil.GetSectors();
 
             Assert.IsNotNull(sectors);
             Assert.IsTrue(sectors.Length > 0);

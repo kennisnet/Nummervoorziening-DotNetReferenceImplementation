@@ -16,22 +16,32 @@ limitations under the License.
 */
 #endregion
 
-using System;
-using System.ServiceModel;
-
 namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
 {
+    using System;
+
     /// <summary>
     /// This class reflects the Ping operation of the Nummervoorziening service
     /// </summary>
-    class PingOperation
+    public class PingOperation
     {
-        private SchoolIDClient schoolIDClient;
-        private PingRequest pingRequest = new PingRequest();
-        private pingRequest1 pingRequestWrapper = new pingRequest1();
+        /// <summary>
+        /// The SchoolID object for communication with the service
+        /// </summary>
+        private readonly SchoolIDClient schoolIDClient;
 
         /// <summary>
-        /// Sets up the PingOperation object with a reference to the SchoolIDClient proxy class
+        /// The actual Ping Request object
+        /// </summary>
+        private readonly PingRequest pingRequest = new PingRequest();
+
+        /// <summary>
+        /// The wrapper class containing the request to be send to the service
+        /// </summary>
+        private readonly pingRequest1 pingRequestWrapper = new pingRequest1();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PingOperation" /> class with a reference to the ShoolIDClient proxy class
         /// </summary>
         /// <param name="schoolIDClient">An initialized SchoolIDClient proxy class</param>
         public PingOperation(SchoolIDClient schoolIDClient)
@@ -47,8 +57,8 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
         {
             try
             {
-                pingRequestWrapper.pingRequest = pingRequest;
-                pingResponse1 pingResponseWrapper = schoolIDClient.ping(pingRequestWrapper);
+                this.pingRequestWrapper.pingRequest = this.pingRequest;
+                pingResponse1 pingResponseWrapper = this.schoolIDClient.ping(this.pingRequestWrapper);
                 PingResponse pingReponse = pingResponseWrapper.pingResponse;
                 return pingReponse.available;
             }
@@ -69,8 +79,8 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
         {           
             try
             {
-                pingRequestWrapper.pingRequest = pingRequest;
-                pingResponse1 pingResponseWrapper = schoolIDClient.ping(pingRequestWrapper);
+                this.pingRequestWrapper.pingRequest = this.pingRequest;
+                pingResponse1 pingResponseWrapper = this.schoolIDClient.ping(this.pingRequestWrapper);
                 PingResponse pingReponse = pingResponseWrapper.pingResponse;
                 return pingReponse.systemTime;
             }
@@ -89,12 +99,12 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
         /// <returns>A string containing the version of the School ID service, or an empty string upon error</returns>
         public string GetSchoolIDVersion()
         {
-            string applicationVersion = "";
+            string applicationVersion = string.Empty;
 
             try
             {
-                pingRequestWrapper.pingRequest = pingRequest;
-                pingResponse1 pingResponseWrapper = schoolIDClient.ping(pingRequestWrapper);
+                this.pingRequestWrapper.pingRequest = this.pingRequest;
+                pingResponse1 pingResponseWrapper = this.schoolIDClient.ping(this.pingRequestWrapper);
                 PingResponse pingReponse = pingResponseWrapper.pingResponse;
                 applicationVersion = pingReponse.applicationVersion;
             }

@@ -21,14 +21,25 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
     /// <summary>
     /// This class reflects the RetrieveSectors operation of the Nummervoorziening service
     /// </summary>
-    class RetrieveSectorsOperation
+    public class RetrieveSectorsOperation
     {
-        private SchoolIDClient schoolIDClient;
-        private RetrieveSectorsRequest retrieveSectorsRequest = new RetrieveSectorsRequest();
-        private retrieveSectorsRequest1 retrieveSectorsRequestWrapper = new retrieveSectorsRequest1();
+        /// <summary>
+        /// The SchoolID object for communication with the service
+        /// </summary>
+        private readonly SchoolIDClient schoolIDClient;
 
         /// <summary>
-        /// Sets up the RetrieveSectorsOperation object with a reference to the SchoolIDClient proxy class
+        /// The actual Retrieve Sectors Request object
+        /// </summary>
+        private readonly RetrieveSectorsRequest retrieveSectorsRequest = new RetrieveSectorsRequest();
+
+        /// <summary>
+        /// The wrapper class containing the request to be send to the service
+        /// </summary>
+        private readonly retrieveSectorsRequest1 retrieveSectorsRequestWrapper = new retrieveSectorsRequest1();
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="RetrieveSectorsOperation" /> class with a reference to the ShoolIDClient proxy class
         /// </summary>
         /// <param name="schoolIDClient">An initialized SchoolIDClient proxy class</param>
         public RetrieveSectorsOperation(SchoolIDClient schoolIDClient)
@@ -42,8 +53,8 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
         /// <returns>Sector[] containing active sectors</returns>
         public Sector[] GetSectors()
         {
-            retrieveSectorsRequestWrapper.retrieveSectorsRequest = retrieveSectorsRequest;
-            retrieveSectorsResponse retrieveSectorsReponseWrapper = schoolIDClient.retrieveSectors(retrieveSectorsRequestWrapper);
+            this.retrieveSectorsRequestWrapper.retrieveSectorsRequest = this.retrieveSectorsRequest;
+            retrieveSectorsResponse retrieveSectorsReponseWrapper = this.schoolIDClient.retrieveSectors(this.retrieveSectorsRequestWrapper);
             return retrieveSectorsReponseWrapper.retrieveSectorsResponse1;
         }
     }

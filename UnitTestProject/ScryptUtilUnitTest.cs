@@ -16,24 +16,26 @@ limitations under the License.
 */
 #endregion
 
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using NVA_DotNetReferenceImplementation.SCrypter;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
 namespace UnitTestProject
 {
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using NVA_DotNetReferenceImplementation.SCrypter;
+
     /// <summary>
     /// Demonstrates correct usage of the ScryptUtil class.
     /// </summary>
     [TestClass]
     public class ScryptUtilUnitTest : AbstractUnitTest
     {
-        string validStudentPgn = "063138219";
-        string validTeacherPgn = "20DP teacher@school.com";
+        /// <summary>
+        /// Standard student pgn to use for the tests
+        /// </summary>
+        private string validStudentPgn = "063138219";
+
+        /// <summary>
+        /// Standard teacher pgn to use
+        /// </summary>
+        private string validTeacherPgn = "20DP teacher@school.com";
 
         /// <summary>
         /// Tests that generated scrypt hash in hexadecimal notation is correct.
@@ -43,7 +45,7 @@ namespace UnitTestProject
         {
             string expectedValue = "9735dfd2235eaeb5f0300886bcc99c82ffc1d6420c4e0bde8de7218def2135fa";
             ScryptUtil scryptUtil = new ScryptUtil();
-            Assert.AreEqual(expectedValue, scryptUtil.GenerateHexHash(validStudentPgn));
+            Assert.AreEqual(expectedValue, scryptUtil.GenerateHexHash(this.validStudentPgn));
         }
 
         /// <summary>
@@ -54,7 +56,7 @@ namespace UnitTestProject
         {
             string expectedValue = "0b870ff044775ef0360655c40d5b284b7e3ae2b72207a6894794d787eb019e60";
             ScryptUtil scryptUtil = new ScryptUtil();
-            Assert.AreEqual(expectedValue, scryptUtil.GenerateHexHash(validTeacherPgn));
+            Assert.AreEqual(expectedValue, scryptUtil.GenerateHexHash(this.validTeacherPgn));
         }
 
         /// <summary>
