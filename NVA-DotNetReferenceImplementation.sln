@@ -1,11 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptSharp", "CryptSharp_2_1_0\CryptSharp\CryptSharp.csproj", "{5E33051D-1471-4E5A-B94E-BD0E8FFFF99E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SchoolID", "SchoolID\SchoolID.csproj", "{05381B19-A711-48D3-A62A-29B8CE1DEBE8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EckID", "EckID\EckID.csproj", "{05381B19-A711-48D3-A62A-29B8CE1DEBE8}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication", "ConsoleApplication\ConsoleApplication.csproj", "{887E51BB-4F41-4270-85FD-9E33F24CE4AD}"
 EndProject

@@ -16,58 +16,54 @@ limitations under the License.
 */
 #endregion
 
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-/// <summary>
-/// Entity with information about generated in batch operation School IDs.
-/// </summary>
-namespace NVA_DotNetReferenceImplementation.SchoolID
+namespace EckID
 {
-    public class SchoolIDBatch
+    /// <summary>
+    /// Entity with information about generated in batch operation Eck IDs.
+    /// </summary>
+    public class EckIDBatch
     {
-        private Dictionary<int, string> successList;
+        private Dictionary<int, string> _successList;
 
-        private Dictionary<int, string> failureList;
+        private Dictionary<int, string> _failureList;
 
         /// <summary>
         /// Standard constructor
         /// </summary>
-        public SchoolIDBatch()
+        public EckIDBatch()
         {
 
         }
 
         /// <summary>
-        /// Constructor for creating a SchoolIDBatch with Dictionary formatted lists
+        /// Constructor for creating a EckIDBatch with Dictionary formatted lists
         /// </summary>
         /// <param name="successList">List of succesful generated EckIds</param>
         /// <param name="failedList">List of indices for which generation of EckId failed</param>
-        public SchoolIDBatch(Dictionary<int, string> successList, Dictionary<int, string> failedList)
+        public EckIDBatch(Dictionary<int, string> successList, Dictionary<int, string> failedList)
         {
-            setSuccessList(successList);
-            setFailedList(failedList);
+            SetSuccessList(successList);
+            SetFailedList(failedList);
         }
 
         /// <summary>
         /// Sets the Dictionary with indexes of passed hashed PGN as keys and School IDs as values
         /// </summary>
         /// <param name="successList">Dictionary with indexes of passed hashed PGN as keys and School IDs as values</param>
-        public void setSuccessList(Dictionary<int, string> successList)
+        public void SetSuccessList(Dictionary<int, string> successList)
         {
-            this.successList = successList;
+            _successList = successList;
         }
 
         /// <summary>
         /// Sets the Dictionary with indexes of passed hashed PGN as keys and School IDs as values
         /// </summary>
         /// <param name="successList">ListedEckIdSuccess array with indexes of passed hashed PGN as keys and School IDs as values</param>
-        public void setSuccessList(ListedEntitySuccess[] successList)
+        public void SetSuccessList(ListedEntitySuccess[] successList)
         {
-            setSuccessList(listedEckIdSuccessToDictionary(successList));
+            SetSuccessList(listedEckIdSuccessToDictionary(successList));
         }
 
 
@@ -75,18 +71,18 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
         /// Sets the Dictionary with indexes of passed hashed PGN as keys and error messages as values
         /// </summary>
         /// <param name="failedList">Dictionary with indexes of passed hashed PGN as keys and error messages as values</param>
-        public void setFailedList(Dictionary<int, string> failedList)
+        public void SetFailedList(Dictionary<int, string> failedList)
         {
-            this.failureList = failedList;
+            _failureList = failedList;
         }
 
         /// <summary>
         /// Sets the Dictionary with indexes of passed hashed PGN as keys and error messages as values
         /// </summary>
         /// <param name="failureList">ListedEckIdFailure array with indexes of passed hashed PGN as keys and error messages as values</param>
-        public void setFailedList(ListedEntityFailure[] failureList)
+        public void SetFailedList(ListedEntityFailure[] failureList)
         {
-            setFailedList(listedEckIdFailureToDictionary(failureList));
+            SetFailedList(listedEckIdFailureToDictionary(failureList));
         }
 
 
@@ -94,18 +90,18 @@ namespace NVA_DotNetReferenceImplementation.SchoolID
         /// Gets the Dictionary with indexes of passed hashed PGN as keys and School IDs as values
         /// </summary>
         /// <returns>Dictionary with indexes of passed hashed PGN as keys and School IDs as values</returns>
-        public Dictionary<int, string> getSuccessList()
+        public Dictionary<int, string> GetSuccessList()
         {
-            return successList;
+            return _successList;
         }
 
         /// <summary>
         /// Gets the Dictionary with indexes of passed hashed PGN as keys and error messages as values
         /// </summary>
         /// <returns>Dictionary with indexes of passed hashed PGN as keys and error messages as values</returns>
-        public Dictionary<int, string> getFailedList()
+        public Dictionary<int, string> GetFailedList()
         {
-            return failureList;
+            return _failureList;
         }
         
         /// <summary>

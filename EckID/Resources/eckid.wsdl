@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <?xml-stylesheet type="text/xsl" href="wsdl-viewer.xsl"?>
 <!--
-    Copyright 2016, Stichting Kennisnet
+    Copyright 2017, Stichting Kennisnet
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -15,32 +15,32 @@
     See the License for the specific language governing permissions and
     limitations under the License.
 -->
-<wsdl:definitions name="SchoolID"
-                  targetNamespace="http://id.school/eck/schemas/v1_0"
-                  xmlns:sid="http://id.school/eck/schemas/v1_0"
+<wsdl:definitions name="EckID"
+                  targetNamespace="http://ketenid.nl/eck/schemas/v1_0"
+                  xmlns:sid="http://ketenid.nl/eck/schemas/v1_0"
                   xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
                   xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl"
                   xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/"
                   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
     <wsdl:documentation>
-        Service: SchoolID (Nummervoorziening)
-        Version: 0.5-20170419
-        Contact: Marc Fleischeuers (M.Fleischeuers@kennisnet.nl)
+        Service: EckID (Nummervoorziening)
+        Version: 0.7-20171229
+        Contact: Vincent Tedjakusuma (V.Tedjakusuma@kennisnet.nl)
 
         Uses WS:Addressing
     </wsdl:documentation>
 
     <wsdl:types>
-        <xsd:schema targetNamespace="http://id.school/eck/schemas/v1_0"
+        <xsd:schema targetNamespace="http://ketenid.nl/eck/schemas/v1_0"
                     elementFormDefault="qualified">
             <xsd:element name="pingRequest" type="sid:PingRequest"></xsd:element>
             <xsd:element name="pingResponse" type="sid:PingResponse"></xsd:element>
             <xsd:element name="retrieveStampseudonymRequest" type="sid:RetrieveStampseudonymRequest"></xsd:element>
             <xsd:element name="retrieveStampseudonymResponse" type="sid:RetrieveStampseudonymResponse"></xsd:element>
-            <xsd:element name="retrieveEckIdRequest" type="sid:RetrieveEckIdRequest"></xsd:element>
-            <xsd:element name="retrieveEckIdResponse" type="sid:RetrieveEckIdResponse"></xsd:element>
-            <xsd:element name="submitEckIdBatchRequest" type="sid:SubmitEckIdBatchRequest"></xsd:element>
+            <xsd:element name="retrieveEckIDRequest" type="sid:RetrieveEckIDRequest"></xsd:element>
+            <xsd:element name="retrieveEckIDResponse" type="sid:RetrieveEckIDResponse"></xsd:element>
+            <xsd:element name="submitEckIDBatchRequest" type="sid:SubmitEckIDBatchRequest"></xsd:element>
             <xsd:element name="submitBatchResponse" type="sid:SubmitBatchResponse"></xsd:element>
             <xsd:element name="submitStampseudonymBatchRequest" type="sid:SubmitStampseudonymBatchRequest"></xsd:element>
             <xsd:element name="retrieveBatchRequest" type="sid:RetrieveBatchRequest"></xsd:element>
@@ -104,7 +104,7 @@
                 </xsd:sequence>
             </xsd:complexType>
 
-            <xsd:complexType name="RetrieveEckIdRequest">
+            <xsd:complexType name="RetrieveEckIDRequest">
                 <xsd:annotation>
                     <xsd:documentation>Request parameters (het Stampseudoniem, keten ID en sector ID) voor het genereren van een ECK-ID.</xsd:documentation>
                 </xsd:annotation>
@@ -115,16 +115,16 @@
                 </xsd:sequence>
             </xsd:complexType>
 
-            <xsd:complexType name="RetrieveEckIdResponse">
+            <xsd:complexType name="RetrieveEckIDResponse">
                 <xsd:annotation>
                     <xsd:documentation>Response parameters verstuurd na het genereren van een ECK-ID. Wanneer de parameters voldoen aan de validaties en de verwerking goed is verlopen bevat het response het gegenereerde ECK-ID, anders wordt een Soap:fault teruggeven.</xsd:documentation>
                 </xsd:annotation>
                 <xsd:sequence>
-                    <xsd:element name="eckId" type="sid:EckId" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="eckId" type="sid:EckID" minOccurs="1" maxOccurs="1"></xsd:element>
                 </xsd:sequence>
             </xsd:complexType>
 
-            <xsd:complexType name="SubmitEckIdBatchRequest">
+            <xsd:complexType name="SubmitEckIDBatchRequest">
                 <xsd:annotation>
                     <xsd:documentation>Request parameters (lijst van Stampseudoniemen, een keten ID en een sector ID) voor het genereren van meerdere ECK-IDs in een enkele aanroep. </xsd:documentation>
                 </xsd:annotation>
@@ -293,7 +293,7 @@
                 </xsd:sequence>
             </xsd:complexType>
 
-            <xsd:complexType name="EckId">
+            <xsd:complexType name="EckID">
                 <xsd:annotation>
                     <xsd:documentation>Het ECK-ID.</xsd:documentation>
                 </xsd:annotation>
@@ -340,14 +340,14 @@
     <wsdl:message name="retrieveStampseudonymResponse">
         <wsdl:part name="retrieveStampseudonymResponse" element="sid:retrieveStampseudonymResponse"></wsdl:part>
     </wsdl:message>
-    <wsdl:message name="retrieveEckIdRequest">
-        <wsdl:part name="retrieveEckIdRequest" element="sid:retrieveEckIdRequest"></wsdl:part>
+    <wsdl:message name="retrieveEckIDRequest">
+        <wsdl:part name="retrieveEckIDRequest" element="sid:retrieveEckIDRequest"></wsdl:part>
     </wsdl:message>
-    <wsdl:message name="retrieveEckIdResponse">
-        <wsdl:part name="retrieveEckIdResponse" element="sid:retrieveEckIdResponse"></wsdl:part>
+    <wsdl:message name="retrieveEckIDResponse">
+        <wsdl:part name="retrieveEckIDResponse" element="sid:retrieveEckIDResponse"></wsdl:part>
     </wsdl:message>
-    <wsdl:message name="submitEckIdBatchRequest">
-        <wsdl:part name="submitEckIdBatchRequest" element="sid:submitEckIdBatchRequest"></wsdl:part>
+    <wsdl:message name="submitEckIDBatchRequest">
+        <wsdl:part name="submitEckIDBatchRequest" element="sid:submitEckIDBatchRequest"></wsdl:part>
     </wsdl:message>
     <wsdl:message name="submitStampseudonymBatchRequest">
         <wsdl:part name="submitStampseudonymBatchRequest" element="sid:submitStampseudonymBatchRequest"></wsdl:part>
@@ -380,7 +380,7 @@
         <wsdl:part name="retrieveSectorsResponse" element="sid:retrieveSectorsResponse"></wsdl:part>
     </wsdl:message>
 
-    <wsdl:portType name="SchoolID">
+    <wsdl:portType name="EckIDPort">
         <wsdl:documentation>Omschrijving van de Nummervoorziening interface.</wsdl:documentation>
 
         <wsdl:operation name="ping">
@@ -395,15 +395,15 @@
             <wsdl:output message="sid:retrieveStampseudonymResponse"/>
         </wsdl:operation>
 
-        <wsdl:operation name="retrieveEckId">
+        <wsdl:operation name="retrieveEckID">
             <wsdl:documentation>Service om op basis van de gegeven input een enkel ECK-ID te genereren.</wsdl:documentation>
-            <wsdl:input message="sid:retrieveEckIdRequest"/>
-            <wsdl:output message="sid:retrieveEckIdResponse"/>
+            <wsdl:input message="sid:retrieveEckIDRequest"/>
+            <wsdl:output message="sid:retrieveEckIDResponse"/>
         </wsdl:operation>
 
-        <wsdl:operation name="submitEckIdBatch">
-            <wsdl:documentation>Service om meerdere ECK-IDs te genereren op basis van een geindexeerde lijst. Als response wordt een batch identifier teruggegeven die kan worden gebruikt bij het aanroepen van de service retrieveBatch. De oorspronkelijke indices gebruikt als input van de submitEckIdBatch service worden hergebruikt voor het resultaat van de retrieveBatch service.</wsdl:documentation>
-            <wsdl:input message="sid:submitEckIdBatchRequest"></wsdl:input>
+        <wsdl:operation name="submitEckIDBatch">
+            <wsdl:documentation>Service om meerdere ECK-IDs te genereren op basis van een geindexeerde lijst. Als response wordt een batch identifier teruggegeven die kan worden gebruikt bij het aanroepen van de service retrieveBatch. De oorspronkelijke indices gebruikt als input van de submitEckIDBatch service worden hergebruikt voor het resultaat van de retrieveBatch service.</wsdl:documentation>
+            <wsdl:input message="sid:submitEckIDBatchRequest"></wsdl:input>
             <wsdl:output message="sid:submitBatchResponse"></wsdl:output>
         </wsdl:operation>
 
@@ -438,68 +438,68 @@
         </wsdl:operation>
     </wsdl:portType>
 
-    <wsdl:binding name="SchoolIDSoapBinding" type="sid:SchoolID">
+    <wsdl:binding name="EckIDSoapBinding" type="sid:EckIDPort">
         <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http" />
-        <!-- wsaw:UsingAddressing wsdl:required="true" / -->
+        <wsaw:UsingAddressing wsdl:required="true" />
 
         <wsdl:operation name="ping">
-            <soap:operation soapAction="http://id.school/eck/schemas/v1_0/ping" />
+            <soap:operation soapAction="http://ketenid.nl/eck/schemas/v1_0/ping" />
             <wsdl:input><soap:body use="literal" /></wsdl:input>
             <wsdl:output><soap:body use="literal" /></wsdl:output>
         </wsdl:operation>
 
         <wsdl:operation name="retrieveStampseudonym">
-            <soap:operation soapAction="http://id.school/eck/schemas/v1_0/retrieveStampseudonym" />
+            <soap:operation soapAction="http://ketenid.nl/eck/schemas/v1_0/retrieveStampseudonym" />
             <wsdl:input><soap:body use="literal" /></wsdl:input>
             <wsdl:output><soap:body use="literal" /></wsdl:output>
         </wsdl:operation>
 
-        <wsdl:operation name="retrieveEckId">
-            <soap:operation soapAction="http://id.school/eck/schemas/v1_0/retrieveEckId" />
+        <wsdl:operation name="retrieveEckID">
+            <soap:operation soapAction="http://ketenid.nl/eck/schemas/v1_0/retrieveEckID" />
             <wsdl:input><soap:body use="literal" /></wsdl:input>
             <wsdl:output><soap:body use="literal" /></wsdl:output>
         </wsdl:operation>
 
-        <wsdl:operation name="submitEckIdBatch">
-            <soap:operation soapAction="http://id.school/eck/schemas/v1_0/submitEckIdBatch" />
+        <wsdl:operation name="submitEckIDBatch">
+            <soap:operation soapAction="http://ketenid.nl/eck/schemas/v1_0/submitEckIDBatch" />
             <wsdl:input><soap:body use="literal" /></wsdl:input>
             <wsdl:output><soap:body use="literal" /></wsdl:output>
         </wsdl:operation>
 
         <wsdl:operation name="submitStampseudonymBatch">
-            <soap:operation soapAction="http://id.school/eck/schemas/v1_0/submitStampseudonymBatch" />
+            <soap:operation soapAction="http://ketenid.nl/eck/schemas/v1_0/submitStampseudonymBatch" />
             <wsdl:input><soap:body use="literal" /></wsdl:input>
             <wsdl:output><soap:body use="literal" /></wsdl:output>
         </wsdl:operation>
 
         <wsdl:operation name="retrieveBatch">
-            <soap:operation soapAction="http://id.school/eck/schemas/v1_0/retrieveBatch" />
+            <soap:operation soapAction="http://ketenid.nl/eck/schemas/v1_0/retrieveBatch" />
             <wsdl:input><soap:body use="literal" /></wsdl:input>
             <wsdl:output><soap:body use="literal" /></wsdl:output>
         </wsdl:operation>
 
         <wsdl:operation name="replaceStampseudonym">
-            <soap:operation soapAction="http://id.school/eck/schemas/v1_0/replaceStampseudonym" />
+            <soap:operation soapAction="http://ketenid.nl/eck/schemas/v1_0/replaceStampseudonym" />
             <wsdl:input><soap:body use="literal" /></wsdl:input>
             <wsdl:output><soap:body use="literal" /></wsdl:output>
         </wsdl:operation>
 
         <wsdl:operation name="retrieveChains">
-            <soap:operation soapAction="http://id.school/eck/schemas/v1_0/retrieveChains" />
+            <soap:operation soapAction="http://ketenid.nl/eck/schemas/v1_0/retrieveChains" />
             <wsdl:input><soap:body use="literal" /></wsdl:input>
             <wsdl:output><soap:body use="literal" /></wsdl:output>
         </wsdl:operation>
 
         <wsdl:operation name="retrieveSectors">
-            <soap:operation soapAction="http://id.school/eck/schemas/v1_0/retrieveSectors" />
+            <soap:operation soapAction="http://ketenid.nl/eck/schemas/v1_0/retrieveSectors" />
             <wsdl:input><soap:body use="literal" /></wsdl:input>
             <wsdl:output><soap:body use="literal" /></wsdl:output>
         </wsdl:operation>
     </wsdl:binding>
 
-    <wsdl:service name="SchoolIDService">
-        <wsdl:port binding="sid:SchoolIDSoapBinding" name="SchoolIDSoap10">
-            <soap:address location="https://id.school/service/201703" />
+    <wsdl:service name="EckIDService">
+        <wsdl:port binding="sid:EckIDSoapBinding" name="EckIDSoap10">
+            <soap:address location="https://service.ketenid.nl/eck/ws/201703" />
         </wsdl:port>
     </wsdl:service>
 </wsdl:definitions>

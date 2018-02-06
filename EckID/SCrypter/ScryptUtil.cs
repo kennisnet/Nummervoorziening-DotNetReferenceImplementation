@@ -16,11 +16,11 @@ limitations under the License.
 */
 #endregion
 
-using CryptSharp.Utility;
 using System;
 using System.Text;
+using CryptSharp.Utility;
 
-namespace NVA_DotNetReferenceImplementation.SCrypter
+namespace EckID.SCrypter
 {
     public class ScryptUtil
     {

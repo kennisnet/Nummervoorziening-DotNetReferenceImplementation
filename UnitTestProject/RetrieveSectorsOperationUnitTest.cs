@@ -32,7 +32,7 @@ namespace UnitTestProject
         [TestMethod]
         public void GetSectorsTest()
         {
-            Sector[] sectors = this.schoolIDServiceUtil.GetSectors();
+            Sector[] sectors = EckIDServiceUtil.GetSectors();
 
             Assert.IsNotNull(sectors);
             Assert.IsTrue(sectors.Length > 0);

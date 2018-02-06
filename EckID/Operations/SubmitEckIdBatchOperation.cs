@@ -16,37 +16,37 @@ limitations under the License.
 */
 #endregion
 
-namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
+namespace EckID.Operations
 {
     using System.Collections.Generic;
 
     /// <summary>
-    /// This class reflects the SubmitEckIdBatch operation of the Nummervoorziening service
+    /// This class reflects the SubmitEckIDBatch operation of the Nummervoorziening service
     /// </summary>
-    public class SubmitEckIdBatchOperation
+    public class SubmitEckIDBatchOperation
     {
         /// <summary>
-        /// The SchoolID object for communication with the service
+        /// The EckID object for communication with the service
         /// </summary>
-        private SchoolIDClient schoolIDClient;
+        private EckIDPortClient _eckIdClient;
 
         /// <summary>
         /// The actual Submit Eck Id Batch Request object
         /// </summary>
-        private readonly SubmitEckIdBatchRequest submitEckIdBatchRequest = new SubmitEckIdBatchRequest();
+        private readonly SubmitEckIdBatchRequest _submitEckIDBatchRequest = new SubmitEckIdBatchRequest();
 
         /// <summary>
         /// The wrapper class containing the request to be send to the service
         /// </summary>
-        private readonly submitEckIdBatchRequest1 submitEckIdBatchRequestWrapper = new submitEckIdBatchRequest1();
+        private readonly submitEckIdBatchRequest1 _submitEckIDBatchRequestWrapper = new submitEckIdBatchRequest1();
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="SubmitEckIdBatchOperation" /> class with a reference to the ShoolIDClient proxy class
+        /// Initializes a new instance of the <see cref="SubmitEckIDBatchOperation" /> class with a reference to the ShoolIDClient proxy class
         /// </summary>
-        /// <param name="schoolIDClient">An initialized SchoolIDClient proxy class</param>
-        public SubmitEckIdBatchOperation(SchoolIDClient schoolIDClient)
+        /// <param name="eckIdClient">An initialized EckIDPortClient proxy class</param>
+        public SubmitEckIDBatchOperation(EckIDPortClient eckIdClient)
         {
-            this.schoolIDClient = schoolIDClient;
+            _eckIdClient = eckIdClient;
         }
 
         /// <summary>
@@ -57,7 +57,7 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
         /// <param name="chainGuid">A valid chain id</param>
         /// <param name="sectorGuid">A valid sector id</param>
         /// <returns>If successful, a String containing the Batch Identifier</returns>
-        public string SubmitEckIdBatch(Dictionary<int, string> listedStampseudonym, string chainGuid, string sectorGuid)
+        public string SubmitEckIDBatch(Dictionary<int, string> listedStampseudonym, string chainGuid, string sectorGuid)
         {
             List<ListedStampseudonym> stampseudonymList = new List<ListedStampseudonym>();
 
@@ -74,18 +74,18 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
             }
 
             // Create the Request
-            this.submitEckIdBatchRequest.chainId = chainGuid;
-            this.submitEckIdBatchRequest.sectorId = sectorGuid;
-            this.submitEckIdBatchRequest.stampseudonymList = stampseudonymList.ToArray();
-            this.submitEckIdBatchRequestWrapper.submitEckIdBatchRequest = this.submitEckIdBatchRequest;
+            _submitEckIDBatchRequest.chainId = chainGuid;
+            _submitEckIDBatchRequest.sectorId = sectorGuid;
+            _submitEckIDBatchRequest.stampseudonymList = stampseudonymList.ToArray();
+            _submitEckIDBatchRequestWrapper.submitEckIdBatchRequest = _submitEckIDBatchRequest;
 
             // Submit the Request and fetch the Response
-            submitEckIdBatchResponse submitEckIdBatchResponseWrapper = this.schoolIDClient.submitEckIdBatch(this.submitEckIdBatchRequestWrapper);
+            submitEckIdBatchResponse submitEckIDBatchResponseWrapper = _eckIdClient.submitEckIdBatch(_submitEckIDBatchRequestWrapper);
 
             // Unwrap the Response and return the Batch Identifier
-            SubmitBatchResponse submitEckIdBatchResponse = submitEckIdBatchResponseWrapper.submitBatchResponse;
+            SubmitBatchResponse submitEckIDBatchResponse = submitEckIDBatchResponseWrapper.submitBatchResponse;
 
-            return submitEckIdBatchResponse.batchIdentifier.Value;
+            return submitEckIDBatchResponse.batchIdentifier.Value;
         }
     }
 }

@@ -33,28 +33,28 @@ namespace UnitTestProject
         [TestMethod]
         public void GetAvailabilityTest()
         {
-            Assert.AreEqual(true, this.schoolIDServiceUtil.IsSchoolIDAvailable());
+            Assert.AreEqual(true, EckIDServiceUtil.IsEckIdAvailable());
         }
 
         /// <summary>
         /// Tests correct version of Nummervoorziening service.
         /// </summary>
         [TestMethod]
-        public void GetSchoolIDVersionTest()
+        public void GetEckIdVersionTest()
         {
-            string expectedValue = "1.0.3-SNAPSHOT";
-            Assert.AreEqual(expectedValue, this.schoolIDServiceUtil.GetSchoolIDVersion());
+            string expectedValue = "1.0.4-SNAPSHOT";
+            Assert.AreEqual(expectedValue, EckIDServiceUtil.GetEckIdVersion());
         }        
         
         /// <summary>
         /// Tests that time on server is not too different from local time.
         /// </summary>
         [TestMethod]
-        public void GetSchoolIDDateTimeTest()
+        public void GetEckIdDateTimeTest()
         {
             double allowedGapInMinutes = 180;
 
-            DateTime? timeOnServer = this.schoolIDServiceUtil.GetSchoolIDDateTime();
+            DateTime? timeOnServer = EckIDServiceUtil.GetEckIdDateTime();
             DateTime currentDateTime = DateTime.Now;
 
             // Check if the DateTime we received is valid

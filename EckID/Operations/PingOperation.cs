@@ -16,7 +16,7 @@ limitations under the License.
 */
 #endregion
 
-namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
+namespace EckID.Operations
 {
     using System;
 
@@ -26,39 +26,39 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
     public class PingOperation
     {
         /// <summary>
-        /// The SchoolID object for communication with the service
+        /// The EckID object for communication with the service
         /// </summary>
-        private readonly SchoolIDClient schoolIDClient;
+        private readonly EckIDPortClient _eckIdClient;
 
         /// <summary>
         /// The actual Ping Request object
         /// </summary>
-        private readonly PingRequest pingRequest = new PingRequest();
+        private readonly PingRequest _pingRequest = new PingRequest();
 
         /// <summary>
         /// The wrapper class containing the request to be send to the service
         /// </summary>
-        private readonly pingRequest1 pingRequestWrapper = new pingRequest1();
+        private readonly pingRequest1 _pingRequestWrapper = new pingRequest1();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PingOperation" /> class with a reference to the ShoolIDClient proxy class
         /// </summary>
-        /// <param name="schoolIDClient">An initialized SchoolIDClient proxy class</param>
-        public PingOperation(SchoolIDClient schoolIDClient)
+        /// <param name="eckIdClient">An initialized EckIDPortClient proxy class</param>
+        public PingOperation(EckIDPortClient eckIdClient)
         {
-            this.schoolIDClient = schoolIDClient;
+            _eckIdClient = eckIdClient;
         }
 
         /// <summary>
-        /// Checks through a PingRequest whether the SchoolID servivce is available
+        /// Checks through a PingRequest whether the EckID servivce is available
         /// </summary>
         /// <returns>TRUE if the service is up and running</returns>
         public bool IsAvailable()
         {
             try
             {
-                this.pingRequestWrapper.pingRequest = this.pingRequest;
-                pingResponse1 pingResponseWrapper = this.schoolIDClient.ping(this.pingRequestWrapper);
+                _pingRequestWrapper.pingRequest = _pingRequest;
+                pingResponse1 pingResponseWrapper = _eckIdClient.ping(_pingRequestWrapper);
                 PingResponse pingReponse = pingResponseWrapper.pingResponse;
                 return pingReponse.available;
             }
@@ -75,12 +75,12 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
         /// Retrieves the current DateTime of the School ID server
         /// </summary>
         /// <returns>Null upon errors, else the DateTime retrieved from the server</returns>
-        public DateTime? GetSchoolIDDateTime()
+        public DateTime? GetEckIDDateTime()
         {           
             try
             {
-                this.pingRequestWrapper.pingRequest = this.pingRequest;
-                pingResponse1 pingResponseWrapper = this.schoolIDClient.ping(this.pingRequestWrapper);
+                _pingRequestWrapper.pingRequest = _pingRequest;
+                pingResponse1 pingResponseWrapper = _eckIdClient.ping(_pingRequestWrapper);
                 PingResponse pingReponse = pingResponseWrapper.pingResponse;
                 return pingReponse.systemTime;
             }
@@ -97,14 +97,14 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
         /// Retrieves the current application version of the School ID service.
         /// </summary>
         /// <returns>A string containing the version of the School ID service, or an empty string upon error</returns>
-        public string GetSchoolIDVersion()
+        public string GetEckIDVersion()
         {
             string applicationVersion = string.Empty;
 
             try
             {
-                this.pingRequestWrapper.pingRequest = this.pingRequest;
-                pingResponse1 pingResponseWrapper = this.schoolIDClient.ping(this.pingRequestWrapper);
+                _pingRequestWrapper.pingRequest = _pingRequest;
+                pingResponse1 pingResponseWrapper = _eckIdClient.ping(_pingRequestWrapper);
                 PingResponse pingReponse = pingResponseWrapper.pingResponse;
                 applicationVersion = pingReponse.applicationVersion;
             }

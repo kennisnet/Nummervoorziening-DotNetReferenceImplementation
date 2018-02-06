@@ -16,39 +16,39 @@ limitations under the License.
 */
 #endregion
 
-namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
+namespace EckID.Operations
 {
     /// <summary>
-    /// This class reflects the RetrieveEckId operation of the Nummervoorziening service
+    /// This class reflects the RetrieveEckID operation of the Nummervoorziening service
     /// </summary>
     public class RetrieveStampseudonymOperation
     {
         /// <summary>
-        /// The SchoolID object for communication with the service
+        /// The EckID object for communication with the service
         /// </summary>
-        private readonly SchoolIDClient schoolIDClient;
+        private readonly EckIDPortClient _eckIdClient;
 
         /// <summary>
         /// The actual Retrieve Stampseudonym Request object
         /// </summary>
-        private readonly RetrieveStampseudonymRequest retrieveStampseudonymRequest = new RetrieveStampseudonymRequest();
+        private readonly RetrieveStampseudonymRequest _retrieveStampseudonymRequest = new RetrieveStampseudonymRequest();
 
         /// <summary>
         /// The wrapper class containing the request to be send to the service
         /// </summary>
-        private readonly retrieveStampseudonymRequest1 retrieveStampseudonymRequestWrapper = new retrieveStampseudonymRequest1();
+        private readonly retrieveStampseudonymRequest1 _retrieveStampseudonymRequestWrapper = new retrieveStampseudonymRequest1();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RetrieveStampseudonymOperation" /> class with a reference to the ShoolIDClient proxy class
         /// </summary>
-        /// <param name="schoolIDClient">An initialized SchoolIDClient proxy class</param>
-        public RetrieveStampseudonymOperation(SchoolIDClient schoolIDClient)
+        /// <param name="eckIdClient">An initialized EckIDPortClient proxy class</param>
+        public RetrieveStampseudonymOperation(EckIDPortClient eckIdClient)
         {
-            this.schoolIDClient = schoolIDClient;
+            _eckIdClient = eckIdClient;
         }
 
         /// <summary>
-        /// Provides the parameters as a RetrieveEckIdRequest to the Nummervoorziening service, fetches the RetrieveStampseudonymResponse and returns the Stampseudonym.
+        /// Provides the parameters as a RetrieveEckIDRequest to the Nummervoorziening service, fetches the RetrieveStampseudonymResponse and returns the Stampseudonym.
         /// </summary>
         /// <param name="hpgn">The scrypt hashed PGN</param>
         /// <returns>The generated Stampseudonym</returns>
@@ -56,11 +56,11 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
         {
             HPgn hpgnWrapper = new HPgn { Value = hpgn };
 
-            this.retrieveStampseudonymRequest.hpgn = hpgnWrapper;
-            this.retrieveStampseudonymRequestWrapper.retrieveStampseudonymRequest = this.retrieveStampseudonymRequest;
+            _retrieveStampseudonymRequest.hpgn = hpgnWrapper;
+            _retrieveStampseudonymRequestWrapper.retrieveStampseudonymRequest = _retrieveStampseudonymRequest;
 
-            retrieveStampseudonymResponse1 retrieveStampseudonymResponseWrapper = 
-                this.schoolIDClient.retrieveStampseudonym(this.retrieveStampseudonymRequestWrapper);
+            retrieveStampseudonymResponse1 retrieveStampseudonymResponseWrapper =
+                _eckIdClient.retrieveStampseudonym(_retrieveStampseudonymRequestWrapper);
 
             RetrieveStampseudonymResponse retrieveStampseudonymResponse = retrieveStampseudonymResponseWrapper.retrieveStampseudonymResponse;
 

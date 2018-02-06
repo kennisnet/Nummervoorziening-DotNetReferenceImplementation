@@ -1,26 +1,26 @@
 ﻿using System.Collections.Generic;
 
-namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
+namespace EckID.Operations
 {
     public class SubmitStampseudonymBatchOperation
     {
         /// <summary>
-        /// The SchoolID object for communication with the service
+        /// The EckID object for communication with the service
         /// </summary>
-        private SchoolIDClient schoolIDClient;
+        private EckIDPortClient _eckIdClient;
 
         /// <summary>
         /// The wrapper class containing the request to be send to the service
         /// </summary>
-        private readonly submitStampseudonymBatchRequest submitStampseudonymBatchRequestWrapper = new submitStampseudonymBatchRequest();
+        private readonly submitStampseudonymBatchRequest _submitStampseudonymBatchRequestWrapper = new submitStampseudonymBatchRequest();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SubmitStampseudonymBatchOperation" /> class with a reference to the ShoolIDClient proxy class
         /// </summary>
-        /// <param name="schoolIDClient">An initialized SchoolIDClient proxy class</param>
-        public SubmitStampseudonymBatchOperation(SchoolIDClient schoolIDClient)
+        /// <param name="eckIdClient">An initialized EckIDPortClient proxy class</param>
+        public SubmitStampseudonymBatchOperation(EckIDPortClient eckIdClient)
         {
-            this.schoolIDClient = schoolIDClient;
+            _eckIdClient = eckIdClient;
         }
 
         /// <summary>
@@ -46,10 +46,11 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
             }
 
             // Create the Request
-            this.submitStampseudonymBatchRequestWrapper.submitStampseudonymBatchRequest1 = hpgnList.ToArray();
+            _submitStampseudonymBatchRequestWrapper.submitStampseudonymBatchRequest1 = hpgnList.ToArray();
 
             // Submit the Request and fetch the Response
-            submitEckIdBatchResponse submitEckIdBatchResponseWrapper = this.schoolIDClient.submitStampseudonymBatch(this.submitStampseudonymBatchRequestWrapper);
+            submitEckIdBatchResponse submitEckIdBatchResponseWrapper = 
+                _eckIdClient.submitStampseudonymBatch(_submitStampseudonymBatchRequestWrapper);
 
             // Unwrap the Response and return the Batch Identifier
             SubmitBatchResponse submitEckIdBatchResponse = submitEckIdBatchResponseWrapper.submitBatchResponse;

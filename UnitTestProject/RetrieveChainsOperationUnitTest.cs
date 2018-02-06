@@ -32,7 +32,7 @@ namespace UnitTestProject
         [TestMethod]
         public void GetChainsTest()
         {
-            Chain[] chains = this.schoolIDServiceUtil.GetChains();
+            Chain[] chains = EckIDServiceUtil.GetChains();
 
             Assert.IsNotNull(chains);
             Assert.IsTrue(chains.Length > 0);

@@ -16,7 +16,7 @@ limitations under the License.
 */
 #endregion
 
-namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
+namespace EckID.Operations
 {
     using System.ServiceModel;
     using System.ServiceModel.Channels;
@@ -30,60 +30,59 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
     public class RetrieveBatchOperation
     {
         /// <summary>
-        /// The SchoolID object for communication with the service
+        /// The EckID object for communication with the service
         /// </summary>
-        private SchoolIDClient schoolIDClient;
+        private EckIDPortClient _eckIdClient;
 
         /// <summary>
         /// The actual Retrieve Batch Request object
         /// </summary>
-        private readonly RetrieveBatchRequest retrieveBatchRequest = new RetrieveBatchRequest();
+        private readonly RetrieveBatchRequest _retrieveBatchRequest = new RetrieveBatchRequest();
 
         /// <summary>
         /// The wrapper class containing the request to be send to the service
         /// </summary>
-        private readonly retrieveBatchRequest1 retrieveBatchRequestWrapper = new retrieveBatchRequest1();
+        private readonly retrieveBatchRequest1 _retrieveBatchRequestWrapper = new retrieveBatchRequest1();
 
         /// <summary>
         /// Amount of times to try to retrieve a batch before failing
         /// </summary>
-        private int BATCH_RETRIEVE_ATTEMPTS_COUNT = 10;
+        private const int BatchRetrieveAttemptsCount = 10;
 
         /// <summary>
         /// Amount of time in milliseconds to wait before retrying to fetch a batch
         /// </summary>
-        private int RETRIEVE_SCHOOL_ID_BATCH_TIMEOUT = 25000;
+        private const int RetrieveSchoolIdBatchTimeout = 25000;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RetrieveBatchOperation" /> class with a reference to the ShoolIDClient proxy class
         /// </summary>
-        /// <param name="schoolIDClient">An initialized SchoolIDClient proxy class</param>
-        public RetrieveBatchOperation(SchoolIDClient schoolIDClient)
+        /// <param name="eckIdClient">An initialized EckIDPortClient proxy class</param>
+        public RetrieveBatchOperation(EckIDPortClient eckIdClient)
         {
-            this.schoolIDClient = schoolIDClient;
+            _eckIdClient = eckIdClient;
         }
 
         /// <summary>
         /// Fetches a Batch based with the given identifier. Incorporates cooldown periods as well as possible Faults.
         /// </summary>
         /// <param name="batchIdentifier">The identifier of the batch to retrieve</param>
-        /// <returns>A populated SchoolIDBatch object</returns>
-        public SchoolIDBatch RetrieveBatch(string batchIdentifier)
+        /// <returns>A populated EckIDBatch object</returns>
+        public EckIDBatch RetrieveBatch(string batchIdentifier)
         {
-            SchoolIDBatch schoolIdBatch = new SchoolIDBatch();
-            this.retrieveBatchRequest.batchIdentifier = new BatchIdentifier();
-            this.retrieveBatchRequest.batchIdentifier.Value = batchIdentifier;
-            this.retrieveBatchRequestWrapper.retrieveBatchRequest = this.retrieveBatchRequest;
+            EckIDBatch eckIdBatch = new EckIDBatch();
+            _retrieveBatchRequest.batchIdentifier = new BatchIdentifier {Value = batchIdentifier};
+            _retrieveBatchRequestWrapper.retrieveBatchRequest = _retrieveBatchRequest;
             
             // Try to retrieve the Batch, retry if it is not ready yet (a FaultException will be thrown)
-            for (int i = 0; i < this.BATCH_RETRIEVE_ATTEMPTS_COUNT; i++)
+            for (int i = 0; i < BatchRetrieveAttemptsCount; i++)
             {
-                Thread.Sleep(this.RETRIEVE_SCHOOL_ID_BATCH_TIMEOUT);
+                Thread.Sleep(RetrieveSchoolIdBatchTimeout);
 
                 try
                 {
                     retrieveBatchResponse1 retrieveBatchResponseWrapper =
-                        this.schoolIDClient.retrieveBatch(this.retrieveBatchRequestWrapper);
+                        _eckIdClient.retrieveBatch(_retrieveBatchRequestWrapper);
 
                     RetrieveBatchResponse retrieveBatchResponse =
                         retrieveBatchResponseWrapper.retrieveBatchResponse;
@@ -91,15 +90,15 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
                     ListedEntitySuccess[] successListed = retrieveBatchResponse.success;
                     ListedEntityFailure[] failureListed = retrieveBatchResponse.failed;
 
-                    schoolIdBatch.setSuccessList(retrieveBatchResponse.success);
-                    schoolIdBatch.setFailedList(retrieveBatchResponse.failed);
+                    eckIdBatch.SetSuccessList(retrieveBatchResponse.success);
+                    eckIdBatch.SetFailedList(retrieveBatchResponse.failed);
 
                     break;
                 }
                 catch (FaultException fe)
                 {
                     // Exception is thrown, retrieve the responsible actor to verify the cause
-                    switch (this.GetFaultActorFromException(fe))
+                    switch (GetFaultActorFromException(fe))
                     {
                         // NotFinishedException & TemporaryBlockedException: Wait for the cooling down period to pass, and try again
                         case "NotFinishedException":
@@ -115,7 +114,7 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
                 }
             }
 
-            return schoolIdBatch;
+            return eckIdBatch;
         }
 
         /// <summary>

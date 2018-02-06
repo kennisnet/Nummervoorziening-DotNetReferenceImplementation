@@ -66,9 +66,9 @@
       <Project>{5e33051d-1471-4e5a-b94e-bd0e8ffff99e}</Project>
       <Name>CryptSharp</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SchoolID\SchoolID.csproj">
+    <ProjectReference Include="..\EckID\EckID.csproj">
       <Project>{05381b19-a711-48d3-a62a-29b8ce1debe8}</Project>
-      <Name>SchoolID</Name>
+      <Name>EckID</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -6,12 +6,12 @@ De Nummervoorziening - C#.NET Client Reference Application is een client impleme
  * Globale communicatie met de Nummervoorziening applicatie (PingOperation t.b.v. het vaststellen van een correcte verbinding met en werking van de Nummervoorziening applicatie).
  * Genereren van een eerste niveau hash van een PGN middels het SCrypt hashing algoritme.
  * Het opvragen van een Stampseudoniem bij de Nummervoorziening op basis van een gehashte PGN (RetrieveStampseudoniemOperation).
- * Het opvragen van een ECK-ID bij de Nummervoorziening applicatie op basis van een gehashte PGN, een keten-id en sector-id (RetrieveEckIdOperation).
+ * Het opvragen van een ECK-ID bij de Nummervoorziening applicatie op basis van een gehashte PGN, een keten-id en sector-id (RetrieveEckIDOperation).
  * Het opvragen van ondersteunde ketens bij de Nummervoorziening applicatie (RetrieveChainsOperation).
  * Het opvragen van ondersteunde sectoren bij de Nummervoorziening applicatie (RetrieveSectorsOperation).
- * Opvoeren van nieuwe gehashte PGNs die dienen te worden doorverwezen naar reeds bestaande gehashte PGNs bij het creëren van ECK-IDs (ReplaceEckIdOperation).
- * Het opvoeren van een batch met gehaste PGNs (SubmitEckIdBatchOperation).
- * Het opvragen van de status en/of ophalen van een batch met ECK-IDs (RetrieveEckIdBatchOperation).
+ * Opvoeren van nieuwe gehashte PGNs die dienen te worden doorverwezen naar reeds bestaande gehashte PGNs bij het creëren van ECK-IDs (ReplaceEckIDOperation).
+ * Het opvoeren van een batch met gehaste PGNs (SubmitEckIDBatchOperation).
+ * Het opvragen van de status en/of ophalen van een batch met ECK-IDs (RetrieveEckIDBatchOperation).
 
 Voor alle bovenstaande functionaliteiten wordt gebruik gemaakt van SOAP Messaging tussen de verschillende actoren. Authenticatie vindt plaats middels PKI-Certificaten die over TLS worden uitgewisseld. Aanvullende informatie over Nummervoorziening kan gevonden worden op de [Edukoppeling Wiki] van [Stichting Kennisnet].  
 
@@ -38,42 +38,42 @@ De Client Reference Application communiceert met de Nummervoorziening applicatie
  * geen gebruik van End-to-End beveiliging (geen WS-Security: signing en/of encryptie van de SOAP headers of body).
 
 ## Solution Modules
- * **ConsoleApplication**: Voorbeeldapplicatie om de werking van de *schoolID* module te demonstreren
+ * **ConsoleApplication**: Voorbeeldapplicatie om de werking van de *eckId* module te demonstreren
  * **CryptSharp**: 3rd party library genaamd [CryptSharp] met (onder andere) de functionaliteit om op basis van het hashingalgoritme SCrypt hashes te genereren.  
- * **SchoolID**: Library met de basisfunctionaliteiten om de Nummervoorziening applicatie op een juiste wijze te kunnen bevragen. 
- * **UnitTestProject**: Voorbeeldcode voor het gebruik van de Nummervoorziening applicatie, tevens gebruikmakend van de *SchoolID* module en daaronder liggende *CryptSharp* module.
+ * **EckID**: Library met de basisfunctionaliteiten om de Nummervoorziening applicatie op een juiste wijze te kunnen bevragen. 
+ * **UnitTestProject**: Voorbeeldcode voor het gebruik van de Nummervoorziening applicatie, tevens gebruikmakend van de *EckID* module en daaronder liggende *CryptSharp* module.
 
 ### ConsoleApplication - Structuur
  * **App.config**: Bevat de .NET applicatie configuratie. Dit configuratiebestand bevat de applicatiespecifieke instellingen (*appSettings*) voor het instellen van de identificatie van de client middels de OIN en bijbehorende client certificaat en de configuratie van de SOAP verbinding met de Nummervoorziening applicatie (*system.serviceModel*).
  * **Program.cs**: Simpele class met een Main hook. Deze class wordt als Console applicatie gebruikt om een subset van specifieke functionaliteiten en bijbehorende operaties te demonstreren.  
  
-### SchoolID - Structuur
- * **Operations**: Bevat de SchoolID specifieke operaties voor het uitwisselen van data. Uitgangspunt bij deze implementatie is het gebruik van "standaard" classes als parameters, om zodoende niet SchoolID specifieke objecten door de gehele client applicatie te hoeven gebruiken. Voor elke beschikbare operatie is een separate Class opgenomen in deze Library.
+### EckID - Structuur
+ * **Operations**: Bevat de EckID specifieke operaties voor het uitwisselen van data. Uitgangspunt bij deze implementatie is het gebruik van "standaard" classes als parameters, om zodoende niet EckID specifieke objecten door de gehele client applicatie te hoeven gebruiken. Voor elke beschikbare operatie is een separate Class opgenomen in deze Library.
   * *PingOperation.cs*
-  * *ReplaceEckIdOperation.cs*
+  * *ReplaceEckIDOperation.cs*
   * *RetrieveChainsOperation.cs*
-  * *RetrieveEckIdBatchOperation.cs*
-  * *RetrieveEckIdOperation.cs*
+  * *RetrieveEckIDBatchOperation.cs*
+  * *RetrieveEckIDOperation.cs*
   * *RetrieveSectorsOperation.cs*
   * *RetrieveStampseudoniemOperation.cs*
-  * *SubmitEckIdBatchOperation.cs*
+  * *SubmitEckIDBatchOperation.cs*
   * **Resources**: Aanvullende bestanden ter ondersteuning van de Solution.
-    * *schoolid.wsdl*: De WSDL welke is gebruikt als input voor de *svcutil.exe* utility.
+    * *eckid.wsdl*: De WSDL welke is gebruikt als input voor de *svcutil.exe* utility.
  * **SCrypter**: Bevat de logica ter aansturing van de CryptSharp library.
     * *Constants.cs* De SCrypt constanten zoals vastgesteld.
     * *ScryptUtil.cs* Bevat de *GenerateHash()* functie die in de rest van de Library wordt gebruikt om de eerste niveau hash te berekenen.  
- * **SchoolID.cs**: De door *svcutil.exe* gegenereerde WCF interface op basis van de *schoolid.wsdl*.
- * **SchoolIDBatch.cs**: Collectie class voor de opslag en verwerking van opgehaalde batches uit de Nummervoorziening applicatie gebruikmakend van standaard C# objecten.  
- * **SchoolIDServiceUtil.cs**: Singleton service util class voor centrale initializatie van de verbinding met de Nummervoorziening applicatie (certificaten & WS-Adressing) en het uitvoeren van operaties.
+ * **EckID.cs**: De door *svcutil.exe* gegenereerde WCF interface op basis van de *eckid.wsdl*.
+ * **EckIDBatch.cs**: Collectie class voor de opslag en verwerking van opgehaalde batches uit de Nummervoorziening applicatie gebruikmakend van standaard C# objecten.  
+ * **EckIDServiceUtil.cs**: Singleton service util class voor centrale initializatie van de verbinding met de Nummervoorziening applicatie (certificaten & WS-Adressing) en het uitvoeren van operaties.
  
 ### UnitTestProject - Structuur
- * **AbstractUnitTest.cs**: Basis Class voor het initializeren van de SchoolIDServiceUtil Singleton instance en het uitschakelen van aanvullende SSL beveiliging om self-signed certificaten te kunnen ondersteunen. Alle UnitTest classes erven over van de AbstractUnitTest class.  
+ * **AbstractUnitTest.cs**: Basis Class voor het initializeren van de EckIDServiceUtil Singleton instance en het uitschakelen van aanvullende SSL beveiliging om self-signed certificaten te kunnen ondersteunen. Alle UnitTest classes erven over van de AbstractUnitTest class.  
  * **App.config**: Bevat de .NET applicatie configuratie. Dit configuratiebestand bevat de applicatiespecifieke instellingen (*appSettings*) voor het instellen van de identificatie van de client middels de OIN en bijbehorende client certificaat en de configuratie van de SOAP verbinding met de Nummervoorziening applicatie (*system.serviceModel*).
  * **BatchOperationUnitTest.cs**: Voorbeeldcode voor het uitvoeren van een Batch Operation: het submitten van een batch, controleren van de status van de verwerking en het ophalen van het resultaat. 
  * **PingOperationUnitTest.cs**: Voorbeeldcode voor het uitvoeren van een Ping Operation: het uitlezen van de status van de Nummervoorziening applicatie.
- * **ReplaceEckIdOperationUnitTest.cs**: Voorbeeldcode voor het uitvoeren van een Replace ECK ID Operation: het vervangen van een nieuwe HPGN door een reeds bestaande HPGN om zodoende het reeds uitgegeven ECK ID te kunnen blijven gebruiken in de keten bij een PGN/BSN wijziging.
+ * **ReplaceEckIDOperationUnitTest.cs**: Voorbeeldcode voor het uitvoeren van een Replace ECK ID Operation: het vervangen van een nieuwe HPGN door een reeds bestaande HPGN om zodoende het reeds uitgegeven ECK ID te kunnen blijven gebruiken in de keten bij een PGN/BSN wijziging.
  * **RetrieveChainsOperationUnitTest.cs**: Voorbeeldcode voor het uitvoeren van een Retrieve Chains Operation: het ophalen van ondersteunde ketens in de Nummervoorziening applicatie.
- * **RetrieveEckIdOperationUnitTest.cs**: Voorbeeldcode voor het uitvoeren van een Retrieve Eck ID Operation: het ophalen van een enkele ECK ID in de Nummervoorziening applicatie op basis van een eerste niveau hash, keten id en sector id.
+ * **RetrieveEckIDOperationUnitTest.cs**: Voorbeeldcode voor het uitvoeren van een Retrieve Eck ID Operation: het ophalen van een enkele ECK ID in de Nummervoorziening applicatie op basis van een eerste niveau hash, keten id en sector id.
  * **RetrieveSectorsOperationUnitTest.cs**: Voorbeeldcode voor het uitvoeren van een Retrieve Sectors Operation: het ophalen van ondersteunde sectoren in de Nummervoorziening applicatie.
  * **RetrieveStampseudoniemOperationUnitTest.cs**: Voorbeeldcode voor het uitvoeren van een Retrieve Stampseudoniem Operation: het ophalen van een enkele ECK ID in de Nummervoorziening applicatie op basis van een eerste niveau hash.
  * **ScryptUtilUnitTest.cs**: Voorbeeldcode voor het genereren van een eerste niveau hash op basis van een PGN.
@@ -93,29 +93,29 @@ Het service model is ingericht om de configuratie van de SOAP endpoint binding t
  * **client.endpoint**
   * *address*: De url van de Nummervoorziening applicatie
   * *binding*: De gebruikte binding voor deze endpoint (default: *customBinding*)
-  * *bindingConfiguration*: De gebruikte configuratie voor de binding (default: *SchoolIdSoapBinding*)
-  * *contract*: verwijzing naar de WCF interface class (default: *SchoolID*)
-  * *behaviorConfiguration*: De gebruikte behavior voor deze endpoint (default: *SchoolIdBehavior*)
-  * *name*: Naam van het endpoint (default: *SchoolIDSoap10*)
- * **bindings.customBinding.binding**: Configuratie van de custom binding (default name: *SchoolIDSoapBinding*)
+  * *bindingConfiguration*: De gebruikte configuratie voor de binding (default: *EckIDSoapBinding*)
+  * *contract*: verwijzing naar de WCF interface class (default: *EckIDPort*)
+  * *behaviorConfiguration*: De gebruikte behavior voor deze endpoint (default: *EckIDBehavior*)
+  * *name*: Naam van het endpoint (default: *EckIDSoap10*)
+ * **bindings.customBinding.binding**: Configuratie van de custom binding (default name: *EckIDSoapBinding*)
   * *textMessageEncoding*: Activeert WS-Addressing volgens een gedefinieerd profiel (default messageVersion: *Soap11WSAddressing10*)
   * *httpsTransport*: Definieert de vereisten aan de transportlaag; het gebruik van https. Default waarden zijn maxReceivedMessageSize="524288000", requireClientCertificate="true", authenticationScheme="Anonymous".
- * **behaviors.endpointBehaviors.behavior**: Configuratie van de custom behavior (default name: *SchoolIDBehavior*).
+ * **behaviors.endpointBehaviors.behavior**: Configuratie van de custom behavior (default name: *EckIDBehavior*).
   * *clientCredentials.clientCredentials*: Activeert het gebruik van client certificaten als een vereiste voor het uitvoeren van de SOAP operaties.
    
 ## Ontwikkeling
 
 ### WSDL naar Proxy Class
-Voor de ontwikkeling van de applicatie is de WSDL als uitgangspunt genomen. De gebruikte WSDL is onderdeel van de Reference Application package, en is te vinden in *SchoolID/Resources/schoolid.wsdl*.
+Voor de ontwikkeling van de applicatie is de WSDL als uitgangspunt genomen. De gebruikte WSDL is onderdeel van de Reference Application package, en is te vinden in *EckID/Resources/eckid.wsdl*.
 
 Voor het omzetten van een WSDL naar gegenereerde code zijn uit de .NET toolset grofweg twee utilities beschikbaar; *wsdl.exe* en *svcutil.exe*. De utility wsdl.exe zet een WSDL om in een webservice, waarbij de nieuwe class SoapHttpClientProtocol overerft. Het resultaat kan gebruikt worden als ASMX webservice. De utility *svcutil.exe* zet een WSDL om in een WCF proxy class (interface), die gebruikt kan worden door webservices door de interface te implementeren en de class SoapHttpClientProtocol te overerven. Omdat het nieuwere WCF door Microsoft is aangemerkt om ASMX services te vervangen, is voor de ontwikkeling van deze applicatie gekozen om de webservices middels WCF te implementeren. De gebruikte commando voor de utility is als volgt:
 ```
-svcutil.exe /mc /syncOnly schoolid.wsdl
+svcutil.exe /mc /syncOnly eckid.wsdl
 ```
 
 Omdat deze tool de wsaw:UsingAddressing property niet kent, is het wellicht nodig om deze eerst uit de WSDL te verwijderen voordat de svcutil successvol kan worden uitgevoerd. Het weglaten van deze property heeft functioneel geen consequenties, zolang de WCF configuratie juist is vormgegeven.
 
-In de applicatie is de gegenereerde class één-op-één overgenomen: SchoolID.cs, De methodes eindigend op een 1, waaronder pingRequest1, pingResponse1 etc., zijn door de svcutil aangemaakte wrapper objecten, Zo is de pingRequest1() aangemaakt als een wrapper voor het pingRequest object, en wordt gebruikt als payload voor de pingOperation. Als antwoord van de pingOperation wordt de pingResponse1 teruggegeven, dat de pingResponse object bevat.
+In de applicatie is de gegenereerde class één-op-één overgenomen: EckID.cs, De methodes eindigend op een 1, waaronder pingRequest1, pingResponse1 etc., zijn door de svcutil aangemaakte wrapper objecten, Zo is de pingRequest1() aangemaakt als een wrapper voor het pingRequest object, en wordt gebruikt als payload voor de pingOperation. Als antwoord van de pingOperation wordt de pingResponse1 teruggegeven, dat de pingResponse object bevat.
 
 ## Installatie
 De applicatie is gebouwd voor en getest onder Windows 8. Om de applicatie succesvol te laten draaien moet aan een aantal randvoorwaarden worden voldaan:
@@ -129,19 +129,19 @@ De applicatie is gebouwd voor en getest onder Windows 8. Om de applicatie succes
 Client certificaten voor de communicatie met de Nummervoorziening applicatie op de Sandbox omgeving dient bij Kennisnet opgevraagd te worden. Voor de productieomgevingen is een valide PKI-Overheid certificaat vereist.
 
 ## Omgevingen
- * Acceptatieomgeving: https://service-a.id.school/eck/ws/201703
- * Sandboxomgeving: https://service-s.id.school/eck/ws/201703
- * Kwalificatieomgeving: https://service-q.id.school/eck/ws/201703
- * Productieomgeving: https://service.id.school/eck/ws/201703
+ * Acceptatieomgeving: https://service-a.eckid.nl/eck/ws/201703
+ * Sandboxomgeving: https://service-s.eckid.nl/eck/ws/201703
+ * Kwalificatieomgeving: https://service-q.eckid.nl/eck/ws/201703
+ * Productieomgeving: https://service.eckid.nl/eck/ws/201703
 
 ## Licenties
  * **Nummervoorziening - C#.NET Client Reference Application**: Apache License, Version 2.0.
  * **CryptSharp**: Copyright (c) 2010, 2013 James F. Bellinger <http://www.zer7.com/software/cryptsharp>
 
 ## Contact
-Voor meer informatie kunt u contact opnemen met [Marc Fleischeuers](mailto:M.Fleischeuers@kennisnet.nl).
+Voor meer informatie kunt u contact opnemen met [Vincent Tedjakusuma](mailto:V.Tedjakusuma@kennisnet.nl).
 
-** Copyright(c) 2016 [Stichting Kennisnet]**
+** Copyright(c) 2017 [Stichting Kennisnet]**
 
 [//]: # (These are reference links used in the body of this note)
    [Edukoppeling Wiki]: <http://developers.wiki.kennisnet.nl/index.php?title=Standaarden:Edukoppeling>

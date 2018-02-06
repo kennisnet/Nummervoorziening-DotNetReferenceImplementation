@@ -16,7 +16,7 @@ limitations under the License.
 */
 #endregion
 
-namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
+namespace EckID.Operations
 {
     /// <summary>
     /// This class reflects the RetrieveChains operation of the Nummervoorziening service
@@ -24,27 +24,27 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
     public class RetrieveChainsOperation
     {
         /// <summary>
-        /// The SchoolID object for communication with the service
+        /// The EckID object for communication with the service
         /// </summary>
-        private SchoolIDClient schoolIDClient;
+        private EckIDPortClient _eckIdClient;
 
         /// <summary>
         /// The actual Retrieve Chains Request object
         /// </summary>
-        private readonly RetrieveChainsRequest retrieveChainsRequest = new RetrieveChainsRequest();
+        private readonly RetrieveChainsRequest _retrieveChainsRequest = new RetrieveChainsRequest();
 
         /// <summary>
         /// The wrapper class containing the request to be send to the service
         /// </summary>
-        private readonly retrieveChainsRequest1 retrieveChainsRequestWrapper = new retrieveChainsRequest1();
+        private readonly retrieveChainsRequest1 _retrieveChainsRequestWrapper = new retrieveChainsRequest1();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="RetrieveChainsOperation" /> class with a reference to the ShoolIDClient proxy class
         /// </summary>
-        /// <param name="schoolIDClient">An initialized SchoolIDClient proxy class</param>
-        public RetrieveChainsOperation(SchoolIDClient schoolIDClient)
+        /// <param name="eckIdClient">An initialized EckIDPortClient proxy class</param>
+        public RetrieveChainsOperation(EckIDPortClient eckIdClient)
         {
-            this.schoolIDClient = schoolIDClient;
+            _eckIdClient = eckIdClient;
         }
 
         /// <summary>
@@ -53,8 +53,8 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
         /// <returns>Chain[] containing active chains</returns>
         public Chain[] GetChains()
         {
-            this.retrieveChainsRequestWrapper.retrieveChainsRequest = this.retrieveChainsRequest;
-            retrieveChainsResponse retrieveChainsReponseWrapper = this.schoolIDClient.retrieveChains(this.retrieveChainsRequestWrapper);
+            _retrieveChainsRequestWrapper.retrieveChainsRequest = _retrieveChainsRequest;
+            retrieveChainsResponse retrieveChainsReponseWrapper = _eckIdClient.retrieveChains(_retrieveChainsRequestWrapper);
             return retrieveChainsReponseWrapper.retrieveChainsResponse1;
         }
     }

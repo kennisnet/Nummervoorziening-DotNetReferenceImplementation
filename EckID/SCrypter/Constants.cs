@@ -16,7 +16,7 @@ limitations under the License.
 */
 #endregion
 
-namespace NVA_DotNetReferenceImplementation.SCrypter
+namespace EckID.SCrypter
 {
     static class Constants
     {

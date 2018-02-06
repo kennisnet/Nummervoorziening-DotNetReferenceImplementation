@@ -22,38 +22,38 @@ namespace ConsoleNVAClient
     using System.Collections.Generic;
     using System.Linq;
     using System.ServiceModel;
-    using NVA_DotNetReferenceImplementation.SchoolID;
-    using NVA_DotNetReferenceImplementation.SCrypter;
+    using EckID;
+    using EckID.SCrypter;
 
     /// <summary>
-    /// The main entry point for the program. This function demonstrates work with Web Services via SchoolID project.
+    /// The main entry point for the program. This function demonstrates work with Web Services via EckID project.
     /// </summary>
     public class Program
     {
         /// <summary>
         /// Object to store the proxy class which is used to communicate with the Nummervoorziening service
         /// </summary>
-        private static SchoolIDServiceUtil schoolIDServiceUtil;
+        private static EckIDServiceUtil _eckIdServiceUtil;
 
         /// <summary>
         /// Chains retrieved from the Nummervoorziening service
         /// </summary>
-        private static Chain[] chains;
+        private static Chain[] _chains;
 
         /// <summary>
         /// Sectors retrieved from the Nummervoorziening service
         /// </summary>
-        private static Sector[] sectors;
+        private static Sector[] _sectors;
 
         /// <summary>
         /// An example PGN of a student
         /// </summary>
-        private static string studentPgn = "063138219";
+        private static string _studentPgn = "063138219";
 
         /// <summary>
         /// An example PGN of a teacher
         /// </summary>
-        private static string teacherPgn = "20DP teacher@school.com";
+        private static string _teacherPgn = "20DP teacher@school.com";
 
         /// <summary>
         /// Console application entrance of the Reference implementation to demonstrate how a Nummervoorziening client may communicate 
@@ -65,16 +65,16 @@ namespace ConsoleNVAClient
             // Disable SSL checks for now
             System.Net.ServicePointManager.ServerCertificateValidationCallback =
                 (sender, certificate, chain, sslPolicyErrors) => true;
-            
+
             // Setup the Service Utility for School ID 
-            schoolIDServiceUtil = SchoolIDServiceUtil.Instance;
+            _eckIdServiceUtil = EckIDServiceUtil.Instance;
 
             Console.WriteLine("Current server information:");
 
             try
             {
                 // Status information
-                if (schoolIDServiceUtil.IsSchoolIDAvailable())
+                if (_eckIdServiceUtil.IsEckIdAvailable())
                 {
                     // Print some information about the service
                     WritePingStatusOutput();
@@ -87,13 +87,13 @@ namespace ConsoleNVAClient
 
                     // Retrieve a Stampseudonym
                     Console.WriteLine("\nRetrieving Stampseudonym:");
-                    Console.WriteLine("Pgn:\t\t\t\t" + studentPgn);
-                    string studentHpgn = GenerateScryptHash(studentPgn);
+                    Console.WriteLine("Pgn:\t\t\t\t" + _studentPgn);
+                    string studentHpgn = GenerateScryptHash(_studentPgn);
                     Console.WriteLine("HPgn:\t\t\t\t" + studentHpgn);
                     string studentStampseudonym = ExecuteCreateStampseudonymTest(studentHpgn);
                     Console.WriteLine("Retrieved Stampseudonym:\t" + studentStampseudonym + "\n");
-                    Console.WriteLine("Pgn:\t\t\t\t" + teacherPgn);
-                    string teacherHpgn = GenerateScryptHash(teacherPgn);
+                    Console.WriteLine("Pgn:\t\t\t\t" + _teacherPgn);
+                    string teacherHpgn = GenerateScryptHash(_teacherPgn);
                     Console.WriteLine("HPgn:\t\t\t\t" + teacherHpgn);
                     string teacherStampseudonym = ExecuteCreateStampseudonymTest(teacherHpgn);
                     Console.WriteLine("Retrieved Stampseudonym:\t" + teacherStampseudonym + "\n");
@@ -106,13 +106,21 @@ namespace ConsoleNVAClient
                     Console.WriteLine("Submitting Stampseudonym batch (with the same input)");
                     ExecuteStampseudonymBatchTest(listedHpgnDictionary);
 
-                    // Retrieve a SchoolID
-                    Console.WriteLine("\nRetrieving SchoolID for first active sector and first active chain:");
-                    Console.WriteLine("Chain Guid:\t\t\t" + chains[0].id);
-                    Console.WriteLine("Sector Guid:\t\t\t" + sectors[0].id);
+                    // Retrieve a EckID
+                    Console.WriteLine("\nRetrieving EckID for first active sector and first active chain:");
+                    Console.WriteLine("Chain Guid:\t\t\t" + _chains[0].id);
+                    Console.WriteLine("Sector Guid:\t\t\t" + _sectors[0].id);
                     
-                    ExecuteCreateEckIdTest(studentStampseudonym, chains[0].id, sectors[0].id);
-                    ExecuteCreateEckIdTest(teacherStampseudonym, chains[0].id, sectors[0].id);
+                    ExecuteCreateEckIdTest(studentStampseudonym, _chains[0].id, _sectors[0].id);
+                    ExecuteCreateEckIdTest(teacherStampseudonym, _chains[0].id, _sectors[0].id);
+
+                    // Execute a batch operation for retrieving EckIDs
+                    Dictionary<int, string> listedStampseudonymDictionary = new Dictionary<int, string>();
+                    listedStampseudonymDictionary.Add(0, studentStampseudonym);
+                    listedStampseudonymDictionary.Add(1, teacherStampseudonym);
+
+                    Console.WriteLine("Submitting EckId batch (with the same input)");
+                    ExecuteEckIdBatchTest(_chains[0].id, _sectors[0].id, listedStampseudonymDictionary);
                 }
                 else
                 {
@@ -138,8 +146,8 @@ namespace ConsoleNVAClient
         /// </summary>
         private static void WritePingStatusOutput()
         {
-            Console.WriteLine("Application version:\t\t" + schoolIDServiceUtil.GetSchoolIDVersion());
-            Console.WriteLine("System time:\t\t\t" + schoolIDServiceUtil.GetSchoolIDDateTime());
+            Console.WriteLine("Application version:\t\t" + _eckIdServiceUtil.GetEckIdVersion());
+            Console.WriteLine("System time:\t\t\t" + _eckIdServiceUtil.GetEckIdDateTime());
             Console.WriteLine("Available:\t\t\ttrue");
         }
 
@@ -148,10 +156,10 @@ namespace ConsoleNVAClient
         /// </summary>
         private static void WriteAvailableChains()
         {
-            chains = schoolIDServiceUtil.GetChains();
+            _chains = _eckIdServiceUtil.GetChains();
 
             // List available Chains            
-            Console.WriteLine("Count of active chains:\t\t" + chains.Length);
+            Console.WriteLine("Count of active chains:\t\t" + _chains.Length);
         }
 
         /// <summary>
@@ -159,10 +167,10 @@ namespace ConsoleNVAClient
         /// </summary>
         private static void WriteAvailableSectors()
         {
-            sectors = schoolIDServiceUtil.GetSectors();
+            _sectors = _eckIdServiceUtil.GetSectors();
 
             // List available Sectors
-            Console.WriteLine("Count of active sectors:\t" + sectors.Length);
+            Console.WriteLine("Count of active sectors:\t" + _sectors.Length);
         }
 
         /// <summary>
@@ -173,7 +181,7 @@ namespace ConsoleNVAClient
         private static string ExecuteCreateStampseudonymTest(string hpgn)
         {
             // Retrieve Stampseudonym from Nummervoorziening service
-            return schoolIDServiceUtil.GenerateStampseudonym(hpgn);
+            return _eckIdServiceUtil.GenerateStampseudonym(hpgn);
         }
 
         /// <summary>
@@ -184,20 +192,20 @@ namespace ConsoleNVAClient
         {
             try
             {
-                string batchIdentifier = schoolIDServiceUtil.SubmitStampseudonymBatch(listedHpgnDictionary);
+                string batchIdentifier = _eckIdServiceUtil.SubmitStampseudonymBatch(listedHpgnDictionary);
                 Console.WriteLine("Batch identifier:\t\t" + batchIdentifier);
                 Console.WriteLine("Waiting for processing...");
-                SchoolIDBatch stampseudonymBatch = schoolIDServiceUtil.RetrieveBatch(batchIdentifier);
+                EckIDBatch stampseudonymBatch = _eckIdServiceUtil.RetrieveBatch(batchIdentifier);
 
                 if (stampseudonymBatch != null)
                 {
-                    string successList = stampseudonymBatch.getSuccessList().Count > 0
-                                             ? stampseudonymBatch.getSuccessList()
+                    string successList = stampseudonymBatch.GetSuccessList().Count > 0
+                                             ? stampseudonymBatch.GetSuccessList()
                                                  .Select(x => x.Key + "=" + x.Value)
                                                  .Aggregate((s1, s2) => s1 + ", " + s2)
                                              : string.Empty;
-                    string failedList = stampseudonymBatch.getFailedList().Count > 0
-                                             ? stampseudonymBatch.getSuccessList()
+                    string failedList = stampseudonymBatch.GetFailedList().Count > 0
+                                             ? stampseudonymBatch.GetSuccessList()
                                                  .Select(x => x.Key + "=" + x.Value)
                                                  .Aggregate((s1, s2) => s1 + ", " + s2)
                                              : string.Empty;
@@ -217,6 +225,49 @@ namespace ConsoleNVAClient
         }
 
         /// <summary>
+        /// Executes tests submitting and retrieving EckId batch
+        /// </summary>
+        /// <param name="chainGuid">The Guid of the Chain</param>
+        /// <param name="sectorGuid">The Guid of the Sector</param>
+        /// /// <param name="listedStampseudonymDictionary">An indexed list of Stampseudonyms</param>
+        private static void ExecuteEckIdBatchTest(
+            string chainGuid, string sectorGuid, Dictionary<int, string> listedStampseudonymDictionary)
+        {
+            try
+            {
+                string batchIdentifier = _eckIdServiceUtil.SubmitEckIdBatch(listedStampseudonymDictionary, chainGuid, sectorGuid);
+                Console.WriteLine("Batch identifier:\t\t" + batchIdentifier);
+                Console.WriteLine("Waiting for processing...");
+                EckIDBatch eckIdBatch = _eckIdServiceUtil.RetrieveBatch(batchIdentifier);
+
+                if (eckIdBatch != null)
+                {
+                    string successList = eckIdBatch.GetSuccessList().Count > 0
+                        ? eckIdBatch.GetSuccessList()
+                            .Select(x => x.Key + "=" + x.Value)
+                            .Aggregate((s1, s2) => s1 + ", " + s2)
+                        : string.Empty;
+                    string failedList = eckIdBatch.GetFailedList().Count > 0
+                        ? eckIdBatch.GetSuccessList()
+                            .Select(x => x.Key + "=" + x.Value)
+                            .Aggregate((s1, s2) => s1 + ", " + s2)
+                        : string.Empty;
+                    Console.WriteLine("Generated EckIds:\t{" + successList + "}");
+                    Console.WriteLine("Failed EckIds:\t{" + failedList + "}");
+                }
+                else
+                {
+                    Console.WriteLine("Error occured: EckIdBatch is null.");
+                }
+
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine("Exception has been thrown: " + e.Message);
+            }
+        }
+
+        /// <summary>
         /// Executes test cases
         /// </summary>
         /// <param name="stampseudonym">The Stampseudonym input</param>
@@ -226,7 +277,7 @@ namespace ConsoleNVAClient
         {
             try
             {
-                Console.WriteLine("Retrieved SchoolID:\t\t" + GenerateSchoolID(stampseudonym, chainGuid, sectorGuid));
+                Console.WriteLine("Retrieved EckID:\t\t" + GenerateEckId(stampseudonym, chainGuid, sectorGuid));
                 Console.WriteLine();
             }
             catch (Exception e)
@@ -249,15 +300,15 @@ namespace ConsoleNVAClient
         }
         
         /// <summary>
-        /// Wrapper function to retrieve a SchoolID
+        /// Wrapper function to retrieve a EckID
         /// </summary>
         /// <param name="hpgn">A scrypt hash of a PGN</param>
         /// <param name="chainGuid">A valid Chain Guid</param>
         /// <param name="sectorGuid">A valid Sector Guid</param>
         /// <returns>The generated Stampseudonym</returns>
-        private static string GenerateSchoolID(string hpgn, string chainGuid, string sectorGuid)
+        private static string GenerateEckId(string hpgn, string chainGuid, string sectorGuid)
         {
-            return schoolIDServiceUtil.GenerateSchoolID(hpgn, chainGuid, sectorGuid);
+            return _eckIdServiceUtil.GenerateEckId(hpgn, chainGuid, sectorGuid);
         }
     }
 }

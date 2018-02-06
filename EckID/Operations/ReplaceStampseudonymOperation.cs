@@ -16,7 +16,7 @@ limitations under the License.
 */
 #endregion
 
-namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
+namespace EckID.Operations
 {
     using System;
 
@@ -26,21 +26,21 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
     public class ReplaceStampseudonymOperation
     {
         /// <summary>
-        /// The SchoolID object for communication with the service
+        /// The EckID object for communication with the service
         /// </summary>
-        private SchoolIDClient schoolIDClient;
+        private EckIDPortClient _eckIdClient;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReplaceStampseudonymOperation" /> class with a reference to the ShoolIDClient proxy class
         /// </summary>
-        /// <param name="schoolIDClient">An initialized SchoolIDClient proxy class</param>
-        public ReplaceStampseudonymOperation(SchoolIDClient schoolIDClient)
+        /// <param name="eckIdClient">An initialized EckIDPortClient proxy class</param>
+        public ReplaceStampseudonymOperation(EckIDPortClient eckIdClient)
         {
-            this.schoolIDClient = schoolIDClient;
+            _eckIdClient = eckIdClient;
         }
 
         /// <summary>
-        /// Provides the parameters as a ReplaceEckIdRequest to the Nummervoorziening service, fetches the ReplaceEckIdResponse and returns the ECK ID.
+        /// Provides the parameters as a ReplaceEckIDRequest to the Nummervoorziening service, fetches the ReplaceEckIDResponse and returns the ECK ID.
         /// </summary>
         /// <param name="newHpgnValue">The scrypt hashed new PGN</param>
         /// <param name="oldHpgnValue">The scrypt hashed old PGN</param>
@@ -48,28 +48,28 @@ namespace NVA_DotNetReferenceImplementation.SchoolID.Operations
         /// <returns>The generated School ID</returns>
         public string ReplaceStampseudonym(string newHpgnValue, string oldHpgnValue, DateTime? effectiveDate)
         {
-            ReplaceStampseudonymRequest replaceEckIdRequest = new ReplaceStampseudonymRequest();
+            ReplaceStampseudonymRequest replaceEckIDRequest = new ReplaceStampseudonymRequest();
             HPgn newHpgn = new HPgn();
             HPgn oldHpgn = new HPgn();
 
             newHpgn.Value = newHpgnValue;
             oldHpgn.Value = oldHpgnValue;
 
-            replaceEckIdRequest.hpgnNew = newHpgn;
-            replaceEckIdRequest.hpgnOld = oldHpgn;
+            replaceEckIDRequest.hpgnNew = newHpgn;
+            replaceEckIDRequest.hpgnOld = oldHpgn;
 
             if (effectiveDate != null)
             {
-                replaceEckIdRequest.effectiveDateSpecified = true;
-                replaceEckIdRequest.effectiveDate = (DateTime)effectiveDate;
+                replaceEckIDRequest.effectiveDateSpecified = true;
+                replaceEckIDRequest.effectiveDate = (DateTime)effectiveDate;
             }
 
-            replaceStampseudonymRequest1 replaceEckIdRequestWrapper = new replaceStampseudonymRequest1();
-            replaceEckIdRequestWrapper.replaceStampseudonymRequest = replaceEckIdRequest;
-            replaceStampseudonymResponse1 replaceEckIdResponseWrapper = this.schoolIDClient.replaceStampseudonym(replaceEckIdRequestWrapper);
-            ReplaceStampseudonymResponse replaceEckIdResponse = replaceEckIdResponseWrapper.replaceStampseudonymResponse;
+            replaceStampseudonymRequest1 replaceEckIDRequestWrapper = new replaceStampseudonymRequest1();
+            replaceEckIDRequestWrapper.replaceStampseudonymRequest = replaceEckIDRequest;
+            replaceStampseudonymResponse1 replaceEckIDResponseWrapper = _eckIdClient.replaceStampseudonym(replaceEckIDRequestWrapper);
+            ReplaceStampseudonymResponse replaceEckIDResponse = replaceEckIDResponseWrapper.replaceStampseudonymResponse;
                         
-            Stampseudonym eckId = replaceEckIdResponse.stampseudonym;
+            Stampseudonym eckId = replaceEckIDResponse.stampseudonym;
 
             return eckId.Value;
         }

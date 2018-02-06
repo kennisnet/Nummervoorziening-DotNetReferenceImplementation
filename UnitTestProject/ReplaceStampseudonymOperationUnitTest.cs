@@ -16,15 +16,16 @@ limitations under the License.
 */
 #endregion
 
+using EckID.SCrypter;
+
 namespace UnitTestProject
 {
     using System;
     using System.ServiceModel;
     using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using NVA_DotNetReferenceImplementation.SCrypter;
 
     /// <summary>
-    /// Demonstrates the correct usage of the "Retrieve EckId" operation
+    /// Demonstrates the correct usage of the "Retrieve EckID" operation
     /// </summary>
     [TestClass]
     public class ReplaceStampseudonymOperationUnitTest : AbstractUnitTest
@@ -32,50 +33,45 @@ namespace UnitTestProject
         /// <summary>
         /// Valid hPGN prefix for hPGN new
         /// </summary>
-        private static string validHpgnNewPrefix = "csharp01";
+        private const string ValidHpgnNewPrefix = "csharp01";
 
         /// <summary>
         /// Valid hPGN prefix for hPGN intermediate
         /// </summary>
-        private static string validHpgnIntermediatePrefix = "csharp02";
+        private const string ValidHpgnIntermediatePrefix = "csharp02";
 
         /// <summary>
         /// Valid hPGN prefix for hPGN old
         /// </summary>
-        private static string validHpgnOldPrefix = "csharp03";
+        private const string ValidHpgnOldPrefix = "csharp03";
 
         /// <summary>
         /// Valid value for hPGN new
         /// </summary>
-        private static string validHpgnNew;
+        private static string _validHpgnNew;
 
         /// <summary>
         /// Valid value for hPGN intermediate
         /// </summary>
-        private static string validHpgnIntermediate;
+        private static string _validHpgnIntermediate;
 
         /// <summary>
         /// Valid value for hPGN old 
         /// </summary>
-        private static string validHpgnOld;
+        private static string _validHpgnOld;
 
         /// <summary>
         /// Sequence counter
         /// </summary>
-        private static int sequenceCounter;
-
-        /// <summary>
-        /// Invalid hPGN, in this case, empty String
-        /// </summary>
-        private readonly string invalidHpgn = string.Empty;
-
+        private static int _sequenceCounter;
+        
         /// <summary>
         /// Get a unique sequential number
         /// </summary>
         /// <returns>The next available number</returns>
         public static int GetSequentialNumber()
         {
-            return sequenceCounter++;
+            return _sequenceCounter++;
         }
 
         /// <summary>
@@ -87,11 +83,11 @@ namespace UnitTestProject
         public void SetupValidHpgn()
         {
             ScryptUtil scryptUtil = new ScryptUtil();
-            validHpgnNew = scryptUtil.GenerateHexHash(validHpgnNewPrefix + GetSequentialNumber() + 
+            _validHpgnNew = scryptUtil.GenerateHexHash(ValidHpgnNewPrefix + GetSequentialNumber() + 
                 DateTime.Now.ToString("yyyyMMddHHmmss"));
-            validHpgnIntermediate = scryptUtil.GenerateHexHash(validHpgnIntermediatePrefix + GetSequentialNumber() +
+            _validHpgnIntermediate = scryptUtil.GenerateHexHash(ValidHpgnIntermediatePrefix + GetSequentialNumber() +
                 DateTime.Now.ToString("yyyyMMddHHmmss"));
-            validHpgnOld = scryptUtil.GenerateHexHash(validHpgnOldPrefix + GetSequentialNumber() + 
+            _validHpgnOld = scryptUtil.GenerateHexHash(ValidHpgnOldPrefix + GetSequentialNumber() + 
                 DateTime.Now.ToString("yyyyMMddHHmmss"));
         }
 
@@ -102,7 +98,7 @@ namespace UnitTestProject
         [ExpectedException(typeof(FaultException))]
         public void ReplaceStampseudonymInvalidNewHpgnTest()
         {
-            this.schoolIDServiceUtil.ReplaceStampseudonym(this.invalidHpgn, validHpgnOld, null);            
+            EckIDServiceUtil.ReplaceStampseudonym(InvalidHpgn, _validHpgnOld, null);            
         }
 
         /// <summary>
@@ -112,7 +108,7 @@ namespace UnitTestProject
         [ExpectedException(typeof(FaultException))]
         public void ReplaceStampseudonymInvalidOldHpgnTest()
         {
-            this.schoolIDServiceUtil.ReplaceStampseudonym(validHpgnNew, this.invalidHpgn, null);
+            EckIDServiceUtil.ReplaceStampseudonym(_validHpgnNew, InvalidHpgn, null);
         }
 
         /// <summary>
@@ -124,13 +120,13 @@ namespace UnitTestProject
         public void ReplaceStampseudonymNowTest()
         {
             // Use the initial dataset to retrieve the stampseudonym
-            string initialStampseudonym = this.schoolIDServiceUtil.GenerateStampseudonym(validHpgnOld);
+            string initialStampseudonym = EckIDServiceUtil.GenerateStampseudonym(_validHpgnOld);
 
             // Submit the substitution
-            string processedStampseudonym = this.schoolIDServiceUtil.ReplaceStampseudonym(validHpgnNew, validHpgnOld, null);
+            string processedStampseudonym = EckIDServiceUtil.ReplaceStampseudonym(_validHpgnNew, _validHpgnOld, null);
 
             // Retrieve the stampseudonym based on the new Hpgn, and check the result
-            string finalStampseudonym = this.schoolIDServiceUtil.GenerateStampseudonym(validHpgnNew);
+            string finalStampseudonym = EckIDServiceUtil.GenerateStampseudonym(_validHpgnNew);
 
             // Assert that the stampseudonym retrieved from the Replace Stampseudonym operation is correct
             Assert.AreEqual(initialStampseudonym, processedStampseudonym);
@@ -149,16 +145,16 @@ namespace UnitTestProject
         public void ReplaceStampseudonymWithIntermediateTest()
         {
             // Use the datasets to retrieve the stampseudonym before substituting
-            string oldStampseudonym = this.schoolIDServiceUtil.GenerateStampseudonym(validHpgnOld);
+            string oldStampseudonym = EckIDServiceUtil.GenerateStampseudonym(_validHpgnOld);
 
             // Submit the substitutions
-            string stampseudonymFirstSubstitution = this.schoolIDServiceUtil.ReplaceStampseudonym(validHpgnIntermediate,
-                validHpgnOld, null);
-            string stampseudonymSecondSubstitution = this.schoolIDServiceUtil.ReplaceStampseudonym(validHpgnNew,
-                validHpgnIntermediate, null);
+            string stampseudonymFirstSubstitution = EckIDServiceUtil.ReplaceStampseudonym(_validHpgnIntermediate,
+                _validHpgnOld, null);
+            string stampseudonymSecondSubstitution = EckIDServiceUtil.ReplaceStampseudonym(_validHpgnNew,
+                _validHpgnIntermediate, null);
 
             // Retrieve the stampseudonym based on the new Hpgn, and check the result
-            string finalStampseudonym = this.schoolIDServiceUtil.GenerateStampseudonym(validHpgnNew);
+            string finalStampseudonym = EckIDServiceUtil.GenerateStampseudonym(_validHpgnNew);
 
             // Assert that the stampseudonym retrieved from the first Replace Stampseudonym operation is correct
             Assert.AreEqual(oldStampseudonym, stampseudonymFirstSubstitution);
@@ -179,16 +175,16 @@ namespace UnitTestProject
         public void ReplaceStampseudonymFutureTest()
         {
             // Use the future Hpgn to retrieve the stampseudonym based on the new Hpgn
-            string newStampseudonym = this.schoolIDServiceUtil.GenerateStampseudonym(validHpgnNew);
+            string newStampseudonym = EckIDServiceUtil.GenerateStampseudonym(_validHpgnNew);
 
             // Set the effectuation date to a moment in the future
             DateTime effectuationDate = DateTime.Now.AddYears(1);
 
             // Submit the substitution
-            string processedStampseudonym = this.schoolIDServiceUtil.ReplaceStampseudonym(validHpgnNew, validHpgnOld, effectuationDate);
+            string processedStampseudonym = EckIDServiceUtil.ReplaceStampseudonym(_validHpgnNew, _validHpgnOld, effectuationDate);
 
             // Retrieve the stampseudonym based on the new Hpgn, and check the result
-            string finalStampseudonym = this.schoolIDServiceUtil.GenerateStampseudonym(validHpgnNew);
+            string finalStampseudonym = EckIDServiceUtil.GenerateStampseudonym(_validHpgnNew);
 
             // Assert that the stampseudonym retrieved from the Replace Stampseudonym operation is correct
             Assert.AreEqual(newStampseudonym, processedStampseudonym);
@@ -196,5 +192,5 @@ namespace UnitTestProject
             // Assert that the stampseudonym retrieved based on the new Hpgn equals the original value (thus not being substituted)
             Assert.AreEqual(newStampseudonym, finalStampseudonym);
         }
-}
+    }
 }

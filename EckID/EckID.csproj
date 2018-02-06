@@ -7,8 +7,8 @@
     <ProjectGuid>{05381B19-A711-48D3-A62A-29B8CE1DEBE8}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SchoolID</RootNamespace>
-    <AssemblyName>SchoolID</AssemblyName>
+    <RootNamespace>EckID</RootNamespace>
+    <AssemblyName>EckID</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -44,10 +44,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="EckID.cs" />
     <Compile Include="Operations\ReplaceStampseudonymOperation.cs" />
     <Compile Include="Operations\RetrieveStampseudonymOperation.cs" />
     <Compile Include="Operations\SubmitStampseudonymBatchOperation.cs" />
-    <Compile Include="SchoolIDBatch.cs" />
+    <Compile Include="EckIDBatch.cs" />
     <Compile Include="Operations\RetrieveBatchOperation.cs" />
     <Compile Include="Operations\SubmitEckIdBatchOperation.cs" />
     <Compile Include="Operations\RetrieveEckIdOperation.cs" />
@@ -55,8 +56,7 @@
     <Compile Include="Operations\RetrieveChainsOperation.cs" />
     <Compile Include="Operations\RetrieveSectorsOperation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SchoolID.cs" />
-    <Compile Include="SchoolIDServiceUtil.cs" />
+    <Compile Include="EckIDServiceUtil.cs" />
     <Compile Include="SCrypter\Constants.cs" />
     <Compile Include="SCrypter\ScryptUtil.cs" />
   </ItemGroup>
@@ -68,7 +68,7 @@
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
-    <None Include="Resources\schoolid.wsdl" />
+    <None Include="Resources\eckid.wsdl" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
