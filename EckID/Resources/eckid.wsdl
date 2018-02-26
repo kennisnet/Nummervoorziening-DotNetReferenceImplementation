@@ -38,9 +38,9 @@
             <xsd:element name="pingResponse" type="sid:PingResponse"></xsd:element>
             <xsd:element name="retrieveStampseudonymRequest" type="sid:RetrieveStampseudonymRequest"></xsd:element>
             <xsd:element name="retrieveStampseudonymResponse" type="sid:RetrieveStampseudonymResponse"></xsd:element>
-            <xsd:element name="retrieveEckIDRequest" type="sid:RetrieveEckIDRequest"></xsd:element>
-            <xsd:element name="retrieveEckIDResponse" type="sid:RetrieveEckIDResponse"></xsd:element>
-            <xsd:element name="submitEckIDBatchRequest" type="sid:SubmitEckIDBatchRequest"></xsd:element>
+            <xsd:element name="retrieveEckIdRequest" type="sid:RetrieveEckIdRequest"></xsd:element>
+            <xsd:element name="retrieveEckIdResponse" type="sid:RetrieveEckIdResponse"></xsd:element>
+            <xsd:element name="submitEckIdBatchRequest" type="sid:SubmitEckIdBatchRequest"></xsd:element>
             <xsd:element name="submitBatchResponse" type="sid:SubmitBatchResponse"></xsd:element>
             <xsd:element name="submitStampseudonymBatchRequest" type="sid:SubmitStampseudonymBatchRequest"></xsd:element>
             <xsd:element name="retrieveBatchRequest" type="sid:RetrieveBatchRequest"></xsd:element>
@@ -104,7 +104,7 @@
                 </xsd:sequence>
             </xsd:complexType>
 
-            <xsd:complexType name="RetrieveEckIDRequest">
+            <xsd:complexType name="RetrieveEckIdRequest">
                 <xsd:annotation>
                     <xsd:documentation>Request parameters (het Stampseudoniem, keten ID en sector ID) voor het genereren van een ECK-ID.</xsd:documentation>
                 </xsd:annotation>
@@ -115,16 +115,16 @@
                 </xsd:sequence>
             </xsd:complexType>
 
-            <xsd:complexType name="RetrieveEckIDResponse">
+            <xsd:complexType name="RetrieveEckIdResponse">
                 <xsd:annotation>
                     <xsd:documentation>Response parameters verstuurd na het genereren van een ECK-ID. Wanneer de parameters voldoen aan de validaties en de verwerking goed is verlopen bevat het response het gegenereerde ECK-ID, anders wordt een Soap:fault teruggeven.</xsd:documentation>
                 </xsd:annotation>
                 <xsd:sequence>
-                    <xsd:element name="eckId" type="sid:EckID" minOccurs="1" maxOccurs="1"></xsd:element>
+                    <xsd:element name="eckId" type="sid:EckId" minOccurs="1" maxOccurs="1"></xsd:element>
                 </xsd:sequence>
             </xsd:complexType>
 
-            <xsd:complexType name="SubmitEckIDBatchRequest">
+            <xsd:complexType name="SubmitEckIdBatchRequest">
                 <xsd:annotation>
                     <xsd:documentation>Request parameters (lijst van Stampseudoniemen, een keten ID en een sector ID) voor het genereren van meerdere ECK-IDs in een enkele aanroep. </xsd:documentation>
                 </xsd:annotation>
@@ -293,7 +293,7 @@
                 </xsd:sequence>
             </xsd:complexType>
 
-            <xsd:complexType name="EckID">
+            <xsd:complexType name="EckId">
                 <xsd:annotation>
                     <xsd:documentation>Het ECK-ID.</xsd:documentation>
                 </xsd:annotation>
@@ -340,14 +340,14 @@
     <wsdl:message name="retrieveStampseudonymResponse">
         <wsdl:part name="retrieveStampseudonymResponse" element="sid:retrieveStampseudonymResponse"></wsdl:part>
     </wsdl:message>
-    <wsdl:message name="retrieveEckIDRequest">
-        <wsdl:part name="retrieveEckIDRequest" element="sid:retrieveEckIDRequest"></wsdl:part>
+    <wsdl:message name="retrieveEckIdRequest">
+        <wsdl:part name="retrieveEckIdRequest" element="sid:retrieveEckIdRequest"></wsdl:part>
     </wsdl:message>
-    <wsdl:message name="retrieveEckIDResponse">
-        <wsdl:part name="retrieveEckIDResponse" element="sid:retrieveEckIDResponse"></wsdl:part>
+    <wsdl:message name="retrieveEckIdResponse">
+        <wsdl:part name="retrieveEckIdResponse" element="sid:retrieveEckIdResponse"></wsdl:part>
     </wsdl:message>
-    <wsdl:message name="submitEckIDBatchRequest">
-        <wsdl:part name="submitEckIDBatchRequest" element="sid:submitEckIDBatchRequest"></wsdl:part>
+    <wsdl:message name="submitEckIdBatchRequest">
+        <wsdl:part name="submitEckIdBatchRequest" element="sid:submitEckIdBatchRequest"></wsdl:part>
     </wsdl:message>
     <wsdl:message name="submitStampseudonymBatchRequest">
         <wsdl:part name="submitStampseudonymBatchRequest" element="sid:submitStampseudonymBatchRequest"></wsdl:part>
@@ -395,15 +395,15 @@
             <wsdl:output message="sid:retrieveStampseudonymResponse"/>
         </wsdl:operation>
 
-        <wsdl:operation name="retrieveEckID">
+        <wsdl:operation name="retrieveEckId">
             <wsdl:documentation>Service om op basis van de gegeven input een enkel ECK-ID te genereren.</wsdl:documentation>
-            <wsdl:input message="sid:retrieveEckIDRequest"/>
-            <wsdl:output message="sid:retrieveEckIDResponse"/>
+            <wsdl:input message="sid:retrieveEckIdRequest"/>
+            <wsdl:output message="sid:retrieveEckIdResponse"/>
         </wsdl:operation>
 
-        <wsdl:operation name="submitEckIDBatch">
-            <wsdl:documentation>Service om meerdere ECK-IDs te genereren op basis van een geindexeerde lijst. Als response wordt een batch identifier teruggegeven die kan worden gebruikt bij het aanroepen van de service retrieveBatch. De oorspronkelijke indices gebruikt als input van de submitEckIDBatch service worden hergebruikt voor het resultaat van de retrieveBatch service.</wsdl:documentation>
-            <wsdl:input message="sid:submitEckIDBatchRequest"></wsdl:input>
+        <wsdl:operation name="submitEckIdBatch">
+            <wsdl:documentation>Service om meerdere ECK-IDs te genereren op basis van een geindexeerde lijst. Als response wordt een batch identifier teruggegeven die kan worden gebruikt bij het aanroepen van de service retrieveBatch. De oorspronkelijke indices gebruikt als input van de submitEckIdBatch service worden hergebruikt voor het resultaat van de retrieveBatch service.</wsdl:documentation>
+            <wsdl:input message="sid:submitEckIdBatchRequest"></wsdl:input>
             <wsdl:output message="sid:submitBatchResponse"></wsdl:output>
         </wsdl:operation>
 
@@ -454,14 +454,14 @@
             <wsdl:output><soap:body use="literal" /></wsdl:output>
         </wsdl:operation>
 
-        <wsdl:operation name="retrieveEckID">
-            <soap:operation soapAction="http://ketenid.nl/eck/schemas/v1_0/retrieveEckID" />
+        <wsdl:operation name="retrieveEckId">
+            <soap:operation soapAction="http://ketenid.nl/eck/schemas/v1_0/retrieveEckId" />
             <wsdl:input><soap:body use="literal" /></wsdl:input>
             <wsdl:output><soap:body use="literal" /></wsdl:output>
         </wsdl:operation>
 
-        <wsdl:operation name="submitEckIDBatch">
-            <soap:operation soapAction="http://ketenid.nl/eck/schemas/v1_0/submitEckIDBatch" />
+        <wsdl:operation name="submitEckIdBatch">
+            <soap:operation soapAction="http://ketenid.nl/eck/schemas/v1_0/submitEckIdBatch" />
             <wsdl:input><soap:body use="literal" /></wsdl:input>
             <wsdl:output><soap:body use="literal" /></wsdl:output>
         </wsdl:operation>
