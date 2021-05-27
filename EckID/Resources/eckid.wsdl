@@ -24,12 +24,12 @@
                   xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
     <wsdl:documentation>
-        Service: EckID (Nummervoorziening)
-        Version: 0.7-20171229
-        Contact: Vincent Tedjakusuma (V.Tedjakusuma@kennisnet.nl)
+		Service: EckID (Nummervoorziening)
+		Version: 0.7-20171229
+		Contact: Stichting Kennisnet (implementaties@kennisnet.nl)
 
-        Uses WS:Addressing
-    </wsdl:documentation>
+		Uses WS:Addressing
+	</wsdl:documentation>
 
     <wsdl:types>
         <xsd:schema targetNamespace="http://ketenid.nl/eck/schemas/v1_0"

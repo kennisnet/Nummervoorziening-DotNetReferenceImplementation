@@ -32,7 +32,7 @@ namespace EckID.Operations
         /// <summary>
         /// The EckID object for communication with the service
         /// </summary>
-        private EckIDPortClient _eckIdClient;
+        private readonly EckIDPortClient _eckIdClient;
 
         /// <summary>
         /// The actual Retrieve Batch Request object
@@ -90,8 +90,8 @@ namespace EckID.Operations
                     ListedEntitySuccess[] successListed = retrieveBatchResponse.success;
                     ListedEntityFailure[] failureListed = retrieveBatchResponse.failed;
 
-                    eckIdBatch.SetSuccessList(retrieveBatchResponse.success);
-                    eckIdBatch.SetFailedList(retrieveBatchResponse.failed);
+                    eckIdBatch.SetSuccessList(successListed);
+                    eckIdBatch.SetFailedList(failureListed);
 
                     break;
                 }

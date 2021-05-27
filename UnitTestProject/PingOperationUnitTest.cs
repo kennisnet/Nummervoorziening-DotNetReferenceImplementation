@@ -42,7 +42,7 @@ namespace UnitTestProject
         [TestMethod]
         public void GetEckIdVersionTest()
         {
-            string expectedValue = "1.0.4-SNAPSHOT";
+            string expectedValue = "1.1.5-SNAPSHOT";
             Assert.AreEqual(expectedValue, EckIDServiceUtil.GetEckIdVersion());
         }        
         

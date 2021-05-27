@@ -20,11 +20,11 @@ namespace EckID.SCrypter
 {
     static class Constants
     {
-        public static string SALT = "rktYml0MIp9TC9u6Ny6uqw==";
-        public static int N = 131072;
-        public static int r = 8;
-        public static int p = 4;
-        public static int? MAX_THREADS = null;
-        public static int DERIVED_KEY_LENGTH = 32;
+        public static readonly string SALT = "rktYml0MIp9TC9u6Ny6uqw==";
+        public static readonly int N = 131072;
+        public static readonly int r = 8;
+        public static readonly int p = 4;
+        public static readonly int? MAX_THREADS = null;
+        public static readonly int DERIVED_KEY_LENGTH = 32;
     }
 }

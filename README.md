@@ -21,8 +21,8 @@ Voor alle bovenstaande functionaliteiten wordt gebruik gemaakt van SOAP Messagin
 ## Gebruikte Technologiën
 
 Bij de ontwikkeling van Nummervoorziening - C#.NET Client Reference Application zijn diverse technologiën ingezet:
- * .NET v4.5.2 - Microsoft's .NET Framework
- * Visual Studio 2015 - Ontwikkelomgeving
+ * .NET v4.8 - Microsoft's .NET Framework
+ * Visual Studio 2019 - Ontwikkelomgeving
    * svcutil.exe - Utility voor het creëren van WCF proxy service interface op basis van een WSDL
  * CryptSharp v2.1.0 - Library voor het genereren van hashes middels diverse technologiën waaronder SCrypt
  * Fiddler - TLS/SSL debugging
@@ -139,7 +139,7 @@ Client certificaten voor de communicatie met de Nummervoorziening applicatie op 
  * **CryptSharp**: Copyright (c) 2010, 2013 James F. Bellinger <http://www.zer7.com/software/cryptsharp>
 
 ## Contact
-Voor meer informatie kunt u contact opnemen met [Vincent Tedjakusuma](mailto:V.Tedjakusuma@kennisnet.nl).
+Voor meer informatie kunt u contact opnemen met [Stichting Kennisnet](mailto:implementaties@kennisnet.nl).
 
 ** Copyright(c) 2017 [Stichting Kennisnet]**
 

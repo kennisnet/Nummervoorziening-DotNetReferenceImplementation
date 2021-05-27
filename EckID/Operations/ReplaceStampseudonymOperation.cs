@@ -28,7 +28,7 @@ namespace EckID.Operations
         /// <summary>
         /// The EckID object for communication with the service
         /// </summary>
-        private EckIDPortClient _eckIdClient;
+        private readonly EckIDPortClient _eckIdClient;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="ReplaceStampseudonymOperation" /> class with a reference to the ShoolIDClient proxy class

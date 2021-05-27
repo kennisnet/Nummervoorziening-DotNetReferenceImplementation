@@ -26,7 +26,7 @@ namespace EckID.Operations
         /// <summary>
         /// The EckID object for communication with the service
         /// </summary>
-        private EckIDPortClient _eckIdClient;
+        private readonly EckIDPortClient _eckIdClient;
 
         /// <summary>
         /// The actual Retrieve Chains Request object
