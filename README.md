@@ -16,7 +16,7 @@ De Nummervoorziening - C#.NET Client Reference Application is een client impleme
 Voor alle bovenstaande functionaliteiten wordt gebruik gemaakt van SOAP Messaging tussen de verschillende actoren. Authenticatie vindt plaats middels PKI-Certificaten die over TLS worden uitgewisseld. Aanvullende informatie over Nummervoorziening kan gevonden worden op de [Edukoppeling Wiki] van [Stichting Kennisnet].  
 
 ## Version
-0.2-20170329
+0.1.2-SNAPSHOT (20210531)
 
 ## Gebruikte Technologiën
 
@@ -118,11 +118,11 @@ Omdat deze tool de wsaw:UsingAddressing property niet kent, is het wellicht nodi
 In de applicatie is de gegenereerde class één-op-één overgenomen: EckID.cs, De methodes eindigend op een 1, waaronder pingRequest1, pingResponse1 etc., zijn door de svcutil aangemaakte wrapper objecten, Zo is de pingRequest1() aangemaakt als een wrapper voor het pingRequest object, en wordt gebruikt als payload voor de pingOperation. Als antwoord van de pingOperation wordt de pingResponse1 teruggegeven, dat de pingResponse object bevat.
 
 ## Installatie
-De applicatie is gebouwd voor en getest onder Windows 8. Om de applicatie succesvol te laten draaien moet aan een aantal randvoorwaarden worden voldaan:
+De applicatie is gebouwd voor en getest onder Windows 10. Om de applicatie succesvol te laten draaien moet aan een aantal randvoorwaarden worden voldaan:
  * De machine dient een geldig en geregistreerd TLS client certificaat te hebben waarmee geidentificeerd kan worden bij de Nummervoorziening applicatie
  * Het certificaat is in de juiste directory geplaatst (naast de *App.config*)
  * App.config aangepast op basis van certificaat gegevens
- * De broncode is geladen in Visual Studio 2015. 
+ * De broncode is geladen in Visual Studio 2019. 
  * Er zijn geen aanvullende plugins en/of libraries benodigd.
  * Na een build van de Solution worden de Unit Tests getoond in de Test Explorer, en kunnen deze worden uitgevoerd.
 
